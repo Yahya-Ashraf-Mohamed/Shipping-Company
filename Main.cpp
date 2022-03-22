@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-#include "MarsStation.h"
+#include"MarsStation/MarsStation.h"
 
 //main
 int main()

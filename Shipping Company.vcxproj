@@ -139,11 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Event\Event.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MarsStation\MarsStation.cpp" />
+    <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Event.h" />
-    <ClInclude Include="MarsStation.h" />
+    <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="MarsStation\MarsStation.h" />
+    <ClInclude Include="UI\UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
