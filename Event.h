@@ -13,7 +13,7 @@ public:
 	Event(MarsStation* pApp) { pStation = pApp; }	//constructor
 
 
-	//Execute action (code depends on Event )
+	//Execute Event (code depends on Event )
 	virtual void Execute() = 0;
 
 };
