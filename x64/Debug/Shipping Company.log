@@ -1,4 +1,9 @@
 ﻿  Main.cpp
   MarsStation.cpp
+  PromotionEvent.cpp
+  ReadyEvent.cpp
+C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Event\ReadyEvent.h(9,6): error C3646: 'cargo_type': unknown override specifier
+C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Event\ReadyEvent.h(9,16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Event\ReadyEvent.h(13,9): error C3646: 'value': unknown override specifier
+C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Event\ReadyEvent.h(13,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
   Generating Code...
-  Shipping Company.vcxproj -> C:\Users\dell\Desktop\Shipping Company\x64\Debug\Shipping Company.exe

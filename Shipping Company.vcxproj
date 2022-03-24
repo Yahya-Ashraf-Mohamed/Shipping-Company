@@ -139,14 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Event\Event.cpp" />
+    <ClCompile Include="Event\CancellationEvent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MarsStation\MarsStation.cpp" />
+    <ClCompile Include="Event\PromotionEvent.cpp" />
+    <ClCompile Include="Event\ReadyEvent.cpp" />
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Defs.H" />
+    <ClInclude Include="Event\CancellationEvent.h" />
     <ClInclude Include="Event\Event.h" />
     <ClInclude Include="MarsStation\MarsStation.h" />
+    <ClInclude Include="Event\PromotionEvent.h" />
+    <ClInclude Include="Event\ReadyEvent.h" />
     <ClInclude Include="UI\UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,6 +9,8 @@
 	{
 	protected:
 		MarsStation* pStation;	//Events needs station pointer to do their job
+		int event_time[2];      // [day,hour] "user input"
+		int cargo_id;           
 	public:
 		Event(MarsStation* pApp) { pStation = pApp; }	//constructor
 
