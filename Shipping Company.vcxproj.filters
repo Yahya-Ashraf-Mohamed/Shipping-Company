@@ -26,5 +26,8 @@
     <ClInclude Include="MarsStation.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Def.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

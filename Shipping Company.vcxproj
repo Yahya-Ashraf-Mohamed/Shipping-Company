@@ -142,8 +142,15 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ClInclude Include="Event.h" />
     <ClInclude Include="MarsStation.h" />
+=======
+    <ClInclude Include="Def.h" />
+    <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="MarsStation\MarsStation.h" />
+    <ClInclude Include="UI\UI.h" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
