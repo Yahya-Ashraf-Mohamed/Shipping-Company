@@ -139,6 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cargo\Cargo.cpp" />
+    <ClCompile Include="DataStructures\Node.cpp" />
+    <ClCompile Include="DataStructures\Queue.cpp" />
     <ClCompile Include="Event\CancellationEvent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MarsStation\MarsStation.cpp" />
@@ -147,6 +150,9 @@
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cargo\Cargo.h" />
+    <ClInclude Include="DataStructures\Node.h" />
+    <ClInclude Include="DataStructures\Queue.h" />
     <ClInclude Include="Defs.H" />
     <ClInclude Include="Event\CancellationEvent.h" />
     <ClInclude Include="Event\Event.h" />

@@ -9,9 +9,10 @@ private:
 	TYP cargo_type;      //TYP is enum that contains ( NORMAL , SPECIAL , VIP )
 	double cargo_distance;    //The distance that the cargo will travel in kilometeres
 	int load_time;            //Time (in hours) to load or unload cargo
+	int cargo_id;             // unique sequence number that identifies each cargo
 	int cost;                 //cost of delievering the cargo
 public:
-	ReadyEvent(MarsStation* pApp);
+	ReadyEvent(MarsStation* pApp, int Eventtime_day,int Eventtime_hour);
 	virtual ~ReadyEvent(void);
 
 	//Execute Event 

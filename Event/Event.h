@@ -2,7 +2,7 @@
 #ifndef _EVENT_H
 #define _EVENT_H
 
-	class MarsStation; //forward class declaration
+#include "..\MarsStation\MarsStation.h"
 
 	//Base class for all possible Events (abstract class)
 	class Event
@@ -10,9 +10,15 @@
 	protected:
 		MarsStation* pStation;	//Events needs station pointer to do their job
 		int event_time[2];      // [day,hour] "user input"
-		int cargo_id;           
+		Cargo* pCargo;           // cargo pointer carring cargo info
+		UI* pUI;               //Get a Pointer to the user Interfaces
 	public:
-		Event(MarsStation* pApp) { pStation = pApp; }	//constructor
+		//constructor
+		Event(MarsStation* pApp)
+		{
+			pStation = pApp;
+			pUI = pApp->GetUI();
+		}	
 
 
 		//Execute Event (code depends on Event )
