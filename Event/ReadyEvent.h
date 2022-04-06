@@ -15,6 +15,9 @@ public:
 	ReadyEvent(MarsStation* pApp, int Eventtime_day,int Eventtime_hour);
 	virtual ~ReadyEvent(void);
 
+	//gets cargo type from UI and returns it with as enum value "TYP"
+	TYP get_cargo_type();
+
 	//Execute Event 
 	virtual void Execute();
 
