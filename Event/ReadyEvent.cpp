@@ -12,30 +12,45 @@ ReadyEvent::~ReadyEvent(void)
 {
 }
 
-void ReadyEvent::Execute()
+
+//gets cargo type from UI and returns it with as enum value "TYP"
+
+TYP ReadyEvent::get_cargo_type()
 {
 	char CargoType = pUI->get_cargo_type();
+	TYP type;
 	switch (CargoType)  //Cargo class excepects cargo_type enumerated type "TYP"
 	{
 	case 'V':
-		cargo_type=VIP;
+		type = VIP;
 		break;
 	case 'S':
-		cargo_type = SPECIAL;
+		type = SPECIAL;
 		break;
 	case 'N':
-		cargo_type = NORMAL;
+		type = NORMAL;
 		break;
 	}
+	return type;
+}
 
+
+//Excecute Event
+
+void ReadyEvent::Execute()
+{
+	//get user input from UI
+	cargo_type = get_cargo_type();
 	cargo_distance = pUI->get_cargo_distance();
 	load_time = pUI->get_load_time();
 	cargo_id = pUI->get_cargo_id();
 	cost = pUI->get_cargo_cost();
 
+	//Create Cargo and add it to Queue
 	pCargo = new Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);
 	pStation->AddCargo(pCargo, cargo_type);
 
+	// Stores ReadyEvent_time in the created Cargo 
 	pCargo->Set_ReadyEvent_time(event_time);
 }
 
