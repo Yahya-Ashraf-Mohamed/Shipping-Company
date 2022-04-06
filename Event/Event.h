@@ -1,30 +1,26 @@
 #pragma once
-#ifndef _EVENT_H
-#define _EVENT_H
+#include"Event.h"
+//include cargo
 
-#include "..\MarsStation\MarsStation.h"
+//Class responsible for adding  new Cargo 
+class ReadyEvent : public Event
+{
+private:
+	TYP cargo_type;      //TYP is enum that contains ( NORMAL , SPECIAL , VIP )
+	double cargo_distance;    //The distance that the cargo will travel in kilometeres
+	int load_time;            //Time (in hours) to load or unload cargo
+	int cargo_id;             // unique sequence number that identifies each cargo
+	int cost;                 //cost of delievering the cargo
+public:
+	ReadyEvent(MarsStation* pApp, int Eventtime_day,int Eventtime_hour);
+	virtual ~ReadyEvent(void);
 
-	//Base class for all possible Events (abstract class)
-	class Event
-	{
-	protected:
-		MarsStation* pStation;	//Events needs station pointer to do their job
-		int event_time[2];      // [day,hour] "user input"
-		Cargo* pCargo;           // cargo pointer carring cargo info
-		UI* pUI;               //Get a Pointer to the user Interfaces
-	public:
-		//constructor
-		Event(MarsStation* pApp)
-		{
-			pStation = pApp;
-			pUI = pApp->GetUI();
-		}	
+	//gets cargo type from UI and returns it with as enum value "TYP"
+	TYP get_cargo_type();
+
+	//Execute Event 
+	virtual void Execute();
 
 
-		//Execute Event (code depends on Event )
-		virtual void Execute() = 0;
 
-	};
-
-#endif
-
+};
