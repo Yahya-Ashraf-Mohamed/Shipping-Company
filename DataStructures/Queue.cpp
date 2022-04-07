@@ -7,8 +7,6 @@ Queue<T>::Queue()
 	rear = nullptr;
 }
 
-
-
 //Function: isEmpty Sees whether this queue is empty.
 //Output: True if the queue is empty; otherwise false.
 
@@ -17,8 +15,6 @@ bool Queue<T>::isEmpty() const
 {
 	return (front == nullptr);
 }
-
-
 
 //Function:enqueue Adds newEntry at the back of this queue.
 //Output: True if the operation is successful; otherwise false.
@@ -36,8 +32,6 @@ bool Queue<T>::enqueue(const T& newEntry)
 	rear = newNodePtr; // New node is the last node now
 	return true;
 } 
-
-
 
 //Function: dequeue Removes the front of this queue. That is, removes the item that was added earliest.
 //Output: True if the operation is successful; otherwise false.
@@ -61,8 +55,6 @@ bool Queue<T>::dequeue(T& frntEntry)
 	return true;
 }
 
-
-
 //Function: peek copies the front of this queue to the passed param. The operation does not modify the queue.
 //Output: The front of the queue.
 
@@ -72,12 +64,10 @@ bool Queue<T>::peek(T& frntEntry) const
 	if (isEmpty())
 		return false;
 
-	frntEntry = frontPtr->getdata();
+	front = frntEntry->getdata();
 	return true;
 
 }
-
-
 
 template <typename T>   //Destructor
 Queue<T>::~Queue()

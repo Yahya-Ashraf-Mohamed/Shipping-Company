@@ -1,6 +1,6 @@
 #pragma once
-#include"Event.h"
-//include cargo
+#include"../Event/Event.h"
+#include "../Cargo/Cargo.h"
 
 //Class responsible for adding  new Cargo 
 class ReadyEvent : public Event

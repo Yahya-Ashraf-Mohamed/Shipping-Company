@@ -1,9 +1,25 @@
 ﻿  Main.cpp
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(8,14): error C2143: syntax error: missing ';' before '*'
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(8,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(8,23): error C2238: unexpected token(s) preceding ';'
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(14,8): error C2061: syntax error: identifier 'MarsStation'
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(16,3): error C2065: 'pStation': undeclared identifier
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(16,14): error C2065: 'pApp': undeclared identifier
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(17,9): error C2065: 'pApp': undeclared identifier
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\ReadyEvent.h(15,13): error C2061: syntax error: identifier 'MarsStation'
   MarsStation.cpp
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(8,14): error C2143: syntax error: missing ';' before '*'
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(8,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(8,23): error C2238: unexpected token(s) preceding ';'
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(14,8): error C2061: syntax error: identifier 'MarsStation'
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(16,3): error C2065: 'pStation': undeclared identifier
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(16,14): error C2065: 'pApp': undeclared identifier
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\Event.h(17,9): error C2065: 'pApp': undeclared identifier
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\ReadyEvent.h(15,13): error C2061: syntax error: identifier 'MarsStation'
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\MarsStation\MarsStation.cpp(32,63): error C2661: 'ReadyEvent::ReadyEvent': no overloaded function takes 3 arguments
   PromotionEvent.cpp
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\ReadyEvent.h(7,1): error C2504: 'Event': base class undefined
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\ReadyEvent.h(15,13): error C2061: syntax error: identifier 'MarsStation'
   ReadyEvent.cpp
-C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Event\ReadyEvent.h(9,6): error C3646: 'cargo_type': unknown override specifier
-C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Event\ReadyEvent.h(9,16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Event\ReadyEvent.h(13,9): error C3646: 'value': unknown override specifier
-C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Event\ReadyEvent.h(13,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Truck.cpp
   Generating Code...

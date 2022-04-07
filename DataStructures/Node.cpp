@@ -16,8 +16,8 @@ Node<T>::Node(const T& DATA)
 template < typename T>
 Node<T>::Node(const T& DATA, Node<T>* NEXT)
 {
-	data = r_Item;
-	next = nextNodePtr;
+	data = DATA;
+	next = NEXT;
 }
 template < typename T>
 void Node<T>::setdata(const T& DATA)

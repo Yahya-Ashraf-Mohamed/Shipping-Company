@@ -2,7 +2,7 @@
 #include"ReadyEvent.h"
 #include"..\MarsStation\MarsStation.h"
 
-ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour) :Event(pApp)
+ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour) : Event(pApp)
 {
 	event_time[0] = Eventtime_day;
 	event_time[1] = Eventtime_hour;
