@@ -3,7 +3,11 @@ enum TYP
 {
 	NORMAL,
 	SPECIAL,
-	VIP,
+	VIP
+};
+
+enum TruckStatus
+{
 	MAINTANANCE,
 	NONAVAILABLE
 };
