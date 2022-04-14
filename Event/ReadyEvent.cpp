@@ -2,7 +2,7 @@
 #include"ReadyEvent.h"
 #include"..\MarsStation\MarsStation.h"
 
-ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour) : Event(pApp)
+ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour) :Event(pApp)
 {
 	event_time[0] = Eventtime_day;
 	event_time[1] = Eventtime_hour;
@@ -17,6 +17,7 @@ ReadyEvent::~ReadyEvent(void)
 
 TYP ReadyEvent::get_cargo_type()
 {
+	UI*pUI = pStation->GetUI();
 	char CargoType = pUI->get_cargo_type();
 	TYP type;
 	switch (CargoType)  //Cargo class excepects cargo_type enumerated type "TYP"
@@ -39,6 +40,8 @@ TYP ReadyEvent::get_cargo_type()
 
 void ReadyEvent::Execute()
 {
+	UI*pUI = pStation->GetUI();
+
 	//get user input from UI
 	cargo_type = get_cargo_type();
 	cargo_distance = pUI->get_cargo_distance();
@@ -47,10 +50,21 @@ void ReadyEvent::Execute()
 	cost = pUI->get_cargo_cost();
 
 	//Create Cargo and add it to Queue
-	pCargo = new Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);
-	pStation->AddCargo(pCargo, cargo_type);
+	/*pCargo = new Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);
+	pStation->AddCargo(pCargo, cargo_type);*/
+
+
+	//try
+	Cargo newCargo =  Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);
+	pCargo = &newCargo;
+	pCargo->Set_ReadyEvent_time(event_time);
+	/*pStation->AddCargo(newCargo, cargo_type);*/
+
+
+
+
 
 	// Stores ReadyEvent_time in the created Cargo 
-	pCargo->Set_ReadyEvent_time(event_time);
+	/*pCargo->Set_ReadyEvent_time(event_time);*/
 }
 

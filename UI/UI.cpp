@@ -2,26 +2,18 @@
 
 
 
-UI::UI()
-{
-	AppMode = silent;	//Design Mode is the startup mode
+//////////////////////////////////////////////////////////////////////
+ //NOTE:these implementations are wrong
+char UI::get_Event() { return 'A'; };
+char UI::get_cargo_type(){ return 'A'; };
+double UI::get_cargo_distance() { return 0; };
 
-}
+//Event time [day,hour]
+//let Event time be ET
+int UI::get_ET_day() { return 0; };
+int UI::get_ET_hour() { return 0; };
 
-// Function set App mode interactive or step_by_step or silent
-void UI::SetAppMode(MODE mode)
-{
-	AppMode = mode;
-}
-
-
-// Function get App mode interactive or step_by_step or silent
-MODE UI::GetAppMode()const
-{
-	return AppMode;
-}
-
-//ostream UI::Start_silent_Mode()
-//{
-////	cout << "Silent Mode\n" << "Si";
-//}
+int UI::get_load_time() { return 0; };
+int UI::get_cargo_id() { return 0; };
+int UI::get_cargo_cost() { return 0; };
+///////////////////////////////////////////////////////////////////////

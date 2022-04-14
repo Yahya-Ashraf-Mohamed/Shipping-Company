@@ -1,6 +1,8 @@
+
 #include <iostream>
 #include <string>
 using namespace std;
+
 #include"MarsStation/MarsStation.h"
 
 //main

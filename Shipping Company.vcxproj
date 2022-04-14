@@ -147,7 +147,6 @@
     <ClCompile Include="MarsStation\MarsStation.cpp" />
     <ClCompile Include="Event\PromotionEvent.cpp" />
     <ClCompile Include="Event\ReadyEvent.cpp" />
-    <ClCompile Include="Truck\Truck.cpp" />
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,7 +159,6 @@
     <ClInclude Include="MarsStation\MarsStation.h" />
     <ClInclude Include="Event\PromotionEvent.h" />
     <ClInclude Include="Event\ReadyEvent.h" />
-    <ClInclude Include="Truck\Truck.h" />
     <ClInclude Include="UI\UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
