@@ -46,7 +46,6 @@ void MarsStation::ExecuteEvent(char eventt, Cargo* pCargo)
 
 ////Add Cargo to Cargo Queue depending on it's type
 //void MarsStation::AddCargo( Cargo newCargo , TYP CargoType)
-////void MarsStation::AddCargo (Cargo* pCargo, TYP CargoType)
 //{
 //	switch (CargoType)
 //	{
