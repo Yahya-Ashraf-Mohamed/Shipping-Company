@@ -13,13 +13,8 @@ Truck ::Truck (TYP Type , double Speed, int maxJourneys , int TruckCapacity)
 		case(SPECIAL):
 			this->Type = Type;
 			break;
-		case(NONAVAILABLE):
-			this->Type = Type;
-			break;
-		case(MAINTANANCE):
-			this->Type = Type;
-			break;
 	}
+
 	this->Speed = Speed;
 	this->maxJourneys = maxJourneys;
 	this->TruckCapacity = TruckCapacity;

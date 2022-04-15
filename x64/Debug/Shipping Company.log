@@ -1,6 +1,4 @@
-﻿  Node.cpp
-  Queue.cpp
-  PromotionEvent.cpp
+﻿  PromotionEvent.cpp
   ReadyEvent.cpp
   Main.cpp
   MarsStation.cpp

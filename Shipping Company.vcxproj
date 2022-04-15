@@ -140,13 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cargo\Cargo.cpp" />
-    <ClCompile Include="DataStructures\Node.cpp" />
-    <ClCompile Include="DataStructures\Queue.cpp" />
     <ClCompile Include="Event\CancellationEvent.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MarsStation\MarsStation.cpp" />
     <ClCompile Include="Event\PromotionEvent.cpp" />
     <ClCompile Include="Event\ReadyEvent.cpp" />
+    <ClCompile Include="Truck\Truck.cpp" />
     <ClCompile Include="UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +158,16 @@
     <ClInclude Include="MarsStation\MarsStation.h" />
     <ClInclude Include="Event\PromotionEvent.h" />
     <ClInclude Include="Event\ReadyEvent.h" />
+    <ClInclude Include="Truck\Truck.h" />
     <ClInclude Include="UI\UI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

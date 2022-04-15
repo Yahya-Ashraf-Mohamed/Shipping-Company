@@ -6,6 +6,7 @@ class Truck
 {
 private:
 	TYP Type;   // Decides the type of the truck used in making list
+	Status Truck_Status= WAITING;
 	double Speed;       // will be read form the input file
 	double DelivaryInterval;        // will be calculated depending on cargos input
 	double MaintenanceCheckupTime;   // will be read form the input file after maxNumber of Journeys

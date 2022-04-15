@@ -6,10 +6,12 @@ enum TYP
 	VIP
 };
 
-enum TruckStatus
+enum Status
 {
-	MAINTANANCE,
-	NONAVAILABLE
+	MOVING,
+	WAITING,
+	LOADED,
+	MAINTANANCE
 };
 
 enum  MODE	//Modes of operation

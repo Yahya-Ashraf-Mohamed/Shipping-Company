@@ -36,10 +36,7 @@
     <ClCompile Include="Cargo\Cargo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataStructures\Queue.cpp">
+    <ClCompile Include="Truck\Truck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,5 +71,16 @@
     <ClInclude Include="DataStructures\Queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Truck\Truck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include=".gitignore" />
+    <None Include=".gitattributes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
   </ItemGroup>
 </Project>

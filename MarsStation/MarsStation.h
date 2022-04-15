@@ -7,7 +7,7 @@
 #include "..\Cargo\Cargo.h"
 #include "..\DataStructures\Queue.h"
 
-#include "../Truck/Truck.h"
+#include "..\Truck\Truck.h"
 #include  <fstream>
 #include  <string>
 
@@ -28,10 +28,10 @@ class MarsStation
 	
 	//Truck Queue
 	//Queue<Truck*> VIP_Truck;
-	//Queue<Truck*> SPECIAL_Truck;
-	//Queue<Truck*> NORMAL_Truck;
-	//Queue<Truck*> MAINTANANCE_Truck;
-	//Queue<Truck*> NONAVAILABLE_Truck;
+	Queue<Truck*> SPECIAL_Truck;
+	Queue<Truck*> NORMAL_Truck;
+	Queue<Truck*> MAINTANANCE_Truck;
+	Queue<Truck*> NONAVAILABLE_Truck;
 
 
 	int Clock[2] = { 0,0 };
