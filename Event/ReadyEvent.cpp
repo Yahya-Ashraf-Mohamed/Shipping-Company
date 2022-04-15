@@ -50,21 +50,18 @@ void ReadyEvent::Execute()
 	cost = pUI->get_cargo_cost();
 
 	//Create Cargo and add it to Queue
-	/*pCargo = new Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);
-	pStation->AddCargo(pCargo, cargo_type);*/
-
-
-	//try
-	Cargo newCargo =  Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);
-	pCargo = &newCargo;
-	pCargo->Set_ReadyEvent_time(event_time);
-	/*pStation->AddCargo(newCargo, cargo_type);*/
-
-
-
-
+	pCargo = new Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);
+	pStation->AddCargo(pCargo, cargo_type);
 
 	// Stores ReadyEvent_time in the created Cargo 
-	/*pCargo->Set_ReadyEvent_time(event_time);*/
+	pCargo->Set_ReadyEvent_time(event_time);
+
+
+	////try
+	//Cargo newCargo =  Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);
+	//pCargo = &newCargo;
+	//pCargo->Set_ReadyEvent_time(event_time);
+	///*pStation->AddCargo(newCargo, cargo_type);*/
+
 }
 

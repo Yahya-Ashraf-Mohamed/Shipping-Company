@@ -1,3 +1,8 @@
-﻿MarsStation.obj : error LNK2019: unresolved external symbol "public: __cdecl Queue<class Cargo>::Queue<class Cargo>(void)" (??0?$Queue@VCargo@@@@QEAA@XZ) referenced in function "public: __cdecl MarsStation::MarsStation(void)" (??0MarsStation@@QEAA@XZ)
-MarsStation.obj : error LNK2019: unresolved external symbol "public: __cdecl Queue<class Cargo>::~Queue<class Cargo>(void)" (??1?$Queue@VCargo@@@@QEAA@XZ) referenced in function "int `public: __cdecl MarsStation::MarsStation(void)'::`1'::dtor$0" (?dtor$0@?0???0MarsStation@@QEAA@XZ@4HA)
-C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\x64\Debug\Shipping Company.exe : fatal error LNK1120: 2 unresolved externals
+﻿  Node.cpp
+  Queue.cpp
+  PromotionEvent.cpp
+  ReadyEvent.cpp
+  Main.cpp
+  MarsStation.cpp
+  Generating Code...
+  Shipping Company.vcxproj -> C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Shipping-Company\Shipping-Company\x64\Debug\Shipping Company.exe
