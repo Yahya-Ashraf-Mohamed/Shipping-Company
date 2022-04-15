@@ -8,11 +8,67 @@
 #include  <fstream>
 
 //================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================
-MarsStation::MarsStation()
+//MarsStation::MarsStation()
+//{
+//	//Creates the UI Object & Initialize the UI
+//	pUI = new UI;
+//
+//	events = new string * [no_events];
+//
+//	for (int i = 0; i < no_events; i++)
+//	{
+//		events[i] = new string[7];		// hint: you have to change 7 as their is 3 and 4
+//	}
+//}
+
+MarsStation::MarsStation(string name)
 {
-	//Creates the UI Object & Initialize the UI
-	pUI = new UI;
+	ifstream dataFile(name);// File stream object
+
+
+	if (openFileIn(dataFile, name) == false)
+	{
+		//pop an error message        //TO DO
+	}
+	else
+	{
+		setInt_Variables(dataFile);
+
+		while (!check_file_is_empty(dataFile))
+		{
+			getline(dataFile, inputFileLines[LineNum]);
+			LineNum++;
+		}
+
+		events = new string * [no_events];
+
+		for (int i = 0; i < no_events; i++)
+		{
+			events[i] = new string[7];		// hint: you have to change 7 as their is 3 and 4
+		}
+
+		int j = 0, k = 0;
+
+		for (int i = 0; i < no_events; i++) {
+
+			stringstream ssin(inputFileLines[k]);
+			while (ssin.good() && j < 7) {
+				ssin >> events[i][j];
+				++j;
+			}
+			j = 0;
+			++k;
+		}
+
+		Start_Next_Event(events, EventLineNum);
+
+		//Creates the UI Object & Initialize the UI
+		pUI = new UI;
+
+	}
+
 }
+
 MarsStation::~MarsStation()
 {
 	delete pUI;
@@ -21,6 +77,66 @@ UI* MarsStation::GetUI()
 {
 	return pUI;
 }
+
+//=================================================== Input Functions =================================================
+
+void MarsStation::setClock_Hours(int Hours)
+{
+	Clock[0] = Hours;
+}
+
+void MarsStation::setClock_Days(int Days)
+{
+	Clock[1] = Days;
+}
+
+void MarsStation::setClock(int Hours, int Days)
+{
+	Clock[0] = Hours;
+	Clock[1] = Days;
+}
+
+void MarsStation::setInt_Variables(ifstream& DataFile)
+{
+	DataFile >> no_Normal >> no_Special >> no_VIP
+		>> Normal_speed >> Special_speed >> VIP_speed
+		>> Normal_capacity >> Special_capacity >> VIP_capacity
+		>> Normal_CheckUp_duration >> Special_CheckUp_duration >> VIP_CheckUp_duration
+		>> CheckUp_Journeys
+		>> AutoPromotion
+		>> MaxW
+		>> no_events;
+}
+
+//=================================================== Output Functions =================================================
+
+int MarsStation::getClock_Days()
+{
+	return Clock[1];
+}
+
+int MarsStation::getClock_Hours()
+{
+	return Clock[0];
+}
+
+
+//=================================================== File handler =================================================
+
+bool MarsStation::openFileIn(ifstream& file, string name)
+{
+	file.open(name, ios::in);
+	if (file.fail())
+		return false;
+	else
+		return true;
+
+}
+
+bool MarsStation::check_file_is_empty(ifstream& file) {
+	return file.peek() == EOF;
+}
+
 
 //=================================================== EVENTS =================================================
 	
@@ -63,63 +179,36 @@ void MarsStation::AddCargo( Cargo* pCargo , TYP CargoType)
 	}
 }
 
+void MarsStation::Start_Next_Event(string** events, int EventLineNum)
+{
+	EventType = events[EventLineNum][0];
 
-//=================================================== Input Functions =================================================
-
-//void MarsStation::setClock_Hours(int Hours)
-//{
-//	Clock[0] = Hours;
-//}
-//
-//void MarsStation::setClock_Days(int Days)
-//{
-//	Clock[1] = Days;
-//}
-//
-//void MarsStation::setClock(int Hours, int Days)
-//{
-//	Clock[0] = Hours;
-//	Clock[1] = Days;
-//}
-//
-//void MarsStation::setInt_Variables(fstream DataFile)
-//{
-//	DataFile >> no_Normal >> no_Special >> no_VIP
-//		>> Normal_speed >> Special_speed >> VIP_speed
-//		>> Normal_capacity >> Special_capacity >> VIP_capacity
-//		>> Normal_CheckUp_duration >> Special_CheckUp_duration >> VIP_CheckUp_duration
-//		>> CheckUp_Journeys
-//		>> AutoPromotion
-//		>> MaxW
-//		>> no_events;
-//}
-//
-//
-
-
-
-//=================================================== Output Functions =================================================
-
-//int MarsStation::getClock_Days()
-//{
-//	return Clock[1];
-//}
-//
-//int MarsStation::getClock_Hours()
-//{
-//	return Clock[0];
-//}
-
-
-//=================================================== File handler =================================================
-
-//bool MarsStation::openFileIn(fstream& file, string name)
-//{
-//	file.open(name, ios::in);
-//	if (file.fail())
-//		return false;
-//	else
-//		return true;
-//
-//}
-
+	if(EventType == "R")
+	{
+		CargoType = events[EventLineNum][1];
+		//TODO: call function to get event time    || events[EventLineNum][2]
+		stringstream StringToIntConverter_CargoID(events[EventLineNum][3]);		// object from the class stringstream
+		StringToIntConverter_CargoID >> CargoID;		// The object has the string numbers and stream it to the integer CargoID
+		stringstream StringToIntConverter_CargoDistance(events[EventLineNum][4]);
+		StringToIntConverter_CargoDistance >> CargoDistance;
+		stringstream StringToIntConverter_CargoLoadTime(events[EventLineNum][5]);
+		StringToIntConverter_CargoLoadTime >> CargoLoadTime;
+		stringstream StringToIntConverter_CargoCost(events[EventLineNum][6]);
+		StringToIntConverter_CargoCost >> CargoCost;
+		
+	}
+	else if (EventType == "P")
+	{
+		// TODO: call function to get event time || events[EventLineNum][1]
+		stringstream StringToIntConverter_CargoID(events[EventLineNum][2]);
+		StringToIntConverter_CargoID >> CargoID;
+		stringstream StringToIntConverter_CargoExtraMoney(events[EventLineNum][3]);
+		StringToIntConverter_CargoExtraMoney >> CargoExtraMoney;
+	}
+	else
+	{
+		//TODO: call function to get event time    || events[EventLineNum][1]
+		stringstream StringToIntConverter_CargoID(events[EventLineNum][2]);
+		StringToIntConverter_CargoID >> CargoID;
+	}
+}
