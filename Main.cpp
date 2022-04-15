@@ -9,4 +9,6 @@ using namespace std;
 int main()
 {
     std::cout << "Hello World!\n";
+    MarsStation("test.txt");
+    std::cout << "Bye World!\n";
 }
