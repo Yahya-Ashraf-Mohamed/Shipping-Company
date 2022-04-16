@@ -6,13 +6,13 @@
 #include "..\UI\UI.h"
 #include "..\Cargo\Cargo.h"
 #include "..\DataStructures\Queue.h"
-
 #include "..\Truck\Truck.h"
 #include  <fstream>
 #include  <string>
 #include <sstream>
 #include <iostream>
 #include <vector>
+
 //#include "stdio.h"    to convert string to char
 
 using namespace std;
@@ -87,21 +87,23 @@ public:
 	void setClock_Days(int Days);			//set the clock minutes
 	void setClock(int Hours, int Days);		//set the clock hours and minutes
 	void setInt_Variables(ifstream& DataFile);	//set the values of the integar variables
-	void setEvent_Time(string EventTime);
+	//void setEvent_Time(string EventTime);
 
 	// getters Functions		---------------------------
 	int getClock_Hours();						//get clock hour
 	int getClock_Days();						//get clock days
-	int getCargo_ID();
-	int getTruck_ID();
-	int getCargo_Load_Time();
-	int* getEvent_Time();
-	float getCargo_Distance();
-	float getCargo_Cost();
-	float getCargo_Extra_Money();
-	string getCargo_Type();
-	string getTruck_Type();
-	string getEvent_Type();
+	//int getCargo_ID();
+	//int getTruck_ID();
+	//int getCargo_Load_Time();
+	// 
+	//int* getEvent_Time();
+	
+	//float getCargo_Distance();
+	//float getCargo_Cost();
+	//float getCargo_Extra_Money();
+	//string getCargo_Type();
+	//string getTruck_Type();
+	//string getEvent_Type();
 
 	// input file handler	---------------------------
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded

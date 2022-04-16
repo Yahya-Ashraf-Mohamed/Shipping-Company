@@ -1,6 +1,6 @@
 #include"Truck.h"
 
-Truck ::Truck (TYP Type , double Speed, int maxJourneys , int TruckCapacity)
+Truck ::Truck (TYP Type , int TruckID ,double Speed, int maxJourneys , int TruckCapacity)
 {
 	switch (Type)
 	{
@@ -14,7 +14,7 @@ Truck ::Truck (TYP Type , double Speed, int maxJourneys , int TruckCapacity)
 			this->Type = Type;
 			break;
 	}
-
+	this->TruckID = TruckID ;
 	this->Speed = Speed;
 	this->maxJourneys = maxJourneys;
 	this->TruckCapacity = TruckCapacity;
@@ -30,11 +30,15 @@ double Truck :: getDelivaryInterval()
 	return this->DelivaryInterval;
 }
 
-TYP Truck::getType()
+TYP Truck::getTruckType()
 {
 	return this->Type;
 }
 
+int Truck::getTruckID()
+{
+	return TruckID;
+}
 int Truck::getmaxJourneys()
 {
 	return this->maxJourneys;

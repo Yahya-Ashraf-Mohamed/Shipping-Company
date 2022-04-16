@@ -19,6 +19,12 @@ public:
 	Cargo(TYP type,double dist,int LT,int ID,int COST);
 	~Cargo();
 
+	int getCargo_ID();
+	float getCargo_Distance();
+	float getCargo_Cost();
+	float getCargo_Extra_Money();
+	string getCargo_Type();
+	int getCargo_Load_Time();
 	void Set_ReadyEvent_time(int* Eventtime );
 	int* get_ReadyEvent_time();
 };
