@@ -19,7 +19,4 @@ public:
 
 	//Execute Event 
 	virtual void Execute();
-
-
-
 };
