@@ -116,7 +116,8 @@ void MarsStation::setEvent_Time(string Time)
 	string EventTime_S[2] = { "","" };
 	stringstream splitString(Time);
 
-	while (splitString.good()) {
+	while (splitString.good()) 
+	{
 		string substr;
 		getline(splitString, substr, ':');
 		v.push_back(substr);
@@ -143,46 +144,46 @@ int MarsStation::getClock_Hours()
 	return Clock[0];
 }
 
-int MarsStation::getCargo_ID()
-{
-	return CargoID;
-}
-int MarsStation::getTruck_ID()
-{
-	return TruckID;
-}
-int MarsStation::getCargo_Load_Time()
-{
-	return CargoLoadTime;
-}
-int* MarsStation::getEvent_Time()
-{
-	return EventTime;
-}
-float MarsStation::getCargo_Distance()
-{
-	return CargoDistance;
-}
-float MarsStation::getCargo_Cost()
-{
-	return CargoCost;
-}
-float MarsStation::getCargo_Extra_Money()
-{
-	return CargoExtraMoney;
-}
-string MarsStation::getCargo_Type()
-{
-	return CargoType;
-}
-string MarsStation::getTruck_Type()
-{
-	return TruckType;
-}
-string MarsStation::getEvent_Type()
-{
-	return EventType;
-}
+//int MarsStation::getCargo_ID()
+//{
+//	return CargoID;
+//}
+//int MarsStation::getTruck_ID()
+//{
+//	return TruckID;
+//}
+//int MarsStation::getCargo_Load_Time()
+//{
+//	return CargoLoadTime;
+//}
+//int* MarsStation::getEvent_Time()
+//{
+//	return EventTime;
+//}
+//float MarsStation::getCargo_Distance()
+//{
+//	return CargoDistance;
+//}
+//float MarsStation::getCargo_Cost()
+//{
+//	return CargoCost;
+//}
+//float MarsStation::getCargo_Extra_Money()
+//{
+//	return CargoExtraMoney;
+//}
+//string MarsStation::getCargo_Type()
+//{
+//	return CargoType;
+//}
+//string MarsStation::getTruck_Type()
+//{
+//	return TruckType;
+//}
+//string MarsStation::getEvent_Type()
+//{
+//	return EventType;
+//}
 
 //=================================================== File handler =================================================
 
