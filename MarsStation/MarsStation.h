@@ -41,8 +41,6 @@ class MarsStation
 
 	int Clock[2] = { 0,0 };
 
-//	string input;// To hold file input
-	//ifstream dataFile;// File stream object
 
 
 	// >> There is no need for all these paramters , already found in the class of Truck and Cargo
@@ -76,7 +74,7 @@ class MarsStation
 
 public:
 	// constructor and destructor
-	//MarsStation();
+
 	MarsStation(string name);	// Takes name of the input file
 
 	~MarsStation();
@@ -101,12 +99,12 @@ public:
 	
 	//int* getEvent_Time();
 	
-	//float getCargo_Distance();
-	//float getCargo_Cost();
-	//float getCargo_Extra_Money();
-	//string getCargo_Type();
-	//string getTruck_Type();
-	//string getEvent_Type();
+	float getCargo_Distance();
+	float getCargo_Cost();
+	float getCargo_Extra_Money();
+	string getCargo_Type();
+	string getTruck_Type();
+	string getEvent_Type();
 
 	// input file handler	---------------------------
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded

@@ -20,7 +20,11 @@ public:
 	//float getCargo_Distance();
 	//float getCargo_Cost();
 	//float getCargo_Extra_Money();
+
 	//TYP getCargo_Type();
+
+	//string getCargo_Type();
+
 	//int getCargo_Load_Time();
 	void Set_ReadyEvent_time(int* Eventtime );
 	int* get_ReadyEvent_time();
