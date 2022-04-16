@@ -64,9 +64,9 @@ class MarsStation
 
 	int EventLineNum = 1;
 
-		string* inputFileLines;
+		string* inputFileLines = new string[no_events];
 		string** events;
-		int LineNum = 0;
+		int LineNum = 0;                   
 
 
 public:

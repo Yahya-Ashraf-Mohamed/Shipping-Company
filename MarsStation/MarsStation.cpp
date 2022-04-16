@@ -23,8 +23,8 @@
 
 MarsStation::MarsStation(string name)
 {
-	ifstream dataFile(name);// File stream object
-
+	ifstream dataFile/*(name)*/;// File stream object
+	
 
 	if (openFileIn(dataFile, name) == false)
 	{
@@ -33,10 +33,12 @@ MarsStation::MarsStation(string name)
 	else
 	{
 		setInt_Variables(dataFile);
+		string LineTemp;
 
 		while (!check_file_is_empty(dataFile))
 		{
-			getline(dataFile, inputFileLines[LineNum]);
+			getline(dataFile, LineTemp);
+			inputFileLines[LineNum] = LineTemp;
 			LineNum++;
 		}
 
@@ -186,7 +188,7 @@ string MarsStation::getEvent_Type()
 
 bool MarsStation::openFileIn(ifstream& file, string name)
 {
-	file.open(name, ios::in);
+	file.open(name/*, ios::in*/);
 	if (file.fail())
 		return false;
 	else
