@@ -44,6 +44,9 @@ class MarsStation
 //	string input;// To hold file input
 	//ifstream dataFile;// File stream object
 
+
+	// >> There is no need for all these paramters , already found in the class of Truck and Cargo
+
 	int no_Normal, no_Special, no_VIP,												// Number of trucks of each type 
 		Normal_speed, Special_speed, VIP_speed,										// Speed of all trucks of each type 
 		Normal_capacity, Special_capacity, VIP_capacity,							// no. of cargos that truck can carry (Truck capacity)
@@ -87,7 +90,7 @@ public:
 	void setClock_Days(int Days);			//set the clock minutes
 	void setClock(int Hours, int Days);		//set the clock hours and minutes
 	void setInt_Variables(ifstream& DataFile);	//set the values of the integar variables
-	//void setEvent_Time(string EventTime);
+	void setEvent_Time(string EventTime);
 
 	// getters Functions		---------------------------
 	int getClock_Hours();						//get clock hour
@@ -95,7 +98,7 @@ public:
 	//int getCargo_ID();
 	//int getTruck_ID();
 	//int getCargo_Load_Time();
-	// 
+	
 	//int* getEvent_Time();
 	
 	//float getCargo_Distance();
