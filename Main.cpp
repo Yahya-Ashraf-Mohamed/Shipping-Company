@@ -10,7 +10,8 @@ using namespace std;
 //main
 int main()
 {
-    MarsStation Station ("Text.txt");
+    MarsStation Station;
+
 	std::cout << "Bye World!\n";
 
 }

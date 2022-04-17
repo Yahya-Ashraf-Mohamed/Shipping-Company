@@ -18,6 +18,7 @@ public:
 
 	// Getters Functions  ---------------------------
 	MODE GetAppMode()const;     //returns App Mode state
+	string getInput_File_Name();
 
 	// Run UI Functions	--------------------------------------
 	void Start_silent_Mode();

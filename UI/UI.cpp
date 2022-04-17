@@ -65,6 +65,10 @@ MODE UI::GetAppMode()const
 	return AppMode;
 }
 
+string UI::getInput_File_Name()
+{
+	return inputFileName;
+}
 
 void UI::Start_silent_Mode()
 {

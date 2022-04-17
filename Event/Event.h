@@ -19,10 +19,14 @@
 		{
 			pStation = pApp;
 		}	
+		/*string getEvent_Type();
+		int* getEvent_Time();
+		void setEvent_Time(string EventTime);*/
 
 		//string getEvent_Type();
 		//int* getEvent_Time();
 		//void setEvent_Time(string EventTime);
+
 
 		//Execute Event (code depends on Event )
 		virtual void Execute() = 0;

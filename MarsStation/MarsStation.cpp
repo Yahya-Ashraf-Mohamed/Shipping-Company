@@ -9,12 +9,11 @@
 
 //================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================
 
-MarsStation::MarsStation(string name)
+MarsStation::MarsStation()
 {
-	ReadFile(name);
-
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
+	ReadFile(pUI->getInput_File_Name());
 }
 
 MarsStation::~MarsStation()
@@ -62,7 +61,8 @@ void MarsStation::setEvent_Time(string Time)
 	string EventTime_S[2] = { "","" };
 	stringstream splitString(Time);
 
-	while (splitString.good()) {
+	while (splitString.good()) 
+	{
 		string substr;
 		getline(splitString, substr, ':');
 		v.push_back(substr);

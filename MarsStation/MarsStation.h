@@ -57,6 +57,9 @@ class MarsStation
 	int Clock[2] = { 1,1 };
 
 
+
+	// >> There is no need for all these paramters , already found in the class of Truck and Cargo
+
 	int no_Normal, no_Special, no_VIP,												// Number of trucks of each type 
 		Normal_speed, Special_speed, VIP_speed,										// Speed of all trucks of each type 
 		Normal_capacity, Special_capacity, VIP_capacity,							// no. of cargos that truck can carry (Truck capacity)
@@ -87,7 +90,7 @@ class MarsStation
 public:
 	// constructor and destructor
 
-	MarsStation(string name);	// Takes name of the input file
+	MarsStation();	// Takes name of the input file
 
 	~MarsStation();
 
@@ -108,7 +111,7 @@ public:
 	int getCargo_ID();
 	int getTruck_ID();
 	int getCargo_Load_Time();
-	 
+	
 	int* getEvent_Time();
 	
 	float getCargo_Distance();
