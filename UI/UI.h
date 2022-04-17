@@ -1,23 +1,36 @@
 #pragma once
+#include <iostream>
+#include "..//Defs.H"
+#include <string>
+using namespace std;
+
 class UI
 {
+private:
+
+	MODE AppMode;	// Application Mode interactive or step_by_step or silent
+	string inputFileName;
+
 public:
 
-    //////////////////////////////////////////////////////////////////////
-	//NOTE:these functions doesn't have implementation please add them
-	//these info is found in the input file
-	char get_Event();
-	char get_cargo_type();
-	double get_cargo_distance();
+	// Constructors
+	UI();			// No Argument constructor
 
-	//Event time [day,hour]
-	//let Event time be ET
-	int get_ET_day();
-	int get_ET_hour();
+	// Getters Functions  ---------------------------
+	MODE GetAppMode()const;     //returns App Mode state
 
-	int get_load_time();
-	int get_cargo_id ();
-	int get_cargo_cost();
-	///////////////////////////////////////////////////////////////////////
+	// Run UI Functions	--------------------------------------
+	void Start_silent_Mode();
+	void End_silent_Mode();
+
+	void Start_interactive_Mode(int day, int hour);//to be continued
+	
+	void Start_step_by_step_Mode(int day, int hour);//to be continued
+
+	void startAPP();
+
+	~UI();		//Destructor
+
 };
+
 

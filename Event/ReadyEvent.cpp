@@ -17,8 +17,8 @@ ReadyEvent::~ReadyEvent(void)
 
 TYP ReadyEvent::get_cargo_type()
 {
-	UI*pUI = pStation->GetUI();
-	char CargoType = pUI->get_cargo_type();
+	//UI*pUI = pStation->GetUI();
+	char CargoType = pStation->getCargo_Type();
 	TYP type;
 	switch (CargoType)  //Cargo class excepects cargo_type enumerated type "TYP"
 	{
@@ -40,14 +40,14 @@ TYP ReadyEvent::get_cargo_type()
 
 void ReadyEvent::Execute()
 {
-	UI*pUI = pStation->GetUI();
+	//UI*pUI = pStation->GetUI();
 
 	//get user input from UI
 	cargo_type = get_cargo_type();
-	cargo_distance = pUI->get_cargo_distance();
-	load_time = pUI->get_load_time();
-	cargo_id = pUI->get_cargo_id();
-	cost = pUI->get_cargo_cost();
+	cargo_distance = pStation->getCargo_Distance();
+	load_time = pStation->getCargo_Load_Time();
+	cargo_id = pStation->getCargo_ID();
+	cost = pStation->getCargo_Cost();
 
 	//Create Cargo and add it to Queue
 	pCargo = new Cargo(cargo_type, cargo_distance, load_time, cargo_id, cost);

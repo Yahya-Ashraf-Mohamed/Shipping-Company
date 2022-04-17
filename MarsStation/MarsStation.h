@@ -8,9 +8,9 @@
 #include "..\DataStructures\Queue.h"
 #include "..\Truck\Truck.h"
 #include  <fstream>
-#include  <string>
+//#include  <string>  in UI
 #include <sstream>
-#include <iostream>
+//#include <iostream>  in UI
 #include <vector>
 
 //#include "stdio.h"    to convert string to char
@@ -21,7 +21,17 @@ using namespace std;
 class MarsStation
 {
 	UI* pUI; //pointer to the UI
+	//ReadyEvent* pReadyEvent;
+	//PromotionEvent* pPromotionEvent;
+	//CancellationEvent* pCancellationEvent;
 	
+	struct Events
+	{
+		char EventType;
+		int EventDay;
+		int EventHour;
+	};
+
 	//event queue need to be implemented
 	//loaded cargo list need to be implemented (add member variable truck pointer in cargo)
 	//delivered cargo list need to be implemented
@@ -38,8 +48,13 @@ class MarsStation
 	Queue<Truck*> MAINTANANCE_Truck;
 	Queue<Truck*> NONAVAILABLE_Truck;
 
+	Queue<Events> EVENTS_List; //struct of type event               
+	//Queue<ReadyEvent*> READY_Events;				// to be uncommented after completing ready class
+	//Queue<PromotionEvent*> PROMOTED_Events;		// to be uncommented after completing promotion class 
+	//Queue<CancellationEvent*> CANCELLED_Events;	// to be uncommented after completing Cancellation class
 
-	int Clock[2] = { 0,0 };
+
+	int Clock[2] = { 1,1 };
 
 
 	int no_Normal, no_Special, no_VIP,												// Number of trucks of each type 
@@ -51,9 +66,9 @@ class MarsStation
 		MaxW,																		// Maximum waiting hours for a cagro
 		no_events;																	// no. of comming events (no. of comming lines)
 		
-	string EventType, CargoType, TruckType;			//TODO: covert string into char
+	char EventType, CargoType, TruckType;			//TODO: covert string into char
 	
-	int EventTime[2] = { 0,0 },
+	int EventTime[2] = { 1,1 },
 		CargoID,
 		TruckID,
 		CargoLoadTime;
@@ -64,9 +79,9 @@ class MarsStation
 
 	int EventLineNum = 1;
 
-		string* inputFileLines;
+		string* inputFileLines = new string[no_events];
 		string** events;
-		int LineNum = 0;
+		int LineNum = 0;                   
 
 
 public:
@@ -99,13 +114,15 @@ public:
 	float getCargo_Distance();
 	float getCargo_Cost();
 	float getCargo_Extra_Money();
-	string getCargo_Type();
-	string getTruck_Type();
-	string getEvent_Type();
+	char getCargo_Type();
+	char getTruck_Type();
+	char getEvent_Type();
 
 	// input file handler	---------------------------
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded
 	bool check_file_is_empty(ifstream& file);
+	void ReadFile(string Filename);
+	void Enqueue_Events(char EventType, int EventDay, int EventHour);
 
 	// events handler	---------------------------
 	//Select Event to be excuted
@@ -113,7 +130,8 @@ public:
 	
 	//Add Cargo
 	void AddCargo(Cargo* pCargo, TYP type) ;
-		
-	void Start_Next_Event(string** DataFile,int EventLineNum);	// set event variables with the new data of the next line || NOTE: you have to call it after finishing each task
+	
+	// Run the program
+	void Run();
 };
 #endif
