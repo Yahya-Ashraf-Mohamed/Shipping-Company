@@ -48,6 +48,24 @@ int Truck::getTruckCapacity()
 	return this->TruckCapacity;
 }
 
+double Truck::getTruckSpeed()
+{
+	return this->Speed;
+}
+
+
+double Truck::getTruckPriority()
+{
+	double Priority = Speed+TruckCapacity+(Speed/TruckCapacity)+Order;
+	return Priority;
+}
+
+int Truck :: getOrderNum()
+{
+	return Order;
+}
+
+int Truck::Order = 0;
 
 Truck :: ~Truck()
 {}

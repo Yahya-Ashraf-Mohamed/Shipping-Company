@@ -13,6 +13,7 @@ private:
 	int maxJourneys;              // will be read form the input file
 	int TruckCapacity;            // will be read form the input file
 	int TruckID;                   // will be read form the input file
+	static int Order;
 public:
 	Truck(TYP Type , int TruckID ,double Speed, int maxJourneys , int TruckCapacity );
 	void setDelivaryInterval(double DistanceFurthest, double sumUnloadTimes, double timeBack);
@@ -21,5 +22,8 @@ public:
 	int getTruckCapacity();
 	int getTruckID();
 	TYP getTruckType();
+	double getTruckSpeed();
+	double getTruckPriority();
+	static int getOrderNum();
 	~Truck();
 };
