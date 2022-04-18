@@ -53,7 +53,6 @@ double Truck::getTruckSpeed()
 	return this->Speed;
 }
 
-
 double Truck::getTruckPriority()
 {
 	double Priority = Speed+TruckCapacity+(Speed/TruckCapacity)+Order;

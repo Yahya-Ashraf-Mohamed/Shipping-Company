@@ -8,65 +8,12 @@
 #include  <fstream>
 
 //================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================
-//MarsStation::MarsStation()
-//{
-//	//Creates the UI Object & Initialize the UI
-//	pUI = new UI;
-//
-//	events = new string * [no_events];
-//
-//	for (int i = 0; i < no_events; i++)
-//	{
-//		events[i] = new string[7];		// hint: you have to change 7 as their is 3 and 4
-//	}
-//}
 
-MarsStation::MarsStation(string name)
+MarsStation::MarsStation()
 {
-	ifstream dataFile(name);// File stream object
-
-
-	if (openFileIn(dataFile, name) == false)
-	{
-		//pop an error message        //TO DO
-	}
-	else
-	{
-		setInt_Variables(dataFile);
-
-		while (!check_file_is_empty(dataFile))
-		{
-			getline(dataFile, inputFileLines[LineNum]);
-			LineNum++;
-		}
-
-		events = new string * [no_events];
-
-		for (int i = 0; i < no_events; i++)
-		{
-			events[i] = new string[7];		// hint: you have to change 7 as their is 3 and 4
-		}
-
-		int j = 0, k = 0;
-
-		for (int i = 0; i < no_events; i++) {
-
-			stringstream ssin(inputFileLines[k]);
-			while (ssin.good() && j < 7) {
-				ssin >> events[i][j];
-				++j;
-			}
-			j = 0;
-			++k;
-		}
-
-		Start_Next_Event(events, EventLineNum);
-
-		//Creates the UI Object & Initialize the UI
-		pUI = new UI;
-
-	}
-
+	//Creates the UI Object & Initialize the UI
+	pUI = new UI;
+	ReadFile(pUI->getInput_File_Name());
 }
 
 MarsStation::~MarsStation()
@@ -142,52 +89,52 @@ int MarsStation::getClock_Hours()
 	return Clock[0];
 }
 
-//int MarsStation::getCargo_ID()
-//{
-//	return CargoID;
-//}
-//int MarsStation::getTruck_ID()
-//{
-//	return TruckID;
-//}
-//int MarsStation::getCargo_Load_Time()
-//{
-//	return CargoLoadTime;
-//}
-//int* MarsStation::getEvent_Time()
-//{
-//	return EventTime;
-//}
-//float MarsStation::getCargo_Distance()
-//{
-//	return CargoDistance;
-//}
-//float MarsStation::getCargo_Cost()
-//{
-//	return CargoCost;
-//}
-//float MarsStation::getCargo_Extra_Money()
-//{
-//	return CargoExtraMoney;
-//}
-//string MarsStation::getCargo_Type()
-//{
-//	return CargoType;
-//}
-//string MarsStation::getTruck_Type()
-//{
-//	return TruckType;
-//}
-//string MarsStation::getEvent_Type()
-//{
-//	return EventType;
-//}
+int MarsStation::getCargo_ID()
+{
+	return CargoID;
+}
+int MarsStation::getTruck_ID()
+{
+	return TruckID;
+}
+int MarsStation::getCargo_Load_Time()
+{
+	return CargoLoadTime;
+}
+int* MarsStation::getEvent_Time()
+{
+	return EventTime;
+}
+float MarsStation::getCargo_Distance()
+{
+	return CargoDistance;
+}
+float MarsStation::getCargo_Cost()
+{
+	return CargoCost;
+}
+float MarsStation::getCargo_Extra_Money()
+{
+	return CargoExtraMoney;
+}
+char MarsStation::getCargo_Type()
+{
+	return CargoType;
+}
+char MarsStation::getTruck_Type()
+{
+	return TruckType;
+}
+char MarsStation::getEvent_Type()
+{
+	return EventType;
+}
 
 //=================================================== File handler =================================================
 
 bool MarsStation::openFileIn(ifstream& file, string name)
 {
-	file.open(name, ios::in);
+	file.open(name/*, ios::in*/);
 	if (file.fail())
 		return false;
 	else
@@ -200,14 +147,69 @@ bool MarsStation::check_file_is_empty(ifstream& file) {
 }
 
 
+void MarsStation::ReadFile(string FileName)
+{
+	ifstream dataFile;	// File stream object
+
+
+	if (openFileIn(dataFile, FileName) == false)
+	{
+
+	}
+	else
+	{
+		setInt_Variables(dataFile);
+
+		char EventType;
+		string EventTime;
+
+		while (!check_file_is_empty(dataFile))
+		{
+			dataFile >> EventType;
+			if (EventType == 'R')
+			{
+				dataFile >> CargoType >> EventTime >> CargoID >> CargoDistance >> CargoLoadTime >> CargoCost;
+				setEvent_Time(EventTime);
+				//call function creat ready event that returns a pointer to this event to put it in the queue
+				//enque this event in ready event
+				//READY_Events.enqueue(Readyevent);
+				//this function must be in run function when its time comes			//pReadyEvent->ReadyEvent(CargoType, EventTime[0], EventTime[1], CargoID, CargoDistance, CargoLoadTime, CargoCost);
+		
+			}
+			else if (EventType == 'P')
+			{
+				dataFile >> EventTime >> CargoID >> CargoExtraMoney;
+				setEvent_Time(EventTime);
+				//pPromotionEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID, CargoExtraMoney);
+			}
+			else if (EventType == 'X')
+			{
+				dataFile >> EventTime >> CargoID;
+				setEvent_Time(EventTime);
+				//pCancellationEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID );
+			}
+			//save event in queue||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+		}
+
+	}
+}
+
+void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour)
+{
+	Events newEvent; //create event with the input values
+	newEvent.EventType = EventType;
+	newEvent.EventDay = EventDay;
+	newEvent.EventHour = EventHour;
+	EVENTS_List.enqueue(newEvent);	// then enque this event	
+}
+
 //=================================================== EVENTS =================================================
-	
 //selecting the Event to be excecuted
 
 void MarsStation::ExecuteEvent(char eventt, Cargo* pCargo)
 {
-	int Eventtime_day = pUI->get_ET_day();
-	int Eventtime_hour = pUI->get_ET_hour();
+	int Eventtime_day = EventTime[1];
+	int Eventtime_hour = EventTime[0];
 
 	Event* pEvent = nullptr;
 	switch (eventt)
@@ -241,37 +243,21 @@ void MarsStation::AddCargo( Cargo* pCargo , TYP CargoType)
 	}
 }
 
-void MarsStation::Start_Next_Event(string** events, int EventLineNum)
+void MarsStation::Run()
 {
-	EventType = events[EventLineNum][0];
+	bool state = true;
+	while (state == true)
+	{
+		if (Clock[1] == 24)
+		{
+			Clock[0] = Clock[0] + 1;
+			Clock[1] = 1;
+		}
 
-	if(EventType == "R")
-	{
-		CargoType = events[EventLineNum][1];
-		setEvent_Time(events[EventLineNum][2]);
+		///////run application
 
-		stringstream StringToIntConverter_CargoID(events[EventLineNum][3]);		// object from the class stringstream
-		StringToIntConverter_CargoID >> CargoID;		// The object has the string numbers and stream it to the integer CargoID
-		stringstream StringToIntConverter_CargoDistance(events[EventLineNum][4]);
-		StringToIntConverter_CargoDistance >> CargoDistance;
-		stringstream StringToIntConverter_CargoLoadTime(events[EventLineNum][5]);
-		StringToIntConverter_CargoLoadTime >> CargoLoadTime;
-		stringstream StringToIntConverter_CargoCost(events[EventLineNum][6]);
-		StringToIntConverter_CargoCost >> CargoCost;
-		
+		Clock[1] = Clock[1] + 1;
 	}
-	else if (EventType == "P")
-	{
-		setEvent_Time(events[EventLineNum][1]);
-		stringstream StringToIntConverter_CargoID(events[EventLineNum][2]);
-		StringToIntConverter_CargoID >> CargoID;
-		stringstream StringToIntConverter_CargoExtraMoney(events[EventLineNum][3]);
-		StringToIntConverter_CargoExtraMoney >> CargoExtraMoney;
-	}
-	else
-	{
-		setEvent_Time(events[EventLineNum][1]);
-		stringstream StringToIntConverter_CargoID(events[EventLineNum][2]);
-		StringToIntConverter_CargoID >> CargoID;
-	}
+	if (pUI->GetAppMode() == 2)
+		pUI->Start_silent_Mode();
 }

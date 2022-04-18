@@ -16,7 +16,7 @@ public:
 	Node<T>* getNext() const;
 	double getPriority(T* truck) const;
 	void operator= (const T& DATA);
-}; // end Node
+};// end Node
 
 template <typename T>
 void Node<T> :: operator= (const T& DATA)

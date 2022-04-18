@@ -5,10 +5,13 @@ using namespace std;
 
 #include"MarsStation/MarsStation.h"
 
+#include  <fstream>
+#include  <string>
 //main
 int main()
 {
-    std::cout << "Hello World!\n";
-    MarsStation("test.txt");
-    std::cout << "Bye World!\n";
+    MarsStation Station;
+
+	std::cout << "Bye World!\n";
+
 }

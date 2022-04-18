@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  PromotionEvent.cpp
   ReadyEvent.cpp
   Main.cpp
@@ -5,3 +6,7 @@
   Truck.cpp
   Generating Code...
   Shipping Company.vcxproj -> E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\x64\Debug\Shipping Company.exe
+=======
+﻿  Main.cpp
+  Shipping Company.vcxproj -> D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe
+>>>>>>> dc31eaa53a1505a2abbc7511e46a6276d0143263
