@@ -1,12 +1,45 @@
-<<<<<<< HEAD
-﻿  PromotionEvent.cpp
-  ReadyEvent.cpp
+﻿  Cargo.cpp
+  CancellationEvent.cpp
   Main.cpp
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(124,1): error C2059: syntax error: '=='
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(125,22): error C2238: unexpected token(s) preceding ';'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(128,1): error C2059: syntax error: '>>'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(131,46): error C2238: unexpected token(s) preceding ';'
   MarsStation.cpp
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(124,1): error C2059: syntax error: '=='
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(125,22): error C2238: unexpected token(s) preceding ';'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(128,1): error C2059: syntax error: '>>'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(131,46): error C2238: unexpected token(s) preceding ';'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(108,20): error C2039: 'getCargo_Distance': is not a member of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\Event\Event.h(6): message : see declaration of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(110,9): error C2065: 'CargoDistance': undeclared identifier
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(112,20): error C2039: 'getCargo_Cost': is not a member of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\Event\Event.h(6): message : see declaration of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(114,9): error C2065: 'CargoCost': undeclared identifier
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(116,20): error C2039: 'getCargo_Extra_Money': is not a member of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\Event\Event.h(6): message : see declaration of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(118,9): error C2065: 'CargoExtraMoney': undeclared identifier
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(120,19): error C2039: 'getCargo_Type': is not a member of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\Event\Event.h(6): message : see declaration of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(122,9): error C2065: 'CargoType': undeclared identifier
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.cpp(135,19): error C2039: 'openFileIn': is not a member of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\Event\Event.h(6): message : see declaration of 'MarsStation'
+  PromotionEvent.cpp
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(124,1): error C2059: syntax error: '=='
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(125,22): error C2238: unexpected token(s) preceding ';'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(128,1): error C2059: syntax error: '>>'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(131,46): error C2238: unexpected token(s) preceding ';'
+  ReadyEvent.cpp
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(124,1): error C2059: syntax error: '=='
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(125,22): error C2238: unexpected token(s) preceding ';'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(128,1): error C2059: syntax error: '>>'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(131,46): error C2238: unexpected token(s) preceding ';'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\Event\ReadyEvent.cpp(21,29): error C2039: 'getCargo_Type': is not a member of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(21): message : see declaration of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\Event\ReadyEvent.cpp(47,29): error C2039: 'getCargo_Distance': is not a member of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(21): message : see declaration of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\Event\ReadyEvent.cpp(50,19): error C2039: 'getCargo_Cost': is not a member of 'MarsStation'
+C:\Users\Ahmmed Hazem\Desktop\project version test\project version test'\MarsStation\MarsStation.h(21): message : see declaration of 'MarsStation'
   Truck.cpp
+  UI.cpp
   Generating Code...
-  Shipping Company.vcxproj -> E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\x64\Debug\Shipping Company.exe
-=======
-﻿  Main.cpp
-  Shipping Company.vcxproj -> D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe
->>>>>>> dc31eaa53a1505a2abbc7511e46a6276d0143263
