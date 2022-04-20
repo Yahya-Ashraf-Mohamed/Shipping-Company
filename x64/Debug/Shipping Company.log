@@ -1,12 +1,13 @@
-<<<<<<< HEAD
-﻿  PromotionEvent.cpp
-  ReadyEvent.cpp
-  Main.cpp
+﻿  Main.cpp
   MarsStation.cpp
+  PromotionEvent.cpp
+  ReadyEvent.cpp
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\Event\ReadyEvent.cpp(50,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Truck.cpp
   Generating Code...
-  Shipping Company.vcxproj -> E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\x64\Debug\Shipping Company.exe
-=======
-﻿  Main.cpp
-  Shipping Company.vcxproj -> D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe
->>>>>>> dc31eaa53a1505a2abbc7511e46a6276d0143263
+  LINK : E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\x64\Debug\Shipping Company.exe not found or not built by the last incremental link; performing full link
+MarsStation.obj : error LNK2019: unresolved external symbol "public: __cdecl UI::UI(void)" (??0UI@@QEAA@XZ) referenced in function "public: __cdecl MarsStation::MarsStation(void)" (??0MarsStation@@QEAA@XZ)
+MarsStation.obj : error LNK2019: unresolved external symbol "public: enum MODE __cdecl UI::GetAppMode(void)const " (?GetAppMode@UI@@QEBA?AW4MODE@@XZ) referenced in function "public: void __cdecl MarsStation::Run(void)" (?Run@MarsStation@@QEAAXXZ)
+MarsStation.obj : error LNK2019: unresolved external symbol "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl UI::getInput_File_Name(void)" (?getInput_File_Name@UI@@QEAA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ) referenced in function "public: __cdecl MarsStation::MarsStation(void)" (??0MarsStation@@QEAA@XZ)
+MarsStation.obj : error LNK2019: unresolved external symbol "public: void __cdecl UI::Start_silent_Mode(void)" (?Start_silent_Mode@UI@@QEAAXXZ) referenced in function "public: void __cdecl MarsStation::Run(void)" (?Run@MarsStation@@QEAAXXZ)
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\x64\Debug\Shipping Company.exe : fatal error LNK1120: 4 unresolved externals

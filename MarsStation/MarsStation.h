@@ -114,18 +114,17 @@ public:
 	
 	int* getEvent_Time();
 	
-	/*float getCargo_Distance();
+	float getCargo_Distance();
 	float getCargo_Cost();
 	float getCargo_Extra_Money();
-<<<<<<< HEAD
-	string getCargo_Type();
+
+	/*string getCargo_Type();
 	string getTruck_Type();
 	string getEvent_Type();*/
-=======
+
 	char getCargo_Type();
 	char getTruck_Type();
 	char getEvent_Type();
->>>>>>> dc31eaa53a1505a2abbc7511e46a6276d0143263
 
 	// input file handler	---------------------------
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded
