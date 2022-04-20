@@ -5,6 +5,8 @@ D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shippi
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\Event\ReadyEvent.cpp(50,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
   Main.cpp
   MarsStation.cpp
+  Truck.cpp
+  UI.cpp
   Generating Code...
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\Cargo\Cargo.cpp(57): warning C4715: 'Cargo::getCargo_Extra_Money': not all control paths return a value
   Shipping Company.vcxproj -> D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe

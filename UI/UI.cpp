@@ -101,4 +101,18 @@ void UI::Start_interactive_Mode(int Days, int Hours)//to be continued ) //input:
 	cout << "Current Time (Day:Hour):- " << Days << ":" << Hours << endl;
 }
 
+void UI::Show_Error(Error ErrorType)
+{
+	switch (ErrorType)
+	{
+	case(error_Open_inputFile):
+		cout << "Error in openning input file!" << endl;
+		break;
+	case(error_Print_OutputFile):
+		cout << "Error in executing output file!" << endl;
+		break;
+		//to be completed
+	}
+}
+
 UI::~UI(){}

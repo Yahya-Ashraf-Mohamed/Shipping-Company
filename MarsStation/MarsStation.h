@@ -130,7 +130,7 @@ public:
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
-	void Excute_Output_File();
+	bool Excute_Output_File();
 	void Enqueue_Events(char EventType, int EventDay, int EventHour);
 
 	// events handler	---------------------------

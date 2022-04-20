@@ -20,3 +20,9 @@ enum  MODE	//Modes of operation
 	step_by_step,
 	silent
 };
+
+enum Error
+{
+	error_Open_inputFile,
+	error_Print_OutputFile
+};

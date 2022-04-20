@@ -30,6 +30,7 @@ public:
 
 	void startAPP();
 
+	void Show_Error(Error errorType);
 	~UI();		//Destructor
 
 };
