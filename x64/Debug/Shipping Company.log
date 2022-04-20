@@ -1,2 +1,7 @@
-﻿  Main.cpp
+﻿  PromotionEvent.cpp
+  ReadyEvent.cpp
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\Event\ReadyEvent.cpp(50,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Main.cpp
+  MarsStation.cpp
+  Generating Code...
   Shipping Company.vcxproj -> D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe

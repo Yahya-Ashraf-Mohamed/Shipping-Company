@@ -192,6 +192,29 @@ void MarsStation::ReadFile(string FileName)
 		}
 
 	}
+	dataFile.close();		//close input file
+}
+
+void MarsStation::Excute_Output_File()		//to be completed after events
+{
+	ofstream OutPutFile;
+	OutPutFile.open("Report.txt");	// Create and Open output file
+
+	OutPutFile << "CDT\t ID\t PT\t WT\t TID\t" << endl;
+	//for loop on cargoDlivered list
+	//OutPutFile << "Day:Time" << "\t " << "ID" << "\t " << "Prepartiontime" << "\t " << "WaitTime" << "\t " << "TruckID"<< endl;
+
+	OutPutFile << "..........................................................................." << endl;
+	OutPutFile << "..........................................................................." << endl;
+	OutPutFile << "Cargos: " << /*<<total cargo count <<*/ "[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<< endl*/;
+	OutPutFile << "Cargo Avg Wait = " << /*get Averg wait time<<*/  endl;
+	OutPutFile << "Auto-promoted Cargos: " << /*get % promoted cargo<<*/ "%" << endl;
+	OutPutFile << "Trucks: " << /*get munber of trucks<<*/"[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<<*/ << endl;
+	OutPutFile << "Avg Active time = 91%" << endl;
+	OutPutFile << "Avg utilization = 87%" << endl;
+
+	OutPutFile.close();
+
 }
 
 void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour)
