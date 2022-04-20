@@ -10,25 +10,34 @@ Cargo::Cargo(TYP type, double dist, int LT, int ID, int COST)
 };
 Cargo::~Cargo() {};
 
-//int Cargo :: getCargo_ID()
-//{
-//}
-//
-//float  Cargo :: getCargo_Distance()
-//{
-//}
-//float Cargo::getCargo_Cost()
-//{
-//}
-//float Cargo::getCargo_Extra_Money()
-//{
-//}
-//TYP Cargo::getCargo_Type()
-//{
-//}
-//int Cargo::getCargo_Load_Time()
-//{
-//}
+int Cargo::getCargoID()
+{
+	return cargo_id;
+}
+double Cargo::getCargoDistance()
+{
+	return cargo_distance;
+}
+
+int Cargo::getCargoCost()
+{
+	return cost;
+}
+float Cargo::getCargo_Extra_Money()
+{
+	if (this->cargo_type == NORMAL)
+		return cargo_extra_money;
+
+}
+ TYP Cargo::getCargo_Type()
+{
+	return cargo_type;
+}
+ int Cargo::getCargo_Load_Time()
+ {
+	 return load_time;
+ }
+
 
 
 void Cargo::Set_ReadyEvent_time(int* Eventtime)

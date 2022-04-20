@@ -8,7 +8,7 @@ private:
 	int load_time;            //Time (in hours) to load or unload cargo
 	int cargo_id;             // unique sequence number that identifies each cargo
 	int cost;                 //cost of delievering the cargo
-	TYP CargoType;
+	int cargo_extra_money;    //extra money of promotion from normal to vip cargo
 	//Event time [day,hour]
 	int ReadyEvent_time[2];
 
@@ -16,16 +16,16 @@ public:
 	Cargo(TYP type,double dist,int LT,int ID,int COST);
 	~Cargo();
 
-	//int getCargo_ID();
-	//float getCargo_Distance();
-	//float getCargo_Cost();
-	//float getCargo_Extra_Money();
+	int getCargoID();
+	double getCargoDistance();
+	int getCargoCost();
+	float getCargo_Extra_Money();
 
-	//TYP getCargo_Type();
+	TYP getCargo_Type();
 
 	//string getCargo_Type();
 
-	//int getCargo_Load_Time();
+	int getCargo_Load_Time();
 	void Set_ReadyEvent_time(int* Eventtime );
 	int* get_ReadyEvent_time();
 };
