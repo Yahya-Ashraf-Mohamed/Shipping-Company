@@ -1,11 +1,10 @@
 #pragma once
-#ifndef _NODE
-#define _NODE
 template <typename T>
 class Node
 {
 private:
 	T data; // A data item
+	double Priority; //  It shows the priority in the Priority Queue only
 	Node<T>* next; // Pointer to next node
 public:
 	Node();
@@ -15,9 +14,15 @@ public:
 	void setNext(Node<T>* NEXT);
 	T getdata() const;
 	Node<T>* getNext() const;
-}; // end Node
-#endif
+	double getPriority(T* truck) const;
+	void operator= (const T& DATA);
+};// end Node
 
+template <typename T>
+void Node<T> :: operator= (const T& DATA)
+{
+	data = DATA;
+}
 
 template < typename T>
 Node<T>::Node()
@@ -28,7 +33,8 @@ Node<T>::Node()
 template < typename T>
 Node<T>::Node(const T& DATA)
 {
-	data = DATA;
+	/*data = DATA;*/
+	operator= (DATA);
 	next = nullptr;
 }
 
@@ -38,6 +44,7 @@ Node<T>::Node(const T& DATA, Node<T>* NEXT)
 	data = DATA;
 	next = NEXT;
 }
+
 template < typename T>
 void Node<T>::setdata(const T& DATA)
 {
@@ -60,4 +67,11 @@ template < typename T>
 Node<T>* Node<T>::getNext() const
 {
 	return next;
+}
+
+template < typename T>
+double Node<T>::getPriority(T* truck) const
+{
+	Priority = truck->getTruckPriority();
+	return Priority;
 }

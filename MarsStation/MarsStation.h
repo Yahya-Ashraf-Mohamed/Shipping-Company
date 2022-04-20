@@ -117,6 +117,11 @@ public:
 	float getCargo_Distance();
 	float getCargo_Cost();
 	float getCargo_Extra_Money();
+
+	/*string getCargo_Type();
+	string getTruck_Type();
+	string getEvent_Type();*/
+
 	char getCargo_Type();
 	char getTruck_Type();
 	char getEvent_Type();

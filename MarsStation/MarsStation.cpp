@@ -4,7 +4,7 @@
 #include "..\Event\ReadyEvent.h"
 #include "..\Event\CancellationEvent.h"
 #include "..\Event\PromotionEvent.h"
-
+//#include "..\Cargo\Cargo.h"
 #include  <fstream>
 
 //================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================

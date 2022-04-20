@@ -1,7 +1,4 @@
 #pragma once
-#ifndef _QUEUE_
-#define _QUEUE_
-
 #include "Node.h"
 
 template <typename T>
@@ -18,7 +15,6 @@ public:
 	bool peek(T& frntEntry)  const;
 	~Queue();
 };
-#endif
 
 template <typename T>   //Constructor
 Queue<T>::Queue()
@@ -81,8 +77,6 @@ bool Queue<T>::dequeue(T& frntEntry)
 	return true;
 }
 
-
-
 //Function: peek copies the front of this queue to the passed param. The operation does not modify the queue.
 //Output: The front of the queue.
 
@@ -96,8 +90,6 @@ bool Queue<T>::peek(T& frntEntry) const
 	return true;
 
 }
-
-
 
 template <typename T>   //Destructor
 Queue<T>::~Queue()
