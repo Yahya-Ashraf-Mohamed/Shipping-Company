@@ -7,12 +7,14 @@ class Queue
 private:
 	Node<T>* front;
 	Node<T>* rear;
+	int Size = 0;
 public:
 	Queue();
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	int getSize(); 
 	~Queue();
 };
 
@@ -23,7 +25,11 @@ Queue<T>::Queue()
 	rear = nullptr;
 }
 
-
+template <typename T>  
+int Queue<T>:: getSize ()
+{
+	return Size;
+}
 
 //Function: isEmpty Sees whether this queue is empty.
 //Output: True if the queue is empty; otherwise false.
@@ -50,6 +56,7 @@ bool Queue<T>::enqueue(const T& newEntry)
 		rear->setNext(newNodePtr); // The queue was not empty
 
 	rear = newNodePtr; // New node is the last node now
+	Size++;
 	return true;
 }
 
@@ -73,7 +80,7 @@ bool Queue<T>::dequeue(T& frntEntry)
 
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	Size--;
 	return true;
 }
 
@@ -90,6 +97,8 @@ bool Queue<T>::peek(T& frntEntry) const
 	return true;
 
 }
+
+
 
 template <typename T>   //Destructor
 Queue<T>::~Queue()

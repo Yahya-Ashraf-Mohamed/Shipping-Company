@@ -5,13 +5,14 @@ template <typename T>
 class PriorityQueue
 {
 private:
-	Node <T>* Front, * Rear;
+	Node <T>* Front, * Rear; int Size = 0;
 public:
 	PriorityQueue();
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	int getSize();
 	~PriorityQueue();
 };
 
@@ -39,12 +40,13 @@ bool PriorityQueue< T > ::enqueue(const T& newEntry)
 	else
 	{
 		Node<T>* Temp = new Node<T>(newEntry);
-		while (Temp->getNext() != NULL && Temp->getPriority() < newNodePtr->getPriority())
+		while (Temp->getNext() != nullptr && Temp->getPriority() < newNodePtr->getPriority())
 		{
 			Rear->setNext(newNodePtr);
 		}
 	}
 	Rear = newNodePtr;
+	Size++;
 }
 
 template <typename T>
@@ -63,6 +65,7 @@ bool PriorityQueue< T > ::dequeue(T& frntEntry)
 			Rear = nullptr;
 		// Free memory reserved for the dequeued node
 		delete nodeToDeletePtr;
+		Size--;
 		return true;
 	}
 }
@@ -75,6 +78,12 @@ bool PriorityQueue< T > ::peek(T& frntEntry)  const
 
 	frntEntry = Front->getdata();
 	return true;
+}
+
+template <typename T>
+int PriorityQueue<T> ::getSize()
+{
+	return Size;
 }
 
 template <typename T>

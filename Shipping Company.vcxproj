@@ -150,9 +150,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cargo\Cargo.h" />
+    <ClInclude Include="DataStructures\MergeSort.h" />
     <ClInclude Include="DataStructures\Node.h" />
     <ClInclude Include="DataStructures\PriorityQueue.h" />
     <ClInclude Include="DataStructures\Queue.h" />
+    <ClInclude Include="DataStructures\Stack.h" />
     <ClInclude Include="Defs.H" />
     <ClInclude Include="Event\CancellationEvent.h" />
     <ClInclude Include="Event\Event.h" />
