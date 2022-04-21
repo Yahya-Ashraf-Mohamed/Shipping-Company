@@ -1,6 +1,1 @@
-﻿  ReadyEvent.cpp
-CancellationEvent.obj : error LNK2019: unresolved external symbol "public: void __cdecl MarsStation::CancelCargo(int)" (?CancelCargo@MarsStation@@QEAAXH@Z) referenced in function "public: virtual void __cdecl CancellationEvent::Execute(void)" (?Execute@CancellationEvent@@UEAAXXZ)
-MarsStation.obj : error LNK2019: unresolved external symbol "public: __cdecl ReadyEvent::ReadyEvent(class MarsStation *,int,int)" (??0ReadyEvent@@QEAA@PEAVMarsStation@@HH@Z) referenced in function "public: void __cdecl MarsStation::ExecuteEvent(char,class Cargo *)" (?ExecuteEvent@MarsStation@@QEAAXDPEAVCargo@@@Z)
-PromotionEvent.obj : error LNK2019: unresolved external symbol "public: class Cargo * __cdecl MarsStation::PromoteCargo(int)" (?PromoteCargo@MarsStation@@QEAAPEAVCargo@@H@Z) referenced in function "public: virtual void __cdecl PromotionEvent::Execute(void)" (?Execute@PromotionEvent@@UEAAXXZ)
-ReadyEvent.obj : error LNK2019: unresolved external symbol "public: void __cdecl MarsStation::addPromotionEvent(int,int,int,int)" (?addPromotionEvent@MarsStation@@QEAAXHHHH@Z) referenced in function "public: virtual void __cdecl ReadyEvent::Execute(void)" (?Execute@ReadyEvent@@UEAAXXZ)
-D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe : fatal error LNK1120: 4 unresolved externals
+﻿  Shipping Company.vcxproj -> D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe
