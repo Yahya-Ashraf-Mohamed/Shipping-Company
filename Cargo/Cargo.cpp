@@ -7,7 +7,7 @@ Cargo::Cargo(TYP type, double dist, int LT, int ID, int COST)
 	load_time = LT;
 	cargo_id = ID;
 	cost = COST;
-};
+}
 Cargo::~Cargo() {}
 
 void Cargo::setCargoID(int ID)
@@ -34,7 +34,7 @@ void Cargo::setCargoLoadTime(int loadTime)
 {
 	load_time = loadTime;
 }
-;
+
 
 int Cargo::getCargoID()
 {
@@ -59,6 +59,11 @@ TYP Cargo::getCargo_Type()
 {
 	return cargo_type;
 }
+void Cargo::Set_cargo_type(TYP type)
+{
+	cargo_type = type;
+}
+
 int Cargo::getCargo_Load_Time()
 {
 	return load_time;
@@ -70,8 +75,18 @@ void Cargo::Set_ReadyEvent_time(int* Eventtime)
 {
 	ReadyEvent_time[0] = Eventtime[0];
 	ReadyEvent_time[1] = Eventtime[1];
-};
+}
 int* Cargo::get_ReadyEvent_time()
 {
 	return ReadyEvent_time;
-};
+}
+
+//void Cargo::Set_PromotionEvent_time(int* Eventtime)
+//{
+//	PromotionEvent_time[0] = Eventtime[0];
+//	PromotionEvent_time[1] = Eventtime[1];
+//}
+//int* Cargo::get_PromotionEvent_time()
+//{
+//	return PromotionEvent_time;
+//}

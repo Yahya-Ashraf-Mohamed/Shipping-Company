@@ -5,18 +5,26 @@
 class ReadyEvent : public Event
 {
 private:
-	TYP cargo_type;      //TYP is enum that contains ( NORMAL , SPECIAL , VIP )
+	TYP cargo_type;           //TYP is enum that contains ( NORMAL , SPECIAL , VIP )
 	double cargo_distance;    //The distance that the cargo will travel in kilometeres
 	int load_time;            //Time (in hours) to load or unload cargo
 	int cargo_id;             // unique sequence number that identifies each cargo
 	int cost;                 //cost of delievering the cargo
+	static int AutoP;        //represents number of days after which a normal cargo is Auto promoted to VIP cargo
 public:
-	ReadyEvent(MarsStation* pApp, int Eventtime_day,int Eventtime_hour);
+	ReadyEvent( MarsStation* pApp, int Eventtime_day , int Eventtime_hour , TYP type , double distance , int LoadTime , int id  , int Cost );
 	virtual ~ReadyEvent(void);
 
-	//gets cargo type from UI and returns it with as enum value "TYP"
-	TYP get_cargo_type();
+	TYP	get_cargo_type(char CargoType);
+	void setAutoP(int x);
+	int  getAutoP();
 
 	//Execute Event 
 	virtual void Execute();
+
+	//================================= ignore =========================
+	////gets cargo type from UI and returns it with as enum value "TYP"
+	//TYP get_cargo_type();
+	//===================================================================
+
 };
