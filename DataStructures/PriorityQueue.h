@@ -1,6 +1,7 @@
 #pragma once
 #include"../DataStructures/Node.h"
 
+
 template <typename T>
 class PriorityQueue
 {
