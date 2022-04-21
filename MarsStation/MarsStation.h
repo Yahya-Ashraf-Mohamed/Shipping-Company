@@ -6,6 +6,9 @@
 #include "..\UI\UI.h"
 #include "..\Cargo\Cargo.h"
 #include "..\DataStructures\Queue.h"
+#include "..\DataStructures\LinkedList.h"
+#include "..\Event\Event.h"
+
 #include "..\Truck\Truck.h"
 #include  <fstream>
 //#include  <string>  in UI
@@ -25,36 +28,39 @@ class MarsStation
 	//PromotionEvent* pPromotionEvent;
 	//CancellationEvent* pCancellationEvent;
 	
-	struct Events
-	{
-		char EventType;
-		int EventDay;
-		int EventHour;
-	};
+
 
 	//event queue need to be implemented
 	//loaded cargo list need to be implemented (add member variable truck pointer in cargo)
 	//delivered cargo list need to be implemented
 	
-	//Cargo Queue
+	//Cargo listes
 	Queue<Cargo*> VIP_Cargo;      //need to be a priority queue
 	Queue<Cargo*> Special_Cargo;
-	Queue<Cargo*> Normal_Cargo;  //loop deque and enque
+	LinkedList Normal_Cargo;
 	
+	//Event Queue;
+	Queue<Event*> EVENT;
+	
+	//Counts
+	int VIP_Cargo_count=0;
+	int Special_Cargo_count=0;
+	int Normal_Cargo_count=0;
+
+	int promoted_Cargo_count = 0;
+
+
 	//Truck Queue
-	//Queue<Truck*> VIP_Truck;
-	Queue<Truck*> SPECIAL_Truck;
-	Queue<Truck*> NORMAL_Truck;
-	Queue<Truck*> MAINTANANCE_Truck;
-	Queue<Truck*> NONAVAILABLE_Truck;
-
-	Queue<Events> EVENTS_List; //struct of type event               
-	//Queue<ReadyEvent*> READY_Events;				// to be uncommented after completing ready class
-	//Queue<PromotionEvent*> PROMOTED_Events;		// to be uncommented after completing promotion class 
-	//Queue<CancellationEvent*> CANCELLED_Events;	// to be uncommented after completing Cancellation class
+	Queue<Truck*> Waiting_VIP_Truck;
+	Queue<Truck*> Waiting_SPECIAL_Truck;
+	Queue<Truck*> Waiting_NORMAL_Truck;
+	Queue<Truck*> MAINTANANCE_VIP_Truck;
+	Queue<Truck*> MAINTANANCE_Normal_Truck;
+	Queue<Truck*> MAINTANANCE_Special_Truck;
+	Queue<Truck*> MOVING_Truck;
 
 
-	int Clock[2] = { 1,1 };
+	int Clock[2] = { 1,5 };
 
 
 
@@ -71,7 +77,7 @@ class MarsStation
 		
 	char EventType, CargoType, TruckType;			//TODO: covert string into char
 	
-	int EventTime[2] = { 1,1 },
+	int EventTime[2] = { 1,5 },
 		CargoID,
 		TruckID,
 		CargoLoadTime;
@@ -88,6 +94,10 @@ class MarsStation
 
 
 public:
+
+
+//================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================
+	
 	// constructor and destructor
 
 	MarsStation();	// Takes name of the input file
@@ -131,15 +141,45 @@ public:
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
 	bool Excute_Output_File();
-	void Enqueue_Events(char EventType, int EventDay, int EventHour);
+	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted struct
 
 	// events handler	---------------------------
 	//Select Event to be excuted
-	void ExecuteEvent(char Event, Cargo* pCargo=nullptr);
+	//void ExecuteEvent(char Event, Cargo* pCargo=nullptr);  deleted
 	
-	//Add Cargo
+	//=================================================== EVENTS =================================================//
+
+	//Add Cargo to Cargo Queue depending on it's type
 	void AddCargo(Cargo* pCargo, TYP type) ;
 	
+	//Promote normal cargo to VIP cargoes 
+	Cargo* PromoteCargo(int cargo_id);
+
+	//Cancel Cargo
+	void CancelCargo(int cargo_id);
+
+	void addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost);
+
+	void addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money);
+
+	void addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id);
+
+//=============================================================================================================
+	
+	// Input Functions		--------------------------- (uncomment later)
+	//void setClock_Hours(int Hours);				//set the clock hours
+	//void setClock_Days(int Days);			//set the clock minutes
+	//void setClock(int Hours, int Days);		//set the clock hours and minutes
+	//void setInt_Variables(fstream DataFile);	//set the values of the integar variables
+
+	// Output Functions		---------------------------(uncomment later)
+	//int getClock_Hours();						//get clock hour
+	//int getClock_Days();						//get clock days
+
+	// file handler	--------------------------- (uncomment later)
+	//bool openFileIn(fstream& file, string name);	//
+	//-----------------------------------------------------------
+
 	// Run the program
 	void Run();
 };
