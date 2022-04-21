@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
     MarsStation Station;
-
+	/*Station.Run();*/
 	std::cout << "Bye World!\n";
 
 }

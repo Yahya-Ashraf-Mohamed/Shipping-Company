@@ -25,12 +25,7 @@ class MarsStation
 	//PromotionEvent* pPromotionEvent;
 	//CancellationEvent* pCancellationEvent;
 	
-	struct Events
-	{
-		char EventType;
-		int EventDay;
-		int EventHour;
-	};
+
 
 	//event queue need to be implemented
 	//loaded cargo list need to be implemented (add member variable truck pointer in cargo)
@@ -42,19 +37,16 @@ class MarsStation
 	Queue<Cargo*> Normal_Cargo;  //loop deque and enque
 	
 	//Truck Queue
-	//Queue<Truck*> VIP_Truck;
-	Queue<Truck*> SPECIAL_Truck;
-	Queue<Truck*> NORMAL_Truck;
-	Queue<Truck*> MAINTANANCE_Truck;
-	Queue<Truck*> NONAVAILABLE_Truck;
-
-	Queue<Events> EVENTS_List; //struct of type event               
-	//Queue<ReadyEvent*> READY_Events;				// to be uncommented after completing ready class
-	//Queue<PromotionEvent*> PROMOTED_Events;		// to be uncommented after completing promotion class 
-	//Queue<CancellationEvent*> CANCELLED_Events;	// to be uncommented after completing Cancellation class
+	Queue<Truck*> Waiting_VIP_Truck;
+	Queue<Truck*> Waiting_SPECIAL_Truck;
+	Queue<Truck*> Waiting_NORMAL_Truck;
+	Queue<Truck*> MAINTANANCE_VIP_Truck;
+	Queue<Truck*> MAINTANANCE_Normal_Truck;
+	Queue<Truck*> MAINTANANCE_Special_Truck;
+	Queue<Truck*> MOVING_Truck;
 
 
-	int Clock[2] = { 1,1 };
+	int Clock[2] = { 1,5 };
 
 
 
@@ -71,7 +63,7 @@ class MarsStation
 		
 	char EventType, CargoType, TruckType;			//TODO: covert string into char
 	
-	int EventTime[2] = { 1,1 },
+	int EventTime[2] = { 1,5 },
 		CargoID,
 		TruckID,
 		CargoLoadTime;
