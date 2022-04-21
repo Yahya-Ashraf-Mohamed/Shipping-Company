@@ -1,6 +1,6 @@
 #include "MarsStation.h"
 
-#include "..\Event\Event.h"
+//#include "..\Event\Event.h"
 #include "..\Event\ReadyEvent.h"
 #include "..\Event\CancellationEvent.h"
 #include "..\Event\PromotionEvent.h"
@@ -8,61 +8,70 @@
 #include  <fstream>
 
 //================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================
-MarsStation::MarsStation()
+	
+	MarsStation::MarsStation()
 {
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
 }
-MarsStation::~MarsStation()
-{
-	delete pUI;
-}
-UI* MarsStation::GetUI()
-{
-	return pUI;
-}
+
+	MarsStation::~MarsStation()
+	{
+		delete pUI;
+	}
+
+	UI* MarsStation::GetUI()
+	{
+		return pUI;
+	}
 
 //=================================================== EVENTS =================================================
 	
-//selecting the Event to be excecuted
-
-void MarsStation::ExecuteEvent(char eventt, Cargo* pCargo)
-{
-	int Eventtime_day = pUI->get_ET_day();
-	int Eventtime_hour = pUI->get_ET_hour();
-
-	Event* pEvent = nullptr;
-	switch (eventt)
+	//Add Cargo to Cargo Queue depending on it's type
+	void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 	{
-	case 'R':
-		pEvent = new ReadyEvent(this, Eventtime_day, Eventtime_hour);
-		break;
+		switch (CargoType)
+		{
+		case VIP:
+			VIP_Cargo.enqueue(pCargo);
+			VIP_Cargo_count++;
+			break;
+		case SPECIAL:
+			Special_Cargo.enqueue(pCargo);
+			Special_Cargo_count++;
+			break;
+		case NORMAL:
+			Normal_Cargo.enqueue(pCargo);
+			Normal_Cargo_count++;
+			break;
+		}
 	}
-	if (pEvent)
-	{
-		pEvent->Execute();
-		delete pEvent;
-		pEvent = nullptr;
-	}
-}
 
-//Add Cargo to Cargo Queue depending on it's type
-void MarsStation::AddCargo( Cargo* pCargo , TYP CargoType)
-{
-	switch (CargoType)
+	//Promote normal cargo to VIP cargoes and returns pointer to the promoted Cargo
+	//Auto promote still not Handelled
+	Cargo* MarsStation::PromoteCargo(int cargo_id)
 	{
-	case VIP:
-		VIP_Cargo.enqueue(pCargo);
-		break;
-	case SPECIAL:
-		VIP_Cargo.enqueue(pCargo);
-		break;
-	case NORMAL:
-		VIP_Cargo.enqueue(pCargo);
-		break;
+		Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);
+		if (pCargo)
+		{
+			Normal_Cargo_count--;
+			VIP_Cargo.enqueue(pCargo);
+			VIP_Cargo_count++;
+			promoted_Cargo_count++;
+		}
+		return pCargo;
 	}
-}
 
+	//Cancel Cargo
+	void MarsStation::CancelCargo(int cargo_id)
+	{
+		Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);
+		if (pCargo)
+		{
+			Normal_Cargo_count--;
+			delete pCargo;
+		}
+	}
 
 //=================================================== Input Functions =================================================
 

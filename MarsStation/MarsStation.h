@@ -6,6 +6,8 @@
 #include "..\UI\UI.h"
 #include "..\Cargo\Cargo.h"
 #include "..\DataStructures\Queue.h"
+#include "..\DataStructures\LinkedList.h"
+#include "..\Event\Event.h"
 
 #include "..\Truck\Truck.h"
 #include  <fstream>
@@ -21,17 +23,28 @@ class MarsStation
 	//loaded cargo list need to be implemented (add member variable truck pointer in cargo)
 	//delivered cargo list need to be implemented
 	
-	//Cargo Queue
+	//Cargo listes
 	Queue<Cargo*> VIP_Cargo;      //need to be a priority queue
 	Queue<Cargo*> Special_Cargo;
-	Queue<Cargo*> Normal_Cargo;  //loop deque and enque
+	LinkedList Normal_Cargo;
 	
+	//Event Queue;
+	Queue<Event*> EVENT;
+	
+	//Counts
+	int VIP_Cargo_count=0;
+	int Special_Cargo_count=0;
+	int Normal_Cargo_count=0;
+
+	int promoted_Cargo_count = 0;
+
+
 	//Truck Queue
-	//Queue<Truck*> VIP_Truck;
+	Queue<Truck*> VIP_Truck;
 	Queue<Truck*> SPECIAL_Truck;
 	Queue<Truck*> NORMAL_Truck;
 	Queue<Truck*> MAINTANANCE_Truck;
-	Queue<Truck*> NONAVAILABLE_Truck;
+	Queue<Truck*> MOVING_Truck;
 
 
 	int Clock[2] = { 0,0 };
@@ -50,6 +63,10 @@ class MarsStation
 //--------------------------------------------------------------------------
 
 public:
+
+
+//================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================
+	
 	// constructor and destructor
 	MarsStation();
 	~MarsStation();
@@ -57,12 +74,24 @@ public:
 	//Gets a pointer to UI Object
 	UI* GetUI();
 
-	//Select Event to be excuted
-	void ExecuteEvent(char Event, Cargo* pCargo=nullptr);
+//=================================================== EVENTS =================================================
 	
-	//Add Cargo
+	//Add Cargo to Cargo Queue depending on it's type
 	void AddCargo(Cargo* pCargo, TYP type) ;
 	
+	//Promote normal cargo to VIP cargoes 
+	Cargo* PromoteCargo(int cargo_id);
+
+	//Cancel Cargo
+	void CancelCargo(int cargo_id);
+
+	void addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost);
+
+	void addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money = 0);
+
+	void addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id);
+
+//=============================================================================================================
 	
 	// Input Functions		--------------------------- (uncomment later)
 	//void setClock_Hours(int Hours);				//set the clock hours
