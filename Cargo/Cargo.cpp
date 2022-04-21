@@ -1,6 +1,6 @@
 #include "Cargo.h"
 
-Cargo::Cargo(TYP type, double dist, int LT, int ID, int COST) 
+Cargo::Cargo(TYP type, double dist, int LT, int ID, int COST)
 {
 	cargo_type = type;
 	cargo_distance = dist;
@@ -8,7 +8,33 @@ Cargo::Cargo(TYP type, double dist, int LT, int ID, int COST)
 	cargo_id = ID;
 	cost = COST;
 };
-Cargo::~Cargo() {};
+Cargo::~Cargo() {}
+
+void Cargo::setCargoID(int ID)
+{
+	this->cargo_id = ID;
+}
+void Cargo::setCargoDistance(int distance)
+{
+	this->cargo_distance = distance;
+}
+void Cargo::setCargoCost(int cost)
+{
+	this->cost = cost;
+}
+void Cargo::setCargoExtraMoney(int cargoExtraMoney)
+{
+	this->cargo_extra_money = cargoExtraMoney;
+}
+void Cargo::promoteCargo(Cargo* cargo)
+{
+	cargo->cargo_type = VIP;
+}
+void Cargo::setCargoLoadTime(int loadTime)
+{
+	load_time = loadTime;
+}
+;
 
 int Cargo::getCargoID()
 {
@@ -29,14 +55,14 @@ float Cargo::getCargo_Extra_Money()
 		return cargo_extra_money;
 
 }
- TYP Cargo::getCargo_Type()
+TYP Cargo::getCargo_Type()
 {
 	return cargo_type;
 }
- int Cargo::getCargo_Load_Time()
- {
-	 return load_time;
- }
+int Cargo::getCargo_Load_Time()
+{
+	return load_time;
+}
 
 
 

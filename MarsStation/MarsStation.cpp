@@ -154,44 +154,84 @@ void MarsStation::ReadFile(string FileName)
 
 	if (openFileIn(dataFile, FileName) == false)
 	{
-
+		pUI->Show_Error(error_Open_inputFile);
 	}
 	else
 	{
 		setInt_Variables(dataFile);
 
 		char EventType;
-		string EventTime;
+		string ETime;
 
 		while (!check_file_is_empty(dataFile))
 		{
 			dataFile >> EventType;
 			if (EventType == 'R')
 			{
-				dataFile >> CargoType >> EventTime >> CargoID >> CargoDistance >> CargoLoadTime >> CargoCost;
-				setEvent_Time(EventTime);
+				dataFile >> CargoType >> ETime >> CargoID >> CargoDistance >> CargoLoadTime >> CargoCost;
+				setEvent_Time(ETime);
+				// ReadyEvent* pReadyEvent (EventTime[0], EventTime[1]);
+				// pReadyEvent->set_data(CargoType, CargoID, CargoDistance, CargoLoadTime, CargoCost);
+				// READY_Events.enqueue(pReadyEvent);
+				//  
+				// 
 				//call function creat ready event that returns a pointer to this event to put it in the queue
 				//enque this event in ready event
 				//READY_Events.enqueue(Readyevent);
-				//this function must be in run function when its time comes			//pReadyEvent->ReadyEvent(CargoType, EventTime[0], EventTime[1], CargoID, CargoDistance, CargoLoadTime, CargoCost);
+				//this function must be in run function when its time comes  	XXXXX wrong!		//pReadyEvent->Excute(CargoType, EventTime[0], EventTime[1], CargoID, CargoDistance, CargoLoadTime, CargoCost);
 		
 			}
 			else if (EventType == 'P')
 			{
-				dataFile >> EventTime >> CargoID >> CargoExtraMoney;
-				setEvent_Time(EventTime);
-				//pPromotionEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID, CargoExtraMoney);
+				dataFile >> ETime >> CargoID >> CargoExtraMoney;
+				setEvent_Time(ETime);
+				// PromotionEvent* pPromotionEvent (EventTime[0], EventTime[1]);
+				// pPromotionEvent->Promote(CargoID, CargoExtraMoney);
+				// PROMOTED_Events.enqueue(pPromotionEvent);
+				
+
+				//pPromotionEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID, CargoExtraMoney);  XXXXX wrong!
 			}
 			else if (EventType == 'X')
 			{
-				dataFile >> EventTime >> CargoID;
-				setEvent_Time(EventTime);
+				dataFile >> ETime >> CargoID;
+				setEvent_Time(ETime);
+				// CancellationEvent* pCancellationEvent (EventTime[0], EventTime[1]);
+				// pCancellationEvent->Cancel(CargoID);
+				// CANCELLED_Events.enqueue(pCancellationEvent);
+				
+
 				//pCancellationEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID );
 			}
-			//save event in queue||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+			Enqueue_Events(EventType, EventTime[0], EventTime[1]);		//save event in EventList queue		
 		}
 
 	}
+	dataFile.close();		//close input file
+}
+
+bool MarsStation::Excute_Output_File()		//to be completed after events
+{
+	ofstream OutPutFile;
+	OutPutFile.open("Report.txt");	// Create and Open output file
+
+	OutPutFile << "CDT\t ID\t PT\t WT\t TID\t" << endl;
+	//for loop on cargoDlivered list
+	//OutPutFile << "Day:Time" << "\t " << "ID" << "\t " << "Prepartiontime" << "\t " << "WaitTime" << "\t " << "TruckID"<< endl;
+
+	OutPutFile << "..........................................................................." << endl;
+	OutPutFile << "..........................................................................." << endl;
+	OutPutFile << "Cargos: " << /*<<total cargo count <<*/ "[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<< endl*/;
+	OutPutFile << "Cargo Avg Wait = " << /*get Averg wait time<<*/  endl;
+	OutPutFile << "Auto-promoted Cargos: " << /*get % promoted cargo<<*/ "%" << endl;
+	OutPutFile << "Trucks: " << /*get munber of trucks<<*/"[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<<*/ << endl;
+	OutPutFile << "Avg Active time = 91%" << endl;
+	OutPutFile << "Avg utilization = 87%" << endl;
+
+	OutPutFile.close();
+
+	return true;
 }
 
 void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour)
@@ -246,6 +286,20 @@ void MarsStation::AddCargo( Cargo* pCargo , TYP CargoType)
 void MarsStation::Run()
 {
 	bool state = true;
+	
+	switch (pUI->GetAppMode())
+	{
+	//case interactive:
+	//	pUI->Start_interactive_Mode();
+	//	break;
+	//case step_by_step:
+	//	pUI->Start_step_by_step_Mode();
+	//	break;
+	case silent:
+		pUI->Start_silent_Mode();
+		break;
+	}
+
 	while (state == true)
 	{
 		if (Clock[1] == 24)
@@ -256,8 +310,29 @@ void MarsStation::Run()
 
 		///////run application
 
+		//if (EVENTS_List.peek())
+
 		Clock[1] = Clock[1] + 1;
+		/*if (EVENTS_List.getCount() == 0)
+		{
+			if (Excute_Output_File() == false)
+				pUI->Show_Error(error_Print_OutputFile);
+			state = false;
+		}*/
 	}
-	if (pUI->GetAppMode() == 2)
-		pUI->Start_silent_Mode();
+
+	switch (pUI->GetAppMode())
+	{
+	//case interactive:
+	//	pUI->Start_interactive_Mode();
+	//	break;
+	//case step_by_step:
+	//	pUI->Start_step_by_step_Mode();
+	//	break;
+	case silent:
+		pUI->End_silent_Mode();
+		break;
+	}
+	
+	
 }

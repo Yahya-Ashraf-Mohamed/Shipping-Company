@@ -3,7 +3,7 @@
 class Cargo
 {
 private:
-	TYP cargo_type;      //TYP is enum that contains ( NORMAL , SPECIAL , VIP )
+	TYP cargo_type;			  //TYP is enum that contains ( NORMAL , SPECIAL , VIP )
 	double cargo_distance;    //The distance that the cargo will travel in kilometeres
 	int load_time;            //Time (in hours) to load or unload cargo
 	int cargo_id;             // unique sequence number that identifies each cargo
@@ -13,8 +13,17 @@ private:
 	int ReadyEvent_time[2];
 
 public:
-	Cargo(TYP type,double dist,int LT,int ID,int COST);
+	Cargo(TYP type, double dist, int LT, int ID, int COST);
 	~Cargo();
+
+
+	void setCargoID(int);
+	void setCargoDistance(int);
+	void setCargoCost(int);
+	void setCargoExtraMoney(int);
+	void promoteCargo(Cargo*);
+	void setCargoLoadTime(int);
+
 
 	int getCargoID();
 	double getCargoDistance();
@@ -26,6 +35,6 @@ public:
 	//string getCargo_Type();
 
 	int getCargo_Load_Time();
-	void Set_ReadyEvent_time(int* Eventtime );
+	void Set_ReadyEvent_time(int* Eventtime);
 	int* get_ReadyEvent_time();
 };
