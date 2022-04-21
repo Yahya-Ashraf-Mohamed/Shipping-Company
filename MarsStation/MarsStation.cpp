@@ -1,6 +1,6 @@
 #include "MarsStation.h"
 
-#include "..\Event\Event.h"
+//#include "..\Event\Event.h"
 #include "..\Event\ReadyEvent.h"
 #include "..\Event\CancellationEvent.h"
 #include "..\Event\PromotionEvent.h"
@@ -14,16 +14,18 @@ MarsStation::MarsStation()
 	//Creates the UI Object & Initialize the UI
 	pUI = new UI;
 	ReadFile(pUI->getInput_File_Name());
+	//Run();
 }
 
-MarsStation::~MarsStation()
-{
-	//delete pUI;
-}
-UI* MarsStation::GetUI()
-{
-	return pUI;
-}
+	MarsStation::~MarsStation()
+	{
+		delete pUI;
+	}
+
+	UI* MarsStation::GetUI()
+	{
+		return pUI;
+	}
 
 //=================================================== Input Functions =================================================
 
@@ -166,45 +168,40 @@ void MarsStation::ReadFile(string FileName)
 		while (!check_file_is_empty(dataFile))
 		{
 			dataFile >> EventType;
+			TYP CargoT = NORMAL;
 			if (EventType == 'R')
 			{
 				dataFile >> CargoType >> ETime >> CargoID >> CargoDistance >> CargoLoadTime >> CargoCost;
 				setEvent_Time(ETime);
-				// ReadyEvent* pReadyEvent (EventTime[0], EventTime[1]);
-				// pReadyEvent->set_data(CargoType, CargoID, CargoDistance, CargoLoadTime, CargoCost);
-				// READY_Events.enqueue(pReadyEvent);
-				//  
-				// 
-				//call function creat ready event that returns a pointer to this event to put it in the queue
-				//enque this event in ready event
-				//READY_Events.enqueue(Readyevent);
-				//this function must be in run function when its time comes  	XXXXX wrong!		//pReadyEvent->Excute(CargoType, EventTime[0], EventTime[1], CargoID, CargoDistance, CargoLoadTime, CargoCost);
+
+				switch (CargoType)
+				{
+				case 'N':
+					CargoT = NORMAL;
+					break;
+				case 'S':
+					CargoT = SPECIAL;
+					break;
+				case 'V':
+					CargoT = VIP;
+					break;
+				}
+
+				addReadyEvent(EventTime[0], EventTime[1], CargoT, CargoDistance, CargoLoadTime, CargoID, CargoCost);
 		
 			}
 			else if (EventType == 'P')
 			{
 				dataFile >> ETime >> CargoID >> CargoExtraMoney;
 				setEvent_Time(ETime);
-				// PromotionEvent* pPromotionEvent (EventTime[0], EventTime[1]);
-				// pPromotionEvent->Promote(CargoID, CargoExtraMoney);
-				// PROMOTED_Events.enqueue(pPromotionEvent);
-				
-
-				//pPromotionEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID, CargoExtraMoney);  XXXXX wrong!
+				addPromotionEvent(EventTime[0], EventTime[1], CargoID, CargoExtraMoney);
 			}
 			else if (EventType == 'X')
 			{
 				dataFile >> ETime >> CargoID;
 				setEvent_Time(ETime);
-				// CancellationEvent* pCancellationEvent (EventTime[0], EventTime[1]);
-				// pCancellationEvent->Cancel(CargoID);
-				// CANCELLED_Events.enqueue(pCancellationEvent);
-				
-
-				//pCancellationEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID );
+				addCancellationEvent(EventTime[0], EventTime[1], CargoID);
 			}
-
-			Enqueue_Events(EventType, EventTime[0], EventTime[1]);		//save event in EventList queue		
 		}
 
 	}
@@ -234,59 +231,105 @@ bool MarsStation::Excute_Output_File()		//to be completed after events
 	return true;
 }
 
-void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour)
-{
-	Events newEvent; //create event with the input values
-	newEvent.EventType = EventType;
-	newEvent.EventDay = EventDay;
-	newEvent.EventHour = EventHour;
-	EVENTS_List.enqueue(newEvent);	// then enque this event	
-}
+//void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour) deleted struct
+//{
+//	Events newEvent; //create event with the input values
+//	newEvent.EventType = EventType;
+//	newEvent.EventDay = EventDay;
+//	newEvent.EventHour = EventHour;
+//	EVENTS_List.enqueue(newEvent);	// then enque this event	
+//}
 
 //=================================================== EVENTS =================================================
 //selecting the Event to be excecuted
 
-void MarsStation::ExecuteEvent(char eventt, Cargo* pCargo)
-{
-	int Eventtime_day = EventTime[1];
-	int Eventtime_hour = EventTime[0];
-
-	Event* pEvent = nullptr;
-	switch (eventt)
-	{
-	case 'R':
-		pEvent = new ReadyEvent(this, Eventtime_day, Eventtime_hour);
-		break;
-	}
-	if (pEvent)
-	{
-		pEvent->Execute();
-		delete pEvent;
-		pEvent = nullptr;
-	}
-}
+//void MarsStation::ExecuteEvent(char eventt, Cargo* pCargo)   deleted
+//{
+//	int Eventtime_day = EventTime[0];
+//	int Eventtime_hour = EventTime[1];
+//
+//	Event* pEvent = nullptr;
+//	switch (eventt)
+//	{
+//	case 'R':
+//		pEvent = new ReadyEvent(this, Eventtime_day, Eventtime_hour);
+//		break;
+//	}
+//	if (pEvent)
+//	{
+//		pEvent->Execute();
+//		delete pEvent;
+//		pEvent = nullptr;
+//	}
+//}
 
 //Add Cargo to Cargo Queue depending on it's type
-void MarsStation::AddCargo( Cargo* pCargo , TYP CargoType)
+//Add Cargo to Cargo Queue depending on it's type
+void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 {
 	switch (CargoType)
 	{
 	case VIP:
 		VIP_Cargo.enqueue(pCargo);
+		VIP_Cargo_count++;
 		break;
 	case SPECIAL:
-		VIP_Cargo.enqueue(pCargo);
+		Special_Cargo.enqueue(pCargo);
+		Special_Cargo_count++;
 		break;
 	case NORMAL:
-		VIP_Cargo.enqueue(pCargo);
+		Normal_Cargo.enqueue(pCargo);
+		Normal_Cargo_count++;
 		break;
 	}
 }
 
-void MarsStation::Run()
+//Promote normal cargo to VIP cargoes and returns pointer to the promoted Cargo
+	//Auto promote still not Handelled
+Cargo* MarsStation::PromoteCargo(int cargo_id)
 {
-	bool state = true;
-	
+	Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);
+	if (pCargo)
+	{
+		Normal_Cargo_count--;
+		VIP_Cargo.enqueue(pCargo);
+		VIP_Cargo_count++;
+		promoted_Cargo_count++;
+	}
+	return pCargo;
+}
+
+//Cancel Cargo
+void MarsStation::CancelCargo(int cargo_id)
+{
+	Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);
+	if (pCargo)
+	{
+		Normal_Cargo_count--;
+		delete pCargo;
+	}
+}
+
+void MarsStation::addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost)
+{
+	ReadyEvent* Revent = new ReadyEvent(this, Eventtime_day, Eventtime_hour, type, distance, LoadTime, id, Cost);
+	EVENT.enqueue(Revent);
+}
+
+void MarsStation::addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money)
+{
+	PromotionEvent* Pevent = new PromotionEvent(this, Eventtime_day, Eventtime_hour, id, Extra_Money);
+	EVENT.enqueue(Pevent);
+}
+
+void MarsStation::addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id)
+{
+	CancellationEvent* Cevent = new CancellationEvent(this, Eventtime_day, Eventtime_hour, id);
+	EVENT.enqueue(Cevent);
+}
+
+void MarsStation::Run()
+{	
 	switch (pUI->GetAppMode())
 	{
 	//case interactive:
@@ -300,17 +343,97 @@ void MarsStation::Run()
 		break;
 	}
 
-	while (state == true)
+	while (/*EVENT.isEmpty()==false*/true)
 	{
-		if (Clock[1] == 24)
+		// Off Hours
+		while (MAINTANANCE_VIP_Truck.isEmpty() == false)		//check on manintenance of VIP truck list
 		{
-			Clock[0] = Clock[0] + 1;
-			Clock[1] = 1;
+			Truck* VIP_Truck;
+			while (MAINTANANCE_VIP_Truck.peek(VIP_Truck))
+			{
+
+				//if(VIP_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && VIP_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
+				//{
+					//MAINTANANCE_VIP_Truck.dequeue(VIP_Truck);
+					//Waiting_VIP_Truck.enqueue(VIP_Truck);
+				//}
+				//else
+					//break;
+			}
+		}
+		while (MAINTANANCE_Normal_Truck.isEmpty() == false)		//check on manintenance of Normal truck list
+		{
+			Truck* Normal_Truck;
+			while (MAINTANANCE_Normal_Truck.peek(Normal_Truck))
+			{
+
+				//if(Normal_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && Normal_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
+				//{
+					//MAINTANANCE_VIP_Truck.dequeue(Normal_Truck);
+					//Waiting_VIP_Truck.enqueue(Normal_Truck);
+				//}
+				//else
+					//break;
+			}
+		}
+		while (MAINTANANCE_Special_Truck.isEmpty() == false)		//check on manintenance of Special truck list
+		{
+			Truck* Special_Truck;
+			while (MAINTANANCE_Special_Truck.peek(Special_Truck))
+			{
+
+				//if(Special_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && Special_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
+				//{
+					//MAINTANANCE_VIP_Truck.dequeue(Special_Truck);
+					//Waiting_VIP_Truck.enqueue(Special_Truck);
+				//}
+				//else
+					//break;
+			}
+		}
+
+		//calculations like distance, time, truck utilization,.........
+		
+		//while (MOVING_Truck.isEmpty() == false)
+		//{
+		// Truck* MovingTruck;
+			//while (MOVING_Truck.peek(MovingTruck))  //priority queue moving truck dequeue if (the time for deliviring last cargo comes)
+			// {
+				// for (int i = 0; i < truck capacity, i++)
+				//	{
+				//		pop cargo from stack
+				//		enque the cargo into the delivered cargo queue
+				//		truck order = order +1;
+				//	}
+				// dequeue this truck
+				// if (truck->no.jurney exeeded )
+				//		enqueue in maintenance truck list
+				// else
+				//		enque in waiting truck
+			// }
+		//}
+
+
+
+		if (Clock[1] < 5 && Clock[1] > 23)		//working hours
+		{
+			//if (dequeue event from EventList is == R)
+			//{
+			//	
+			//}
+			//else if (dequeue event from EventList is == P)
+			//{
+			// 
+			//}
+			//else	if (dequeue event from EventList is == X)
+			//{
+			// 
+			//}
 		}
 
 		///////run application
 
-		//if (EVENTS_List.peek())
+
 
 		Clock[1] = Clock[1] + 1;
 		/*if (EVENTS_List.getCount() == 0)
@@ -319,20 +442,25 @@ void MarsStation::Run()
 				pUI->Show_Error(error_Print_OutputFile);
 			state = false;
 		}*/
+
+
+		switch (pUI->GetAppMode())
+		{
+			//case interactive:
+			//	pUI->Start_interactive_Mode();
+			//	break;
+			//case step_by_step:
+			//	pUI->Start_step_by_step_Mode();
+			//	break;
+		case silent:
+			pUI->End_silent_Mode();
+			break;
+		}
+
+
+		/*if (EVENTS_List.isEmpty())
+			break;*/
 	}
 
-	switch (pUI->GetAppMode())
-	{
-	//case interactive:
-	//	pUI->Start_interactive_Mode();
-	//	break;
-	//case step_by_step:
-	//	pUI->Start_step_by_step_Mode();
-	//	break;
-	case silent:
-		pUI->End_silent_Mode();
-		break;
-	}
-	
-	
+	// check that all queues are empty except delivered cargoes and waiting trucks
 }
