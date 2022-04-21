@@ -198,7 +198,7 @@ void MarsStation::ReadFile(string FileName)
 				//pCancellationEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID );
 			}
 
-			Enqueue_Events(EventType, EventTime[0], EventTime[1]);		//save event in EventList queue		
+			//Enqueue_Events(EventType, EventTime[0], EventTime[1]);		//save event in EventList queue		
 		}
 
 	}
@@ -228,14 +228,14 @@ bool MarsStation::Excute_Output_File()		//to be completed after events
 	return true;
 }
 
-void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour)
-{
-	Events newEvent; //create event with the input values
-	newEvent.EventType = EventType;
-	newEvent.EventDay = EventDay;
-	newEvent.EventHour = EventHour;
-	EVENTS_List.enqueue(newEvent);	// then enque this event	
-}
+//void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour)
+//{
+//	Events newEvent; //create event with the input values
+//	newEvent.EventType = EventType;
+//	newEvent.EventDay = EventDay;
+//	newEvent.EventHour = EventHour;
+//	EVENTS_List.enqueue(newEvent);	// then enque this event	
+//}
 
 //=================================================== EVENTS =================================================
 //selecting the Event to be excecuted

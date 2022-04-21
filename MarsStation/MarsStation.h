@@ -123,7 +123,7 @@ public:
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
 	bool Excute_Output_File();
-	void Enqueue_Events(char EventType, int EventDay, int EventHour);
+	//void Enqueue_Events(char EventType, int EventDay, int EventHour);
 
 	// events handler	---------------------------
 	//Select Event to be excuted
