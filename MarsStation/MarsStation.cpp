@@ -1,6 +1,6 @@
 #include "MarsStation.h"
 
-#include "..\Event\Event.h"
+//#include "..\Event\Event.h"
 #include "..\Event\ReadyEvent.h"
 #include "..\Event\CancellationEvent.h"
 #include "..\Event\PromotionEvent.h"
@@ -17,14 +17,15 @@ MarsStation::MarsStation()
 	//Run();
 }
 
-MarsStation::~MarsStation()
-{
-	//delete pUI;
-}
-UI* MarsStation::GetUI()
-{
-	return pUI;
-}
+	MarsStation::~MarsStation()
+	{
+		delete pUI;
+	}
+
+	UI* MarsStation::GetUI()
+	{
+		return pUI;
+	}
 
 //=================================================== Input Functions =================================================
 
@@ -167,38 +168,40 @@ void MarsStation::ReadFile(string FileName)
 		while (!check_file_is_empty(dataFile))
 		{
 			dataFile >> EventType;
+			TYP CargoT = NORMAL;
 			if (EventType == 'R')
 			{
 				dataFile >> CargoType >> ETime >> CargoID >> CargoDistance >> CargoLoadTime >> CargoCost;
 				setEvent_Time(ETime);
 
-				//addReadyEvent(EventTime[0], EventTime[1], CargoType, CargoDistance, CargoLoadTime, CargoID, CargoCost);
+				switch (CargoType)
+				{
+				case 'N':
+					CargoT = NORMAL;
+					break;
+				case 'S':
+					CargoT = SPECIAL;
+					break;
+				case 'V':
+					CargoT = VIP;
+					break;
+				}
+
+				addReadyEvent(EventTime[0], EventTime[1], CargoT, CargoDistance, CargoLoadTime, CargoID, CargoCost);
 		
 			}
 			else if (EventType == 'P')
 			{
 				dataFile >> ETime >> CargoID >> CargoExtraMoney;
 				setEvent_Time(ETime);
-				// PromotionEvent* pPromotionEvent (EventTime[0], EventTime[1]);
-				// pPromotionEvent->Promote(CargoID, CargoExtraMoney);
-				// PROMOTED_Events.enqueue(pPromotionEvent);
-				
-
-				//pPromotionEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID, CargoExtraMoney);  XXXXX wrong!
+				addPromotionEvent(EventTime[0], EventTime[1], CargoID, CargoExtraMoney);
 			}
 			else if (EventType == 'X')
 			{
 				dataFile >> ETime >> CargoID;
 				setEvent_Time(ETime);
-				// CancellationEvent* pCancellationEvent (EventTime[0], EventTime[1]);
-				// pCancellationEvent->Cancel(CargoID);
-				// CANCELLED_Events.enqueue(pCancellationEvent);
-				
-
-				//pCancellationEvent->ReadyEvent(EventTime[0], EventTime[1], CargoID );
+				addCancellationEvent(EventTime[0], EventTime[1], CargoID);
 			}
-
-			//Enqueue_Events(EventType, EventTime[0], EventTime[1]);		//save event in EventList queue		
 		}
 
 	}
@@ -228,7 +231,7 @@ bool MarsStation::Excute_Output_File()		//to be completed after events
 	return true;
 }
 
-//void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour)
+//void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour) deleted struct
 //{
 //	Events newEvent; //create event with the input values
 //	newEvent.EventType = EventType;
@@ -240,41 +243,89 @@ bool MarsStation::Excute_Output_File()		//to be completed after events
 //=================================================== EVENTS =================================================
 //selecting the Event to be excecuted
 
-void MarsStation::ExecuteEvent(char eventt, Cargo* pCargo)
-{
-	int Eventtime_day = EventTime[1];
-	int Eventtime_hour = EventTime[0];
-
-	Event* pEvent = nullptr;
-	switch (eventt)
-	{
-	case 'R':
-		pEvent = new ReadyEvent(this, Eventtime_day, Eventtime_hour);
-		break;
-	}
-	if (pEvent)
-	{
-		pEvent->Execute();
-		delete pEvent;
-		pEvent = nullptr;
-	}
-}
+//void MarsStation::ExecuteEvent(char eventt, Cargo* pCargo)   deleted
+//{
+//	int Eventtime_day = EventTime[0];
+//	int Eventtime_hour = EventTime[1];
+//
+//	Event* pEvent = nullptr;
+//	switch (eventt)
+//	{
+//	case 'R':
+//		pEvent = new ReadyEvent(this, Eventtime_day, Eventtime_hour);
+//		break;
+//	}
+//	if (pEvent)
+//	{
+//		pEvent->Execute();
+//		delete pEvent;
+//		pEvent = nullptr;
+//	}
+//}
 
 //Add Cargo to Cargo Queue depending on it's type
-void MarsStation::AddCargo( Cargo* pCargo , TYP CargoType)
+//Add Cargo to Cargo Queue depending on it's type
+void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 {
 	switch (CargoType)
 	{
 	case VIP:
 		VIP_Cargo.enqueue(pCargo);
+		VIP_Cargo_count++;
 		break;
 	case SPECIAL:
 		Special_Cargo.enqueue(pCargo);
+		Special_Cargo_count++;
 		break;
 	case NORMAL:
 		Normal_Cargo.enqueue(pCargo);
+		Normal_Cargo_count++;
 		break;
 	}
+}
+
+//Promote normal cargo to VIP cargoes and returns pointer to the promoted Cargo
+	//Auto promote still not Handelled
+Cargo* MarsStation::PromoteCargo(int cargo_id)
+{
+	Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);
+	if (pCargo)
+	{
+		Normal_Cargo_count--;
+		VIP_Cargo.enqueue(pCargo);
+		VIP_Cargo_count++;
+		promoted_Cargo_count++;
+	}
+	return pCargo;
+}
+
+//Cancel Cargo
+void MarsStation::CancelCargo(int cargo_id)
+{
+	Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);
+	if (pCargo)
+	{
+		Normal_Cargo_count--;
+		delete pCargo;
+	}
+}
+
+void MarsStation::addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost)
+{
+	ReadyEvent* Revent = new ReadyEvent(this, Eventtime_day, Eventtime_hour, type, distance, LoadTime, id, Cost);
+	EVENT.enqueue(Revent);
+}
+
+void MarsStation::addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money)
+{
+	PromotionEvent* Pevent = new PromotionEvent(this, Eventtime_day, Eventtime_hour, id, Extra_Money);
+	EVENT.enqueue(Pevent);
+}
+
+void MarsStation::addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id)
+{
+	CancellationEvent* Cevent = new CancellationEvent(this, Eventtime_day, Eventtime_hour, id);
+	EVENT.enqueue(Cevent);
 }
 
 void MarsStation::Run()
