@@ -15,6 +15,7 @@ public:
 	ReadyEvent( MarsStation* pApp, int Eventtime_day , int Eventtime_hour , TYP type , double distance , int LoadTime , int id  , int Cost );
 	virtual ~ReadyEvent(void);
 
+	TYP	get_cargo_type(char CargoType);
 	void setAutoP(int x);
 	int  getAutoP();
 

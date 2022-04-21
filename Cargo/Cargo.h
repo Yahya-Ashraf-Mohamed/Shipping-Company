@@ -1,8 +1,5 @@
 #pragma once
-#ifndef _CARGO_H
-#define _CARGO_H
 #include "..\Defs.H"
-
 class Cargo
 {
 private:
@@ -11,29 +8,37 @@ private:
 	int load_time;            //Time (in hours) to load or unload cargo
 	int cargo_id;             // unique sequence number that identifies each cargo
 	int cost;                 //cost of delievering the cargo
-
+	int cargo_extra_money;    //extra money of promotion from normal to vip cargo
 	//Event time [day,hour]
 	int ReadyEvent_time[2];
 	/*int PromotionEvent_time[2];*/
 public:
-	Cargo(TYP type,double dist,int LT,int ID,int COST);
+	Cargo(TYP type, double dist, int LT, int ID, int COST);
 	~Cargo();
 
+
+	void setCargoID(int);
+	void setCargoDistance(int);
+	void setCargoCost(int);
+	void setCargoExtraMoney(int);
+	void promoteCargo(Cargo*);
+	void setCargoLoadTime(int);
+
+
+	int getCargoID();
+	double getCargoDistance();
+	int getCargoCost();
+	float getCargo_Extra_Money();
+
+	TYP getCargo_Type();
 	void Set_cargo_type(TYP type);
-	TYP  get_cargo_type();
 
+	//string getCargo_Type();
 
-	void Set_cargo_id(int x);
-	int  get_cargo_id();
-
-	void Set_cost(int x);
-	int  get_cost();
-
+	int getCargo_Load_Time();
 	void Set_ReadyEvent_time(int* Eventtime);
 	int* get_ReadyEvent_time();
 
 	//void Set_PromotionEvent_time(int* Eventtime);
 	//int* get_PromotionEvent_time();
 };
-
-#endif

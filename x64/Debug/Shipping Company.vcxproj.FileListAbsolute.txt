@@ -3,3 +3,6 @@ C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\try
 C:\Users\dell\Desktop\Shipping Company\x64\Debug\Shipping Company.exe
 C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\x64\Debug\Shipping Company.exe
 C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Shipping-Company\Shipping-Company\x64\Debug\Shipping Company.exe
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe
+E:\Zewail City Documents\CIE 2nd Year\2nd Semster\Data Structure and algorithm\Shipping-Company\x64\Debug\Shipping Company.exe
+C:\Users\dell\Desktop\Shipping-Company\x64\Debug\Shipping Company.exe

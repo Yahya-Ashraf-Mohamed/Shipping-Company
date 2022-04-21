@@ -19,8 +19,8 @@ void PromotionEvent::Execute()
 	if (pCargo)
 	{
 		pCargo->Set_cargo_type(VIP);
-		int newCost = pCargo->get_cost() + extra_money;
-		pCargo->Set_cost(newCost);
+		int newCost = pCargo->getCargoCost() + extra_money;
+		pCargo->setCargoCost(newCost);
 		/*pCargo->Set_PromotionEvent_time(event_time);*/
 	}
 

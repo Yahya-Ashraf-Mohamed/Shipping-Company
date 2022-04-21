@@ -46,7 +46,7 @@ void ReadyEvent::Execute()
 		int AutoP_day= event_time[0] + AutoP;
 		int AutoP_hour= event_time[0];
 
-		pStation->addPromotionEvent(AutoP_day, AutoP_hour, cargo_id);
+		//pStation->addPromotionEvent(AutoP_day, AutoP_hour, cargo_id);     //error remain extr money
 	}
 
 }

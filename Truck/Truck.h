@@ -12,12 +12,18 @@ private:
 	double MaintenanceCheckupTime;   // will be read form the input file after maxNumber of Journeys
 	int maxJourneys;              // will be read form the input file
 	int TruckCapacity;            // will be read form the input file
+	int TruckID;                   // will be read form the input file
+	static int Order;
 public:
-	Truck(TYP Type ,double Speed, int maxJourneys , int TruckCapacity );
+	Truck(TYP Type, int TruckID, double Speed, int maxJourneys, int TruckCapacity);
 	void setDelivaryInterval(double DistanceFurthest, double sumUnloadTimes, double timeBack);
 	double getDelivaryInterval();
 	int getmaxJourneys();
 	int getTruckCapacity();
-	TYP getType();
+	int getTruckID();
+	TYP getTruckType();
+	double getTruckSpeed();
+	double getTruckPriority();
+	static int getOrderNum();
 	~Truck();
 };

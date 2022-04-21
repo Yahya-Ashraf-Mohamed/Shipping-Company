@@ -40,7 +40,7 @@ public:
 		while (p)
 		{
 			pCargo = p->getdata();
-			cout << "[ " << pCargo->get_cargo_id() << " ]";
+			cout << "[ " << pCargo->getCargoID() << " ]";
 			cout << "--->";
 			p = p->getNext();
 		}
@@ -181,7 +181,7 @@ private:
 					temp = prev->getNext();
 					pCargo = temp->getdata();
 
-					if (pCargo->get_cargo_id() == id)
+					if (pCargo->getCargoID() == id)
 						return prev->getNext();
 				}
 
@@ -194,11 +194,11 @@ private:
 					return nullptr;
 
 				// If value is present at middle
-				if (pCargo->get_cargo_id() == id)
+				if (pCargo->getCargoID() == id)
 					return mid;
 
 				// If value is more than mid
-				else if (pCargo->get_cargo_id() < id)
+				else if (pCargo->getCargoID() < id)
 				{
 					start = mid->getNext();
 					prev = mid;
