@@ -9,7 +9,7 @@ class Truck
 private:
 	TYP TypeTruck;   // Decides the type of the truck used in making list
 	Status Truck_Status = WAITING;
-	double Speed;       // will be read form the input file
+	double Speed;				    // will be read form the input file
 	double DelivaryInterval;        // will be calculated depending on cargos input
 	double MaintenanceCheckupTime;   // will be read form the input file after maxNumber of Journeys
 	int maxJourneys;              // will be read form the input file
@@ -18,7 +18,7 @@ private:
 	int* StartMaintananceTime = new int[2];
 	static int Order;
 	double Priority;
-	/*Stack <Cargo*> CargoStack (TruckCapacity);*/   // Name of the stack that include the cargos
+	//Stack <Cargo*> *CargoStack ();   // Name of the stack that include the cargos
 	int* TotalTruckActiveTime = new int[2];
 	int TotalCargosDelivered = 0;
 	int TotalDeliveryJourneys;

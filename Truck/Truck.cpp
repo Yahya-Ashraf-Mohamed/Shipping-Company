@@ -75,7 +75,7 @@ int Truck::Order = 0;
 //	{
 //		for (int i = 0 ; i < PriorityQueueCargos.getSize(); i++)
 //		{
-//			CargoStack.push(PriorityQueueCargos.dequeue());
+//			CargoStack.push(/*PriorityQueueCargos.dequeue()*/ );
 //		}
 //	}
 //	else if (TypeCargo == VIP)
@@ -94,6 +94,7 @@ int Truck::Order = 0;
 //			TotalCargosDelivered++;
 //		}
 //	}
+//	return CargoStack;
 //}
 
 int Truck::getCountTotalCargosDelivered()

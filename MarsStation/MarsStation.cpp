@@ -417,18 +417,18 @@ void MarsStation::Run()
 
 		if (Clock[1] < 5 && Clock[1] > 23)		//working hours
 		{
-			//if (dequeue event from EventList is == R)
-			//{
-			//	
-			//}
-			//else if (dequeue event from EventList is == P)
-			//{
-			// 
-			//}
-			//else	if (dequeue event from EventList is == X)
-			//{
-			// 
-			//}
+			/*if (dequeue event from EventList is == R)
+			{
+				
+			}
+			else if (dequeue event from EventList is == P)
+			{
+			 
+			}
+			else	if (dequeue event from EventList is == X)
+			{
+			 
+			}*/
 		}
 
 		///////run application

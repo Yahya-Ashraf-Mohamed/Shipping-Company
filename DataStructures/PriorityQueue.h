@@ -1,6 +1,7 @@
 #pragma once
 #include"../DataStructures/Node.h"
-
+#include<iostream>
+using namespace std;
 
 template <typename T>
 class PriorityQueue
@@ -14,6 +15,7 @@ public:
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	int getSize();
+	void Display() const;
 	~PriorityQueue();
 };
 
@@ -85,6 +87,56 @@ template <typename T>
 int PriorityQueue<T> ::getSize()
 {
 	return Size;
+}
+
+template <typename T>
+void PriorityQueue<T> ::Display() const
+{
+	cout << getSize();
+	cout << " Waiting Cargos:";
+	Node<Cargo*>* p = Front;
+	Cargo* pCargo;
+	TYP CargoType= pCargo->cargo_type;
+	switch (CargoType)
+	{
+	case(NORMAL):
+		while (p)
+		{
+			pCargo = p;
+			cout << "[ " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " ]";
+		break;
+	case(VIP):
+		while (p)
+		{
+			pCargo = p;
+			cout << "{ " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " }";
+		break;
+	case(SPECIAL):
+		while (p)
+		{
+			pCargo = p;
+			cout << "( " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " )";
+		break;
+	default:
+		break;
+	}
+	
+	cout << "\n---------------------------------------------------------------------------------------------------\n";
 }
 
 template <typename T>
