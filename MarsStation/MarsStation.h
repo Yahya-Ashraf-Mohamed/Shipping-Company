@@ -2,8 +2,8 @@
 #ifndef MARS_STATION_H
 #define MARS_STATION_H
 
-#include"..\Defs.H"
-#include "..\UI\UI.h"
+//#include"..\Defs.H"
+#include "..//UI/UI.h"
 #include "..\Cargo\Cargo.h"
 #include "..\DataStructures\Queue.h"
 #include "..\DataStructures\LinkedList.h"

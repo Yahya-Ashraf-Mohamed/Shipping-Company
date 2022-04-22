@@ -39,6 +39,7 @@ bool PriorityQueue< T > ::enqueue(const T& newEntry)
 	if (isEmpty() || newNodePtr->getPriority() < Front->getPriority())
 	{
 		Front = newNodePtr;
+		return true;
 	}
 	else
 	{
@@ -47,15 +48,17 @@ bool PriorityQueue< T > ::enqueue(const T& newEntry)
 		{
 			Rear->setNext(newNodePtr);
 		}
+		return true;
 	}
 	Rear = newNodePtr;
 	Size++;
+	return true;
 }
 
 template <typename T>
 bool PriorityQueue< T > ::dequeue(T& frntEntry)
 {
-	Node* TEMP;
+	//Node* TEMP;
 	if (isEmpty())
 		return false;
 	else
