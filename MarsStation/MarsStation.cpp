@@ -473,18 +473,18 @@ void MarsStation::Run()
 		}*/
 
 
-		switch (pUI->GetAppMode())
-		{
-			//case interactive:
-			//	pUI->Start_interactive_Mode();
-			//	break;
-			//case step_by_step:
-			//	pUI->Start_step_by_step_Mode();
-			//	break;
-		case silent:
-			pUI->End_silent_Mode();
-			break;
-		}
+		//switch (pUI->GetAppMode())
+		//{
+		//	//case interactive:
+		//	//	pUI->Start_interactive_Mode();
+		//	//	break;
+		//	//case step_by_step:
+		//	//	pUI->Start_step_by_step_Mode();
+		//	//	break;
+		//case silent:
+		//	pUI->End_silent_Mode();
+		//	break;
+		//}
 
 
 		/*if (EVENTS_List.isEmpty())
