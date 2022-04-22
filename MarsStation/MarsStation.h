@@ -3,7 +3,7 @@
 #define MARS_STATION_H
 
 //#include"..\Defs.H"
-#include "..//UI/UI.h"
+#include "..\UI\UI.h"
 #include "..\Cargo\Cargo.h"
 #include "..\DataStructures\Queue.h"
 #include "..\DataStructures\LinkedList.h"
@@ -155,9 +155,9 @@ public:
 	//Cancel Cargo
 	void CancelCargo(int cargo_id);
 
-	void addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost);
+	void addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, float Cost);
 
-	void addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money);
+	void addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, float Extra_Money);
 
 	void addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id);
 

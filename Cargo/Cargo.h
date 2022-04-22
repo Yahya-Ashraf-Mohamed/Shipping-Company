@@ -7,28 +7,28 @@ private:
 	double cargo_distance;    //The distance that the cargo will travel in kilometeres
 	int load_time;            //Time (in hours) to load or unload cargo
 	int cargo_id;             // unique sequence number that identifies each cargo
-	int cost;                 //cost of delievering the cargo
-	int cargo_extra_money;    //extra money of promotion from normal to vip cargo
+	float cost;                 //cost of delievering the cargo
+	float cargo_extra_money;    //extra money of promotion from normal to vip cargo
 	//Event time [day,hour]
 	int ReadyEvent_time[2];
 	int Delivery_time[2];
 	/*int PromotionEvent_time[2];*/
 public:
-	Cargo(TYP type, double dist, int LT, int ID, int COST);
+	Cargo(TYP type, double dist, int LT, int ID, float COST);
 	~Cargo();
 
 
 	void setCargoID(int);
 	void setCargoDistance(int);
-	void setCargoCost(int);
-	void setCargoExtraMoney(int);
+	void setCargoCost(float);
+	void setCargoExtraMoney(float);
 	void promoteCargo(Cargo*);
 	void setCargoLoadTime(int);
 
 
 	int getCargoID();
 	double getCargoDistance();
-	int getCargoCost();
+	float getCargoCost();
 	float getCargo_Extra_Money();
 
 	TYP getCargo_Type();

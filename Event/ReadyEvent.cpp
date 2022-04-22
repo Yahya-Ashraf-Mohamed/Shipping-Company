@@ -5,7 +5,7 @@
 //initializing static Variable
 int ReadyEvent::AutoP = 0;
 
-ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost) :Event(pApp)
+ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, float Cost) :Event(pApp)
 {
 	event_time[0] = Eventtime_day;
 	event_time[1] = Eventtime_hour;

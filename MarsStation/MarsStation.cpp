@@ -321,13 +321,13 @@ void MarsStation::CancelCargo(int cargo_id)
 	}
 }
 
-void MarsStation::addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost)
+void MarsStation::addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, float Cost)
 {
 	ReadyEvent* Revent = new ReadyEvent(this, Eventtime_day, Eventtime_hour, type, distance, LoadTime, id, Cost);
 	EVENT.enqueue(Revent);
 }
 
-void MarsStation::addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money)
+void MarsStation::addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, float Extra_Money)
 {
 	PromotionEvent* Pevent = new PromotionEvent(this, Eventtime_day, Eventtime_hour, id, Extra_Money);
 	EVENT.enqueue(Pevent);
@@ -441,6 +441,7 @@ void MarsStation::Run()
 			if (Clock[1] % 5 == 0)
 			{
 				Cargo* deliveredCargo;
+
 				VIP_Cargo.dequeue(deliveredCargo);
 				deliveredCargo->set_Delivery_time(Clock);
 				Delivered_Cargo.enqueue(deliveredCargo);
@@ -454,6 +455,10 @@ void MarsStation::Run()
 				deliveredCargo->set_Delivery_time(Clock);
 				Delivered_Cargo.enqueue(deliveredCargo);
 			}
+
+			Cargo* deliveredCargo;
+			Delivered_Cargo.enqueue(deliveredCargo);
+
 			pUI->Show_State();
 			Clock[1] = Clock[1] + 1;
 		}

@@ -1,6 +1,6 @@
 #include "Cargo.h"
 
-Cargo::Cargo(TYP type, double dist, int LT, int ID, int COST)
+Cargo::Cargo(TYP type, double dist, int LT, int ID, float COST)
 {
 	cargo_type = type;
 	cargo_distance = dist;
@@ -18,11 +18,11 @@ void Cargo::setCargoDistance(int distance)
 {
 	this->cargo_distance = distance;
 }
-void Cargo::setCargoCost(int cost)
+void Cargo::setCargoCost(float cost)
 {
 	this->cost = cost;
 }
-void Cargo::setCargoExtraMoney(int cargoExtraMoney)
+void Cargo::setCargoExtraMoney(float cargoExtraMoney)
 {
 	this->cargo_extra_money = cargoExtraMoney;
 }
@@ -45,7 +45,7 @@ double Cargo::getCargoDistance()
 	return cargo_distance;
 }
 
-int Cargo::getCargoCost()
+float Cargo::getCargoCost()
 {
 	return cost;
 }
@@ -53,7 +53,8 @@ float Cargo::getCargo_Extra_Money()
 {
 	if (this->cargo_type == NORMAL)
 		return cargo_extra_money;
-
+	else
+		return 0;
 }
 TYP Cargo::getCargo_Type()
 {

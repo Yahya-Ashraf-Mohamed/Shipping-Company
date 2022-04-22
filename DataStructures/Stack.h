@@ -12,12 +12,12 @@ public:
 
 	Stack();
 	bool isEmpty() const;
-	bool isFull();
+	//bool isFull();
 	bool push(const T& newEntry);
 	bool pop(T& TopEntry);
-	bool peek(T& TopEntry) const;
+	//bool peek(T& TopEntry) const;
 	int StackSize();
-	void ChangeElement(int position, T value);
+	//void ChangeElement(int position, T value);
 	//void Display();
 	~Stack();
 };

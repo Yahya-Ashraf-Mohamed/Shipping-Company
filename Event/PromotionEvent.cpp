@@ -2,7 +2,7 @@
 #include"PromotionEvent.h"
 #include"..\MarsStation\MarsStation.h"
 
-PromotionEvent::PromotionEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour, int id, int Extra_Money) :Event(pApp)
+PromotionEvent::PromotionEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour, int id, float Extra_Money) :Event(pApp)
 {
 	event_time[0] = Eventtime_day;
 	event_time[1] = Eventtime_hour;
@@ -19,7 +19,7 @@ void PromotionEvent::Execute()
 	if (pCargo)
 	{
 		pCargo->Set_cargo_type(VIP);
-		int newCost = pCargo->getCargoCost() + extra_money;
+		float newCost = pCargo->getCargoCost() + extra_money;
 		pCargo->setCargoCost(newCost);
 		/*pCargo->Set_PromotionEvent_time(event_time);*/
 	}
