@@ -416,28 +416,31 @@ void MarsStation::Run()
 			Event* nextEvent;
 			while (EVENT.peek(nextEvent))
 			{   
-				ReadyEvent* readyEvent = dynamic_cast <ReadyEvent*>(nextEvent);
-				PromotionEvent* promotionEvent = dynamic_cast <PromotionEvent*>(nextEvent);
-				CancellationEvent* cancellationEvent = dynamic_cast <CancellationEvent*>(nextEvent);
-				if (readyEvent != nullptr && nextEvent->getEvent_Time())
+				if (nextEvent->getEvent_Time()== getClock_Days()*24 + getClock_Hours())
 				{
-					readyEvent->Execute();
+					ReadyEvent* readyEvent = dynamic_cast <ReadyEvent*>(nextEvent);
+					PromotionEvent* promotionEvent = dynamic_cast <PromotionEvent*>(nextEvent);
+					CancellationEvent* cancellationEvent = dynamic_cast <CancellationEvent*>(nextEvent);
+					if (readyEvent != nullptr)
+					{
+						readyEvent->Execute();
+					}
+					else if (promotionEvent != nullptr)
+					{
+						promotionEvent->Execute();
+					}
+					else if (cancellationEvent != nullptr)
+					{
+						cancellationEvent->Execute();
+					}
+					/*if (nextEvent-> != Clock)
+						break;
+					 else
+					 {
+						EVENT.dequeue(nextEvent);
+						nextEvent.Excute;
+					}*/
 				}
-				else if (promotionEvent != nullptr)
-				{
-					promotionEvent->Execute();
-				}
-				else if (cancellationEvent != nullptr)
-				{
-					cancellationEvent->Execute();
-				}
-				/*if (nextEvent-> != Clock)
-					break;
-				 else
-				 {
-					EVENT.dequeue(nextEvent);
-					nextEvent.Excute;
-				}*/
 			}
 			if (Clock[1] % 5 == 0)
 			{
