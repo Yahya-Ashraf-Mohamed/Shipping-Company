@@ -170,7 +170,7 @@ public:
 
 	void addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id);
 //============================================== UI Functions ==================================================//
-	void Show_State();
+	void Show_State(int Days, int Hours);
 	void Show_Waiting_Cargos();
 	void Show_Loading_Trucks();
 	void Show_Empty_Trucks();

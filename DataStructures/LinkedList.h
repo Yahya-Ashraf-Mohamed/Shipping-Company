@@ -51,11 +51,11 @@ public:
 			if (p != nullptr)
 				cout << ", ";
 		}
-		cout << "*\n";
+		//cout << "*\n";
 	}
 
 	// Remove first node from list and return pointer to the Cargo removed in x
-	void dequeue(Cargo*& x)
+	bool dequeue(Cargo*& x)
 	{
 
 		if (Head)
@@ -69,7 +69,7 @@ public:
 				Tail = nullptr;
 
 			x = temp->getdata();
-
+			return true;
 		}
 		Size--;
 	}

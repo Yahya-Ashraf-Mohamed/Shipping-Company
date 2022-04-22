@@ -389,8 +389,9 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 		EVENT.enqueue(p);
 	}
 //======================================================== UI Function ============================================//
-	void MarsStation::Show_State()
+	void MarsStation::Show_State(int Days, int Hours)
 	{
+		pUI->Show_State(Days, Hours);
 		Show_Waiting_Cargos();
 		Show_Loading_Trucks();
 		Show_Empty_Trucks();
@@ -436,7 +437,18 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 	void MarsStation::Show_Delivered_Cargos()
 	{	
 		cout << Delivered_Cargo.getSize() << " Delivered Cargos: ";
-	
+		
+		Delivered_Cargo.Display();
+
+		//cout << "] (";
+
+		//Special_Cargo.Display();
+
+		//cout << ") {";
+
+		//VIP_Cargo.Display();
+
+		//cout << "}" << endl;
 	}
 
 
@@ -445,21 +457,10 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 
 void MarsStation::Run()
 {	
-	switch (pUI->GetAppMode())
-	{
-	case interactive:
-		pUI->Start_interactive_Mode(Clock[0], Clock[1]);
-		break;
-	case step_by_step:
-		pUI->Start_step_by_step_Mode(Clock[0], Clock[1]);
-		break;
-	case silent:
-		pUI->Start_silent_Mode();
-		break;
-	}
 
 	Create_Output_File(pUI->getOutput_File_Name());
 
+	pUI->Start_Simulation();
 
 	while (EVENT.isEmpty()==false)
 	{
@@ -548,22 +549,28 @@ void MarsStation::Run()
 					break;
 
 			}
-			if (Clock[1] % 5 == 0 && Clock[0] != 0)
+			if (Clock[1] % 5 == 0 && Clock[0] != 0) // && Clock[0] != 0
 			{
+
 				Cargo* deliveredCargo;
 
-				VIP_Cargo.dequeue(deliveredCargo);
-				if (deliveredCargo->set_Delivery_time(Clock) != false)
+				if (VIP_Cargo.dequeue(deliveredCargo) != false)
+				{
+					deliveredCargo->set_Delivery_time(Clock);
 					Delivered_Cargo.enqueue(deliveredCargo);
-				
+				}
 
-				Special_Cargo.dequeue(deliveredCargo);
-				if (deliveredCargo->set_Delivery_time(Clock) != false)
+				if (Special_Cargo.dequeue(deliveredCargo) != false)
+				{
+					deliveredCargo->set_Delivery_time(Clock);
 					Delivered_Cargo.enqueue(deliveredCargo);
+				}
 
-				Normal_Cargo.dequeue(deliveredCargo);
-				if (deliveredCargo->set_Delivery_time(Clock) != false)
+				if (Normal_Cargo.dequeue(deliveredCargo) != false)
+				{
+					deliveredCargo->set_Delivery_time(Clock);
 					Delivered_Cargo.enqueue(deliveredCargo);
+				}
 			}
 			
 		}
@@ -571,14 +578,20 @@ void MarsStation::Run()
 		switch (pUI->GetAppMode())
 		{
 		case interactive:
-			Show_State();
+			Show_State(Clock[0], Clock[1]);
 			system("pause");		// press any key to continue
+			//pUI->Start_interactive_Mode(Clock[0], Clock[1]);
 			break;
 		case step_by_step:
-			Show_State();
+			Show_State(Clock[0], Clock[1]);
 			Sleep(1000);
+			//pUI->Start_step_by_step_Mode(Clock[0], Clock[1]);
 			break;
+		//case silent:
+		//	pUI->Start_silent_Mode();
+		//	break;
 		}
+
 
 		Clock[1] = Clock[1] + 1;
 
@@ -601,7 +614,7 @@ void MarsStation::Run()
 	
 		//Clock[1] = Clock[1] + 1;
 		
-		if (Clock[1] == 24)
+		if (Clock[1] == 25)
 		{
 			Clock[0] = Clock[0] + 1;
 			Clock[1] = 1;

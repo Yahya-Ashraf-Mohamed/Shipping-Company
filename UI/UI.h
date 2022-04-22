@@ -26,13 +26,15 @@ public:
 	string getOutput_File_Name();
 
 	// Run UI Functions	--------------------------------------
-	void Start_silent_Mode();
 	
-	void Start_interactive_Mode(int day, int hour);//to be continued
-	
-	void Start_step_by_step_Mode(int day, int hour);//to be continued
+	void Start_Simulation();
+	//void Start_silent_Mode();
+	//
+	//void Start_interactive_Mode();//to be continued
+	//
+	//void Start_step_by_step_Mode();//to be continued
 
-	//void Show_State();
+	void Show_State(int Days, int Hours);
 	//void Show_Waiting_Cargos();
 	//void Show_Loading_Trucks();
 	//void Show_Empty_Trucks();

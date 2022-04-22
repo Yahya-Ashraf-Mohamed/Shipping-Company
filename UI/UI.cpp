@@ -78,27 +78,32 @@ string UI::getOutput_File_Name()
 	return outputFileName;
 }
 
-void UI::Start_silent_Mode()
+void UI::Start_Simulation()
 {
-	cout << "Simulation Starts...";
+	cout << "Simulation Starts..." << endl;
 }
 
 void UI::End_Simulation(string outputFileName)
 {
-	cout << "Simulation ends, Output file created with name \""<< outputFileName<< "\". ";
+	cout << "Simulation ends, Output file created with name \""<< outputFileName<< "\". " << endl;
 }
 
-void UI::Start_step_by_step_Mode(int Days, int Hours)//to be continued ) //input: time h, time day
-{
-	cout << "Simulation Starts..." << endl;
-	cout << "Current Time (Day:Hour):- " << Days << ":" << Hours << endl;
-}
-
-void UI::Start_interactive_Mode(int Days, int Hours)//to be continued ) //input: time h, time day
-{
-	cout << "Simulation Starts..." << endl;
-	cout << "Current Time (Day:Hour):- " << Days << ":" << Hours << endl;
-}
+//void UI::Start_silent_Mode()
+//{
+//	cout << "Simulation Starts...";
+//}
+//
+//void UI::Start_step_by_step_Mode()//to be continued ) //input: time h, time day
+//{
+//	cout << "Simulation Starts..." << endl;
+//}
+//
+//void UI::Start_interactive_Mode()//to be continued ) //input: time h, time day
+//{
+//	cout << "Simulation Starts..." << endl;
+//}
+// 
+// 
 //
 //void UI::Show_State()
 //{
@@ -140,6 +145,11 @@ void UI::Start_interactive_Mode(int Days, int Hours)//to be continued ) //input:
 //
 //}
 
+void UI::Show_State(int Days, int Hours)
+{
+	cout << endl << "Current Time (Day:Hour):- " << Days << ":" << Hours << endl;
+	cout << endl;
+}
 
 void UI::Show_Error(Error ErrorType)
 {
