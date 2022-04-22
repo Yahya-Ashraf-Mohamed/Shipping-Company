@@ -18,7 +18,7 @@ public:
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	int getSize();
-	void Display() const;
+	void Display() ;
 	~PriorityQueue();
 };
 
@@ -115,13 +115,13 @@ int PriorityQueue<T> ::getSize()
 }
 
 template <typename T>
-void PriorityQueue<T> ::Display() const
+void PriorityQueue<T> ::Display() 
 {
 	cout << getSize();
 	cout << " Waiting Cargos:";
-	Node<Cargo>* p = Front;
+	Node<Cargo*>* p = Front;
 	Cargo* pCargo;
-	pCargo = p;
+	pCargo = p->getdata();
 	TYP CargoType= pCargo->getCargo_Type();
 	switch (CargoType)
 	{

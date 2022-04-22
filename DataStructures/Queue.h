@@ -16,7 +16,7 @@ public:
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	int getSize();
-	void Display() const;
+	void Display() ;
 	T* getRearPtr();
 	~Queue();
 };
@@ -108,13 +108,13 @@ bool Queue<T>::peek(T& frntEntry) const
 }
 
 template <typename T>
-void Queue <T> :: Display() const
+void Queue <T> :: Display() 
 {
 	cout << getSize();
 	cout << " Delivered Cargos:";
-	Node<Cargo>* p = front;
+	Node<Cargo*>* p = front;
 	Cargo* pCargo;
-	pCargo = p;
+	pCargo = p->getdata();
 	TYP CargoType = pCargo->getCargo_Type();
 	switch (CargoType)
 	{
