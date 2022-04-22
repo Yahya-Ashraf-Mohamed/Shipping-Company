@@ -9,7 +9,7 @@ class UI
 {
 private:
 
-	MarsStation* pStation;
+	//MarsStation* pStation;
 	MODE AppMode;	// Application Mode interactive or step_by_step or silent
 	string inputFileName;
 

@@ -38,7 +38,7 @@ class MarsStation
 	Queue<Cargo*> VIP_Cargo;      //need to be a priority queue
 	Queue<Cargo*> Special_Cargo;
 	LinkedList Normal_Cargo;
-	Queue<Cargo*> Delivered_Cargo;
+	PriorityQueue<Cargo*> Delivered_Cargo;
 
 	//Event Queue;
 	Queue<Event*> EVENT;
@@ -183,7 +183,7 @@ public:
 	Queue<Cargo*> getVIP_Cargo();
 	Queue<Cargo*> getSpecial_Cargo();
 	LinkedList getNormal_Cargo();
-	Queue<Cargo*> getDelivered_Cargo();
+	PriorityQueue<Cargo*> getDelivered_Cargo();
 
 };
 #endif

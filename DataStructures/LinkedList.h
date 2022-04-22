@@ -28,8 +28,7 @@ public:
 	~LinkedList()
 	{
 		DeleteAll();
-	}
-	
+	}	
 
 	//need to be further editted
 	void PrintList()	const 

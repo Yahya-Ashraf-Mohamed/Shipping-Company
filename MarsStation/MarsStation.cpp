@@ -488,4 +488,4 @@ void MarsStation::Run()
 Queue<Cargo*> MarsStation::getVIP_Cargo() { return VIP_Cargo; }
 Queue<Cargo*> MarsStation::getSpecial_Cargo() { return Special_Cargo; }
 LinkedList MarsStation::getNormal_Cargo() { return Normal_Cargo; }
-Queue<Cargo*> MarsStation::getDelivered_Cargo() { return Delivered_Cargo; }
+PriorityQueue<Cargo*> MarsStation::getDelivered_Cargo() { return Delivered_Cargo; }

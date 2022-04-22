@@ -104,8 +104,8 @@ void UI::Show_State()
 
 void UI::Show_Waiting_Cargos()
 {	
-	cout << /*pStation->getVIP_Cargo().getCount() << */" Waiting Cargos: [" << /*pStation->getNormal_Cargo().PrintInfo() << */"] ("
-		<< /*pStation->getSpecial_Cargo().PrintInfo() << */ ") {" << /*pStation->getVIP_Cargo().PrintInfo() << */ "}";
+	//cout << /*pStation->getVIP_Cargo().getCount() << */" Waiting Cargos: [" << /*pStation->getNormal_Cargo().PrintInfo() << */"] ("
+	//	<< /*pStation->getSpecial_Cargo().PrintInfo() << */ ") {" << /*pStation->getVIP_Cargo().PrintInfo() << */ "}";
 }
 
 void UI::Show_Loading_Trucks()
@@ -127,8 +127,8 @@ void UI::Show_In_CheckUp_Trucks()
 void UI::Show_Delivered_Cargos()
 {
 
-	cout << /*pStation->getVIP_Cargo().getCount() << */" Waiting Cargos: [" << /*pStation->getNormal_Cargo().PrintInfo() << */"] ("
-		<< /*pStation->getSpecial_Cargo().PrintInfo() << */ ") {" << /*pStation->getVIP_Cargo().PrintInfo() << */ "}";
+	//cout << /*pStation->getVIP_Cargo().getCount() << */" Waiting Cargos: [" << /*pStation->getNormal_Cargo().PrintInfo() << */"] ("
+	//	<< /*pStation->getSpecial_Cargo().PrintInfo() << */ ") {" << /*pStation->getVIP_Cargo().PrintInfo() << */ "}";
 
 }
 
