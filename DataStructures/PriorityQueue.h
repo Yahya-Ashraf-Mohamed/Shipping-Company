@@ -18,7 +18,7 @@ public:
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	int getSize();
-	void Display() ;
+	bool Display() ;
 	~PriorityQueue();
 };
 
@@ -115,53 +115,59 @@ int PriorityQueue<T> ::getSize()
 }
 
 template <typename T>
-void PriorityQueue<T> ::Display() 
+bool PriorityQueue<T> ::Display()
 {
-	cout << getSize();
-	cout << " Waiting Cargos:";
-	Node<Cargo*>* p = Front;
-	Cargo* pCargo;
-	pCargo = p->getdata();
-	TYP CargoType= pCargo->getCargo_Type();
-	switch (CargoType)
+	if (isEmpty() == true)
+		return false;
+	else
 	{
-	case(NORMAL):
-		while (p)
+		cout << getSize();
+		cout << " Waiting Cargos:";
+		Node<Cargo*>* p = Front;
+		Cargo* pCargo;
+		pCargo = p->getdata();
+		TYP CargoType = pCargo->getCargo_Type();
+		switch (CargoType)
 		{
-			cout << "[ " << pCargo->getCargoID();
-			p = p->getNext();
-			if (p != nullptr)
-				cout << ",";
+		case(NORMAL):
+			while (p)
+			{
+				cout << "[ " << pCargo->getCargoID();
+				p = p->getNext();
+				if (p != nullptr)
+					cout << ",";
+			}
+			cout << " ]";
+			break;
+		case(VIP):
+			while (p)
+			{
+				cout << "{ " << pCargo->getCargoID();
+				p = p->getNext();
+				if (p != nullptr)
+					cout << ",";
+			}
+			cout << " }";
+			break;
+		case(SPECIAL):
+			while (p)
+			{
+				cout << "( " << pCargo->getCargoID();
+				p = p->getNext();
+				if (p != nullptr)
+					cout << ",";
+			}
+			cout << " )";
+			break;
+		default:
+			break;
 		}
-		cout << " ]";
-		break;
-	case(VIP):
-		while (p)
-		{
-			cout << "{ " << pCargo->getCargoID();
-			p = p->getNext();
-			if (p != nullptr)
-				cout << ",";
-		}
-		cout << " }";
-		break;
-	case(SPECIAL):
-		while (p)
-		{
-			cout << "( " << pCargo->getCargoID();
-			p = p->getNext();
-			if (p != nullptr)
-				cout << ",";
-		}
-		cout << " )";
-		break;
-	default:
-		break;
-	}
-	
-	cout << "\n---------------------------------------------------------------------------------------------------\n";
-}
 
+		cout << "\n---------------------------------------------------------------------------------------------------\n";
+		
+		return true;
+	}
+}
 template <typename T>
 PriorityQueue< T > :: ~PriorityQueue()
 {}

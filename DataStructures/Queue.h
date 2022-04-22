@@ -16,7 +16,7 @@ public:
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	int getSize();
-	void Display() ;
+	bool Display();
 	T* getRearPtr();
 	~Queue();
 };
@@ -99,59 +99,67 @@ bool Queue<T>::dequeue(T& frntEntry)
 template <typename T>
 bool Queue<T>::peek(T& frntEntry) const
 {
-	if (isEmpty())
+	if (isEmpty() == true)
 		return false;
-
-	frntEntry = front->getdata();
-	return true;
-
+	else
+	{
+		frntEntry = front->getdata();
+		return true;
+	}
 }
 
 template <typename T>
-void Queue <T> :: Display() 
+bool Queue <T> :: Display() 
 {
-	cout << getSize();
-	cout << " Delivered Cargos:";
-	Node<Cargo*>* p = front;
-	Cargo* pCargo;
-	pCargo = p->getdata();
-	TYP CargoType = pCargo->getCargo_Type();
-	switch (CargoType)
+	if (isEmpty() == true)
+		return false;
+	else
 	{
-	case(NORMAL):
-		while (p)
+		cout << getSize();
+		cout << " Delivered Cargos:";
+		Node<Cargo*>* p = front;
+		Cargo* pCargo;
+		pCargo = p->getdata();
+		TYP CargoType = pCargo->getCargo_Type();
+		switch (CargoType)
 		{
-			cout << "[ " << pCargo->getCargoID();
-			p = p->getNext();
-			if (p != nullptr)
-				cout << ",";
+		case(NORMAL):
+			while (p)
+			{
+				cout << "[ " << pCargo->getCargoID();
+				p = p->getNext();
+				if (p != nullptr)
+					cout << ",";
+			}
+			cout << " ]";
+			break;
+		case(VIP):
+			while (p)
+			{
+				cout << "{ " << pCargo->getCargoID();
+				p = p->getNext();
+				if (p != nullptr)
+					cout << ",";
+			}
+			cout << " }";
+			break;
+		case(SPECIAL):
+			while (p)
+			{
+				cout << "( " << pCargo->getCargoID();
+				p = p->getNext();
+				if (p != nullptr)
+					cout << ",";
+			}
+			cout << " )";
+			break;
+		default:
+			break;
 		}
-		cout << " ]";
-		break;
-	case(VIP):
-		while (p)
-		{
-			cout << "{ " << pCargo->getCargoID();
-			p = p->getNext();
-			if (p != nullptr)
-				cout << ",";
-		}
-		cout << " }";
-		break;
-	case(SPECIAL):
-		while (p)
-		{
-			cout << "( " << pCargo->getCargoID();
-			p = p->getNext();
-			if (p != nullptr)
-				cout << ",";
-		}
-		cout << " )";
-		break;
-	default:
-		break;
+		cout << "\n-------------------------------------------------------------------------------------------------\n";
+	
+		return true;
 	}
-	cout << "\n-------------------------------------------------------------------------------------------------\n";
 }
 
 template <typename T>   //Destructor

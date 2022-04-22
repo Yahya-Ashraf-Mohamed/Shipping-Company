@@ -37,10 +37,10 @@ public:
 	//string getCargo_Type();
 
 	int getCargo_Load_Time();
-	void Set_ReadyEvent_time(int* Eventtime);
+	bool Set_ReadyEvent_time(int* Eventtime);
 	int* get_ReadyEvent_time();
 
-	void set_Delivery_time(int* Eventtime);
+	bool set_Delivery_time(int* Eventtime);
 	int* get_Delivery_time();
 
 	//void Set_PromotionEvent_time(int* Eventtime);

@@ -166,7 +166,7 @@ void MarsStation::ReadFile(string FileName)
 		while (!check_file_is_empty(dataFile))
 		{
 			dataFile >> EventType;
-			TYP CargoT = NORMAL;
+			//TYP CargoT = NORMAL;
 			if (EventType == 'R')
 			{
 				dataFile >> CargoType >> ETime >> CargoID >> CargoDistance >> CargoLoadTime >> CargoCost;
@@ -245,9 +245,9 @@ void MarsStation::Analysis_Output_File()
 	OutPutFile << "..........................................................................." << endl;
 	OutPutFile << "..........................................................................." << endl;
 	OutPutFile << "Cargos: " << (VIP_Cargo_count + Special_Cargo_count + Normal_Cargo_count)
-		<< "[N: " << Normal_Cargo_count
-		<< ", S: " << Special_Cargo_count
-		<< ", V: " << VIP_Cargo_count << "]" << endl;
+		       << "[N: " << Normal_Cargo_count
+			   << ", S: " << Special_Cargo_count
+			   << ", V: " << VIP_Cargo_count << "]" << endl;
 	//OutPutFile << "Cargo Avg Wait = " << /*get Averg wait time<<*/  endl;
 	OutPutFile << "Auto-promoted Cargos: " << (AutoP_Count / (VIP_Cargo_count + Special_Cargo_count + Normal_Cargo_count)) * 100 << "%" << endl;
 	//OutPutFile << "Trucks: " << /*get munber of trucks<<*/"[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<<*/ << endl;
@@ -406,10 +406,10 @@ void MarsStation::Run()
 	switch (pUI->GetAppMode())
 	{
 	case interactive:
-		pUI->Start_interactive_Mode(EventTime[0], EventTime[1]);
+		pUI->Start_interactive_Mode(Clock[0], Clock[1]);
 		break;
 	case step_by_step:
-		pUI->Start_step_by_step_Mode(EventTime[0], EventTime[1]);
+		pUI->Start_step_by_step_Mode(Clock[0], Clock[1]);
 		break;
 	case silent:
 		pUI->Start_silent_Mode();
@@ -418,6 +418,7 @@ void MarsStation::Run()
 
 	while (EVENT.isEmpty()==false)
 	{
+
 		// Off Hours
 		//while (MAINTANANCE_VIP_Truck.isEmpty() == false)		//check on manintenance of VIP truck list
 		//{
@@ -488,7 +489,7 @@ void MarsStation::Run()
 
 
 
-		if (Clock[1] > 5 && Clock[1] < 23)		//working hours
+		if (Clock[1] > 4 && Clock[1] < 24)		//working hours
 		{
 			Event* nextEvent;
 			while (EVENT.peek(nextEvent))
@@ -502,29 +503,28 @@ void MarsStation::Run()
 					break;
 
 			}
-			if (Clock[1] % 5 == 0)
+			if (Clock[1] % 5 == 0 && Clock[0] != 0)
 			{
 				Cargo* deliveredCargo;
 
 				VIP_Cargo.dequeue(deliveredCargo);
-				deliveredCargo->set_Delivery_time(Clock);
-				Delivered_Cargo.enqueue(deliveredCargo);
+				if (deliveredCargo->set_Delivery_time(Clock) != false)
+					Delivered_Cargo.enqueue(deliveredCargo);
 				
 
 				Special_Cargo.dequeue(deliveredCargo);
-				deliveredCargo->set_Delivery_time(Clock);
-				Delivered_Cargo.enqueue(deliveredCargo);
+				if (deliveredCargo->set_Delivery_time(Clock) != false)
+					Delivered_Cargo.enqueue(deliveredCargo);
 
 				Normal_Cargo.dequeue(deliveredCargo);
-				deliveredCargo->set_Delivery_time(Clock);
-				Delivered_Cargo.enqueue(deliveredCargo);
+				if (deliveredCargo->set_Delivery_time(Clock) != false)
+					Delivered_Cargo.enqueue(deliveredCargo);
 			}
-
-
-
-			Show_State();
-			Clock[1] = Clock[1] + 1;
+			
 		}
+		
+		Show_State();
+		Clock[1] = Clock[1] + 1;
 
 
 		///////run application
@@ -543,7 +543,7 @@ void MarsStation::Run()
 		/*if (EVENTS_List.isEmpty())
 			break;*/
 	
-		Clock[1] = Clock[1] + 1;
+		//Clock[1] = Clock[1] + 1;
 		
 		if (Clock[1] == 24)
 		{

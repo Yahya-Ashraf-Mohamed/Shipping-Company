@@ -62,7 +62,7 @@ class MarsStation
 	Queue<Truck*> MOVING_Truck;
 
 
-	int Clock[2] = { 1,5 };
+	int Clock[2] = { 0,5 };
 
 
 
@@ -79,7 +79,7 @@ class MarsStation
 		
 	char EventType, CargoType, TruckType;			//TODO: covert string into char
 	
-	int EventTime[2] = { 1,5 },
+	int EventTime[2] = { 0,5 },
 		CargoID,
 		TruckID,
 		CargoLoadTime;

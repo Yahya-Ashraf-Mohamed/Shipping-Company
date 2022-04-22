@@ -173,6 +173,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="sample.txt" />
     <Text Include="test.txt" />
     <Text Include="Text.txt" />
   </ItemGroup>

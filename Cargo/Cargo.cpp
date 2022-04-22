@@ -72,20 +72,32 @@ int Cargo::getCargo_Load_Time()
 
 
 
-void Cargo::Set_ReadyEvent_time(int* Eventtime)
+bool Cargo::Set_ReadyEvent_time(int* Eventtime)
 {
-	ReadyEvent_time[0] = Eventtime[0];
-	ReadyEvent_time[1] = Eventtime[1];
+	if (Eventtime == nullptr)
+		return false;
+	else
+	{
+		ReadyEvent_time[0] = Eventtime[0];
+		ReadyEvent_time[1] = Eventtime[1];
+		return true;
+	}
 }
 int* Cargo::get_ReadyEvent_time()
 {
 	return ReadyEvent_time;
 }
 
-void Cargo::set_Delivery_time(int* Eventtime)
+bool Cargo::set_Delivery_time(int* Eventtime)
 {
-	Delivery_time[0] = Eventtime[0];
-	Delivery_time[1] = Eventtime[1];
+	if (Eventtime == nullptr)
+		return false;
+	else
+	{
+		Delivery_time[0] = Eventtime[0];
+		Delivery_time[1] = Eventtime[1];
+		return true;
+	}
 }
 int* Cargo::get_Delivery_time()
 {
