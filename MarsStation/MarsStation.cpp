@@ -329,21 +329,21 @@ void MarsStation::addCancellationEvent(int Eventtime_day, int Eventtime_hour, in
 }
 
 void MarsStation::Run()
-{	
+{
 	switch (pUI->GetAppMode())
 	{
-	//case interactive:
-	//	pUI->Start_interactive_Mode();
-	//	break;
-	//case step_by_step:
-	//	pUI->Start_step_by_step_Mode();
-	//	break;
+		//case interactive:
+		//	pUI->Start_interactive_Mode();
+		//	break;
+		//case step_by_step:
+		//	pUI->Start_step_by_step_Mode();
+		//	break;
 	case silent:
 		pUI->Start_silent_Mode();
 		break;
 	}
 
-	while (/*EVENT.isEmpty()==false*/true)
+	while (EVENT.isEmpty() == false)
 	{
 		// Off Hours
 		while (MAINTANANCE_VIP_Truck.isEmpty() == false)		//check on manintenance of VIP truck list
@@ -393,7 +393,7 @@ void MarsStation::Run()
 		}
 
 		//calculations like distance, time, truck utilization,.........
-		
+
 		//while (MOVING_Truck.isEmpty() == false)
 		//{
 		// Truck* MovingTruck;
@@ -415,20 +415,49 @@ void MarsStation::Run()
 
 
 
-		if (Clock[1] < 5 && Clock[1] > 23)		//working hours
+		if (Clock[1] < 5 && Clock[1] > 23)		//The reason for the error here is I can't equalize the created pointer with the rear pointer
 		{
-			/*if (dequeue event from EventList is == R)
-			{
-				
-			}
-			else if (dequeue event from EventList is == P)
-			{
-			 
-			}
-			else	if (dequeue event from EventList is == X)
-			{
-			 
-			}*/
+
+
+			//	Node<Event*>* tempEventPtr = new Node <Event*>;
+			//	tempEventPtr = EVENT.getRearPtr();
+			//	Event* pEvent;
+			//	pEvent= tempEventPtr->getdata();
+
+
+			//	Node<Event*> tempEventPtr /*= new Node <Event*>*/;
+			//	tempEventPtr = EVENT.getRearPtr();
+			//	const ReadyEvent* readyEventPtr = dynamic_cast<const ReadyEvent*> (tempEventPtr);
+			//	const PromotionEvent* promotionEventPtr = dynamic_cast<const ReadyEvent*> (tempEventPtr);
+			//	const CancellationEvent* cancellationEventPtr = dynamic_cast<const ReadyEvent*> (tempEventPtr);
+			//	while (tempEventPtr != nullptr)
+			//	{
+			//		if ( readyEventPtr != nullptr)
+			//		{
+			//			if (readyEventPtr->event_time[0] * 24 + event_time[0])*== ((getClock_Days()) * 24 + getClock_Hours())
+			//			{
+			//				readyEventPtr->Execute();
+			//				EVENT.dequeue(Event.getRearPtr()->tempEventPtr);
+			//			}
+
+			//		}
+			//		else if (promotionEventPtr != nullptr)
+			//		{
+			//			if (promotionEventPtr->event_time[0] * 24 + event_time[0]) *= = ((getClock_Days()) * 24 + getClock_Hours())
+			//			{
+			//				promotionEventPtr->Execute();
+			//				EVENT.dequeue(Event.getRearPtr()->tempEventPtr);
+			//			}
+			//		}
+			//		else if (cancellationEventPtr != nullptr)
+			//		{
+			//			if (cancellationEventPtr->event_time[0] * 24 + event_time[0]) *= = ((getClock_Days()) * 24 + getClock_Hours())
+			//			{
+			//				cancellationEventPtr->Execute();
+			//				EVENT.dequeue(Event.getRearPtr()->tempEventPtr);
+			//			}
+			//		}
+			//	}
 		}
 
 		///////run application
@@ -462,5 +491,4 @@ void MarsStation::Run()
 			break;*/
 	}
 
-	// check that all queues are empty except delivered cargoes and waiting trucks
-}
+}	// check that all queues are empty except delivered cargoes and waiting trucks

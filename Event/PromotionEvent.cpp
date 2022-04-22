@@ -25,3 +25,13 @@ void PromotionEvent::Execute()
 	}
 
 }
+
+//
+//int PromotionEvent::getEvent_Time()
+//{
+//
+//}
+//void PromotionEvent::setEvent_Time(string EventTime)
+//{
+//
+//}

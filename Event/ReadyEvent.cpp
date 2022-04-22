@@ -51,8 +51,6 @@ void ReadyEvent::Execute()
 
 }
 
-
-
 //================================= ignore =========================
 //gets cargo type from UI and returns it with as enum value "TYP"
 TYP ReadyEvent::get_cargo_type(char CargoType)
@@ -72,4 +70,15 @@ TYP ReadyEvent::get_cargo_type(char CargoType)
 	}
 	return type;
 }
+
 //===============================================================
+
+
+//int ReadyEvent::getEvent_Time()
+//{
+//	return event_time[0]*24 + event_time[1];
+//}
+//void ReadyEvent::setEvent_Time(string EventTime)
+//{
+//
+//}
