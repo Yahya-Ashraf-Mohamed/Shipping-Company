@@ -72,3 +72,8 @@ void ReadyEvent::Execute()
 	}
 
 }
+
+int ReadyEvent::getEvent_Time()
+{
+	return event_time[0] * 24 + event_time[1];
+}

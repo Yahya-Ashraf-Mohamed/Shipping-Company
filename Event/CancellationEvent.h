@@ -10,7 +10,7 @@ public:
 	CancellationEvent( MarsStation* pApp, int Eventtime_day, int Eventtime_hour, int id );
 	virtual ~CancellationEvent(void);
 
-	//virtual int getEvent_Time() = 0;
+	virtual int getEvent_Time();
 	//virtual void setEvent_Time(string EventTime) = 0;
 
 	//Execute Event 

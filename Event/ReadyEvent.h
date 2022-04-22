@@ -27,6 +27,7 @@ public:
 	//Execute Event 
 	virtual void Execute();
 
+	virtual int getEvent_Time();
 
 
 };

@@ -72,7 +72,6 @@ Stack<Cargo*>* Truck::LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos)
 {
 	while (!PriorityQueueCargos.isEmpty())
 	{
-		//Node<Cargo*> *newCargoPtr = new Node <Cargo*> ;
 		Cargo* pCargo = nullptr;
 		PriorityQueueCargos.peek(pCargo);
 		TYP CargoType = pCargo->getCargo_Type();

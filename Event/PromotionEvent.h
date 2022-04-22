@@ -13,6 +13,8 @@ public:
 	PromotionEvent( MarsStation* pApp , int Eventtime_day , int Eventtime_hour , int id , float Extra_Money=0);
 	virtual ~PromotionEvent(void);
 
+	virtual int getEvent_Time();
+
 	void setAutoP(bool x);
 	bool isAutoP();
 
