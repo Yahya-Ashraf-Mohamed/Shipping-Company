@@ -1,15 +1,7 @@
-﻿  Cargo.cpp
-  CancellationEvent.cpp
-  Main.cpp
-  MarsStation.cpp
-  PromotionEvent.cpp
-  ReadyEvent.cpp
-  Truck.cpp
-  UI.cpp
+﻿  UI.cpp
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(26,4): error C2143: syntax error: missing ';' before '*'
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(26,4): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(26,9): error C2238: unexpected token(s) preceding ';'
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(104,4): error C2143: syntax error: missing ';' before '*'
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(104,4): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(104,13): error C2238: unexpected token(s) preceding ';'
-  Generating Code...

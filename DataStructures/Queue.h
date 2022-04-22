@@ -17,8 +17,15 @@ public:
 	bool peek(T& frntEntry)  const;
 	int getSize();
 	void Display() const;
+	T* getRearPtr();
 	~Queue();
 };
+
+template <typename T>   
+T* Queue<T> :: getRearPtr()
+{
+	return rear;
+}
 
 template <typename T>   //Constructor
 Queue<T>::Queue()
@@ -105,15 +112,15 @@ void Queue <T> :: Display() const
 {
 	cout << getSize();
 	cout << " Delivered Cargos:";
-	Node<Cargo*>* p = front;
+	Node<Cargo>* p = front;
 	Cargo* pCargo;
-	TYP CargoType = pCargo->cargo_type;
+	pCargo = p;
+	TYP CargoType = pCargo->getCargo_Type();
 	switch (CargoType)
 	{
 	case(NORMAL):
 		while (p)
 		{
-			pCargo = p;
 			cout << "[ " << pCargo->getCargoID();
 			p = p->getNext();
 			if (p != nullptr)
@@ -124,7 +131,6 @@ void Queue <T> :: Display() const
 	case(VIP):
 		while (p)
 		{
-			pCargo = p;
 			cout << "{ " << pCargo->getCargoID();
 			p = p->getNext();
 			if (p != nullptr)
@@ -135,7 +141,6 @@ void Queue <T> :: Display() const
 	case(SPECIAL):
 		while (p)
 		{
-			pCargo = p;
 			cout << "( " << pCargo->getCargoID();
 			p = p->getNext();
 			if (p != nullptr)

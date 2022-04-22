@@ -229,19 +229,6 @@ bool MarsStation::Create_Output_File()		//to be completed after events
 	return true;
 }
 
-void MarsStation::Excute_Output_File(Cargo* cargo)
-{
-	OutPutFile.open("Report.txt");
-
-	OutPutFile << cargo->get_Delivery_time()[0] << ":" << cargo->get_Delivery_time()[1] << "\t " 
-			   << cargo->getCargoID() << "\t " << cargo->get_ReadyEvent_time()[0] << ":" << cargo->get_ReadyEvent_time()[1] << "\t "
-			   << cargo->get_Delivery_time()[0] - cargo->get_ReadyEvent_time()[0] << ":" 
-			   << cargo->get_Delivery_time()[1] - cargo->get_ReadyEvent_time()[1]
-			   << "\t " << "TruckID" << endl;
-	
-	OutPutFile.close();
-}
-
 //void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour) deleted struct
 //{
 //	Events newEvent; //create event with the input values
