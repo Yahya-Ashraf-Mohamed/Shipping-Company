@@ -138,7 +138,9 @@ public:
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
 	bool Create_Output_File();
-	void Excute_Output_File(Cargo*);
+	void Excute_Output_File();     //need implementation
+	void Analysis_Output_File();
+
 	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted struct
 
 	// events handler	---------------------------
@@ -163,7 +165,14 @@ public:
 	void Autop_Count_increment();
 
 	void addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id);
-
+//============================================== UI Functions ==================================================//
+	void Show_State();
+	void Show_Waiting_Cargos();
+	void Show_Loading_Trucks();
+	void Show_Empty_Trucks();
+	void Show_Moving_Cargos();
+	void Show_In_CheckUp_Trucks();
+	void Show_Delivered_Cargos();
 //=============================================================================================================
 	
 	// Input Functions		--------------------------- (uncomment later)

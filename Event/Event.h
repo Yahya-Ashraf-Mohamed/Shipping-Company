@@ -26,6 +26,17 @@
 
 		//string getEvent_Type();
 
+
+		void Set_Event_time(int* Eventtime)
+		{
+			event_time[0] = Eventtime[0];
+			event_time[1] = Eventtime[1];
+		}
+		int* get_Event_time()
+		{
+			return event_time;
+		}
+
 		//Execute Event (code depends on Event )
 		virtual void Execute() = 0;
 

@@ -216,6 +216,48 @@ bool MarsStation::Create_Output_File()		//to be completed after events
 	return true;
 }
 
+//need implementation
+void MarsStation::Excute_Output_File()
+{
+	OutPutFile.open("Report.txt");	// Create and Open output file
+
+	OutPutFile << "CDT\t ID\t PT\t WT\t TID\t" << endl;
+	
+	Cargo* nextCargo;
+	while (Delivered_Cargo.peek(nextCargo))
+	{
+		Delivered_Cargo.dequeue(nextCargo);
+		cout << nextCargo->get_Delivery_time()[0] << ":" << nextCargo->get_Delivery_time()[1] << "\t"
+			<< nextCargo->getCargoID() << "\t"
+			<< nextCargo->get_ReadyEvent_time()[0] << ":" << nextCargo->get_ReadyEvent_time()[1]
+			<< /*to be edited in phase 2*/ nextCargo->get_Delivery_time()[0] - nextCargo->get_ReadyEvent_time()[0] << ":" << nextCargo->get_Delivery_time()[1] - nextCargo->get_ReadyEvent_time()[1]
+			<< endl;		
+	}
+
+	OutPutFile.close();
+	
+}
+
+void MarsStation::Analysis_Output_File()
+{
+	OutPutFile.open("Report.txt");	// Create and Open output file
+
+	OutPutFile << "..........................................................................." << endl;
+	OutPutFile << "..........................................................................." << endl;
+	OutPutFile << "Cargos: " << (VIP_Cargo_count + Special_Cargo_count + Normal_Cargo_count)
+		<< "[N: " << Normal_Cargo_count
+		<< ", S: " << Special_Cargo_count
+		<< ", V: " << VIP_Cargo_count << "]" << endl;
+	//OutPutFile << "Cargo Avg Wait = " << /*get Averg wait time<<*/  endl;
+	OutPutFile << "Auto-promoted Cargos: " << (AutoP_Count / (VIP_Cargo_count + Special_Cargo_count + Normal_Cargo_count)) * 100 << "%" << endl;
+	//OutPutFile << "Trucks: " << /*get munber of trucks<<*/"[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<<*/ << endl;
+	//OutPutFile << "Avg Active time = 91%" << endl;
+	//OutPutFile << "Avg utilization = 87%" << endl;
+
+	OutPutFile.close();
+
+}
+
 //void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour) deleted struct
 //{
 //	Events newEvent; //create event with the input values
@@ -248,7 +290,7 @@ bool MarsStation::Create_Output_File()		//to be completed after events
 //	}
 //}
 
-//Add Cargo to Cargo Queue depending on it's type
+
 //Add Cargo to Cargo Queue depending on it's type
 void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 {
@@ -270,7 +312,6 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 }
 
 //Promote normal cargo to VIP cargoes and returns pointer to the promoted Cargo
-	//Auto promote still not Handelled
 	Cargo* MarsStation::PromoteCargo(int cargo_id)
 	{
 		Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);
@@ -317,6 +358,45 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 		CancellationEvent* p = new CancellationEvent(this, Eventtime_day, Eventtime_hour, id);
 		EVENT.enqueue(p);
 	}
+//======================================================== UI Function ============================================//
+	void MarsStation::Show_State()
+	{
+		Show_Waiting_Cargos();
+		Show_Loading_Trucks();
+		Show_Empty_Trucks();
+		Show_Moving_Cargos();
+		Show_In_CheckUp_Trucks();
+		Show_Delivered_Cargos();
+	}
+
+	void MarsStation::Show_Waiting_Cargos()
+	{
+		VIP_Cargo.Display();
+		Special_Cargo.Display();
+		Normal_Cargo.PrintList();
+	}
+
+	void MarsStation::Show_Loading_Trucks()
+	{
+	}
+
+	void MarsStation::Show_Empty_Trucks()
+	{
+	}
+
+	void MarsStation::Show_Moving_Cargos()
+	{
+	}
+
+	void MarsStation::Show_In_CheckUp_Trucks()
+	{
+	}
+
+	void MarsStation::Show_Delivered_Cargos()
+	{
+		Delivered_Cargo.Display();
+	}
+
 
 //=================================================== Input Functions =================================================
 
@@ -408,17 +488,19 @@ void MarsStation::Run()
 
 
 
-		if (Clock[1] < 5 && Clock[1] > 23)		//working hours
+		if (Clock[1] > 5 && Clock[1] < 23)		//working hours
 		{
 			Event* nextEvent;
 			while (EVENT.peek(nextEvent))
-			{ //if (nextEvent->get_time != Clock)
-				//	break;
-				// else
-				// {
-				//	EVENT.dequeue(nextEvent);
-				//	nextEvent.Excute;
-				//}
+			{			
+				if (nextEvent->get_Event_time()[0] == Clock[0] && nextEvent->get_Event_time()[1] == Clock[1])
+				{
+					EVENT.dequeue(nextEvent);
+					nextEvent->Execute();
+				}
+				else
+					break;
+
 			}
 			if (Clock[1] % 5 == 0)
 			{
@@ -438,12 +520,12 @@ void MarsStation::Run()
 				Delivered_Cargo.enqueue(deliveredCargo);
 			}
 
-			Cargo* deliveredCargo;
-			Delivered_Cargo.enqueue(deliveredCargo);
 
-			pUI->Show_State();
+
+			Show_State();
 			Clock[1] = Clock[1] + 1;
 		}
+
 
 		///////run application
 
@@ -460,19 +542,30 @@ void MarsStation::Run()
 
 		/*if (EVENTS_List.isEmpty())
 			break;*/
+	
+		Clock[1] = Clock[1] + 1;
+		
+		if (Clock[1] == 24)
+		{
+			Clock[0] = Clock[0] + 1;
+			Clock[1] = 1;
+		}
+
 	}
 
 	// check that all queues are empty except delivered cargoes and waiting trucks
-	Cargo* nextCargo;
-	while (Delivered_Cargo.peek(nextCargo))
-	{
-		Delivered_Cargo.dequeue(nextCargo);
-		Excute_Output_File(nextCargo);
-	}
+	//Cargo* nextCargo;
+	//while (Delivered_Cargo.peek(nextCargo))
+	//{
+	//	Delivered_Cargo.dequeue(nextCargo);
+	//	Excute_Output_File();
+	//}
+	Excute_Output_File();
+	Analysis_Output_File();
 	pUI->End_Simulation();
 }
 
-Queue<Cargo*> MarsStation::getVIP_Cargo() { return VIP_Cargo; }
-Queue<Cargo*> MarsStation::getSpecial_Cargo() { return Special_Cargo; }
-LinkedList MarsStation::getNormal_Cargo() { return Normal_Cargo; }
-PriorityQueue<Cargo*> MarsStation::getDelivered_Cargo() { return Delivered_Cargo; }
+//Queue<Cargo*> MarsStation::getVIP_Cargo() { return VIP_Cargo; }
+//Queue<Cargo*> MarsStation::getSpecial_Cargo() { return Special_Cargo; }
+//LinkedList MarsStation::getNormal_Cargo() { return Normal_Cargo; }
+//PriorityQueue<Cargo*> MarsStation::getDelivered_Cargo() { return Delivered_Cargo; }

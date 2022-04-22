@@ -2,8 +2,10 @@
 #include <iostream>
 #include "..//Defs.H"
 #include <string>
-#include "..//MarsStation/MarsStation.h"
+//#include "..//MarsStation/MarsStation.h"
 using namespace std;
+
+class MarsStation;  //forward declaration
 
 class UI
 {
@@ -29,13 +31,13 @@ public:
 	
 	void Start_step_by_step_Mode(int day, int hour);//to be continued
 
-	void Show_State();
-	void Show_Waiting_Cargos();
-	void Show_Loading_Trucks();
-	void Show_Empty_Trucks();
-	void Show_Moving_Cargos();
-	void Show_In_CheckUp_Trucks();
-	void Show_Delivered_Cargos();
+	//void Show_State();
+	//void Show_Waiting_Cargos();
+	//void Show_Loading_Trucks();
+	//void Show_Empty_Trucks();
+	//void Show_Moving_Cargos();
+	//void Show_In_CheckUp_Trucks();
+	//void Show_Delivered_Cargos();
 
 	void End_Simulation();
 

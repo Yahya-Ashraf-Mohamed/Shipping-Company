@@ -18,7 +18,7 @@ private:
 	int* StartMaintananceTime = new int[2];  // [day , hour ]
 	static int Order;
 	double Priority;
-	Stack <Cargo*> *CargoStack = new Stack <Cargo*>;   // Name of the stack that include the cargos
+	Stack <Cargo*>* CargoStack = new Stack <Cargo*>;   // Name of the stack that include the cargos
 	int* TotalTruckActiveTime = new int[2];
 	int TotalCargosDelivered = 0;
 	int TotalDeliveryJourneys;
@@ -47,7 +47,7 @@ public:
 	void setMovingTime(int time[2]);
 	int* getMovingTime();
 
-	//Cargo* LoadCargo (PriorityQueue<Cargo*> PriorityQueueCargos );
+	Stack<Cargo*>* LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos);
 
 	~Truck();
 };

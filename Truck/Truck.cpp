@@ -68,45 +68,35 @@ int Truck::Order = 0;
 
 // >> How to pass a Priority Queue to the function
 
-//Cargo* Truck::LoadCargo( PriorityQueue<Cargo*> PriorityQueueCargos )
-//{
-	/*while (!PriorityQueueCargos.isEmpty())
+Stack<Cargo*>* Truck::LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos)
+{
+	while (!PriorityQueueCargos.isEmpty())
 	{
-		Node<Cargo*>* newCargoPtr = new Node <Cargo*>;
-		newCargoPtr = PriorityQueueCargos.Rear;
-		Cargo* pCargo;
-		pCargo = newCargoPtr->getdata();
+		//Node<Cargo*> *newCargoPtr = new Node <Cargo*> ;
+		Cargo* pCargo = nullptr;
+		PriorityQueueCargos.peek(pCargo);
 		TYP CargoType = pCargo->getCargo_Type();
 		if (CargoType == TypeTruck)
 		{
-			for (int i = 0; i < PriorityQueueCargos.getSize(); i++)
-			{
 
-				PriorityQueueCargos.dequeue()
-					CargoStack->push();
-			}
+			PriorityQueueCargos.dequeue(pCargo);
+			CargoStack->push(pCargo);
 		}
-		else if (CargoType == VIP)
+		else if (CargoType == TypeTruck)
 		{
-			for (int i = 0; i < PriorityQueueCargos.getSize(); i++)
-			{
-				PriorityQueueCargos.dequeue()
-					CargoStack->push();
-				TotalCargosDelivered++;
-			}
+			PriorityQueueCargos.dequeue(pCargo);
+			CargoStack->push(pCargo);
+			TotalCargosDelivered++;
 		}
-		else if (CargoType == NORMAL)
+		else if (CargoType == TypeTruck)
 		{
-			for (int i = 0; i < PriorityQueueCargos.getSize(); i++)
-			{
-				PriorityQueueCargos.dequeue()
-					CargoStack->push();
-				TotalCargosDelivered++;
-			}
+			PriorityQueueCargos.dequeue(pCargo);
+			CargoStack->push(pCargo);
+			TotalCargosDelivered++;
 		}
 		return CargoStack;
-	}*/
-//}
+	}
+}
 
 int Truck::getCountTotalCargosDelivered()
 {
@@ -137,7 +127,7 @@ int* Truck::getMaintananceTime()
 
 void Truck::setTruckUtilization(int TotalSimulationTime[2])  // Time in days will be converted to hours to be able to do the operation
 {
-	TruckUtilization = TotalCargosDelivered / (TruckCapacity * TotalDeliveryJourneys) * (TotalTruckActiveTime[0] *24 + TotalTruckActiveTime[1] ) / (TotalSimulationTime[0]*24 + TotalSimulationTime[1]);
+	TruckUtilization = TotalCargosDelivered / (TruckCapacity * TotalDeliveryJourneys) * (TotalTruckActiveTime[0] * 24 + TotalTruckActiveTime[1]) / (TotalSimulationTime[0] * 24 + TotalSimulationTime[1]);
 }
 
 double Truck::getTruckUtilization()
