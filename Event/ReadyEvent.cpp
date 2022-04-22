@@ -5,7 +5,7 @@
 //initializing static Variable
 int ReadyEvent::AutoP = 0;
 
-ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost) :Event(pApp)
+ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, float Cost) :Event(pApp)
 {
 	event_time[0] = Eventtime_day;
 	event_time[1] = Eventtime_hour;
@@ -51,8 +51,6 @@ void ReadyEvent::Execute()
 
 }
 
-
-
 //================================= ignore =========================
 //gets cargo type from UI and returns it with as enum value "TYP"
 TYP ReadyEvent::get_cargo_type(char CargoType)
@@ -72,4 +70,15 @@ TYP ReadyEvent::get_cargo_type(char CargoType)
 	}
 	return type;
 }
+
 //===============================================================
+
+
+//int ReadyEvent::getEvent_Time()
+//{
+//	return event_time[0]*24 + event_time[1];
+//}
+//void ReadyEvent::setEvent_Time(string EventTime)
+//{
+//
+//}

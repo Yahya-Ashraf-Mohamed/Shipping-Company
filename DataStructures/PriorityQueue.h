@@ -1,20 +1,48 @@
 #pragma once
 #include"../DataStructures/Node.h"
+#include<iostream>
+using namespace std;
 
 template <typename T>
 class PriorityQueue
 {
 private:
-	Node <T>* Front, * Rear;
+	Node <T>* Front;
+	 int Size = 0;
 public:
+	Node<T>*Rear;
 	PriorityQueue();
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
+	/*bool dequeue();*/
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	int getSize();
+	void Display() const;
 	~PriorityQueue();
 };
 
+
+template<typename T>
+bool PriorityQueue<T> ::  dequeue(T& frntEntry)
+{
+	//Node* TEMP;
+	if (isEmpty())
+		return false;
+	else
+	{
+		Node<T>* nodeToDeletePtr = Front;
+		frntEntry = Front->getdata();
+		Front = Front->getNext();
+		// Queue is not empty; remove front
+		if (nodeToDeletePtr == Rear)	 // Special case: last node in the queue
+			Rear = nullptr;
+		// Free memory reserved for the dequeued node
+		delete nodeToDeletePtr;
+		Size--;
+		return true;
+	}
+}
 template <typename T>
 PriorityQueue< T > ::PriorityQueue()
 {
@@ -39,33 +67,36 @@ bool PriorityQueue< T > ::enqueue(const T& newEntry)
 	else
 	{
 		Node<T>* Temp = new Node<T>(newEntry);
-		while (Temp->getNext() != NULL && Temp->getPriority() < newNodePtr->getPriority())
+		while (Temp->getNext() != nullptr && Temp->getPriority() < newNodePtr->getPriority())
 		{
 			Rear->setNext(newNodePtr);
 		}
 	}
 	Rear = newNodePtr;
+	Size++;
+	return true;
 }
 
-template <typename T>
-bool PriorityQueue< T > ::dequeue(T& frntEntry)
-{
-	Node* TEMP;
-	if (isEmpty())
-		return false;
-	else
-	{
-		Node<T>* nodeToDeletePtr = Front;
-		frntEntry = Front->getdata();
-		Front = Front->getNext();
-		// Queue is not empty; remove front
-		if (nodeToDeletePtr == Rear)	 // Special case: last node in the queue
-			Rear = nullptr;
-		// Free memory reserved for the dequeued node
-		delete nodeToDeletePtr;
-		return true;
-	}
-}
+//template <typename T>
+//bool PriorityQueue< T > ::dequeue(T& frntEntry)
+//{
+//	Node* TEMP;
+//	if (isEmpty())
+//		return false;
+//	else
+//	{
+//		Node<T>* nodeToDeletePtr = Front;
+//		frntEntry = Front->getdata();
+//		Front = Front->getNext();
+//		// Queue is not empty; remove front
+//		if (nodeToDeletePtr == Rear)	 // Special case: last node in the queue
+//			Rear = nullptr;
+//		// Free memory reserved for the dequeued node
+//		delete nodeToDeletePtr;
+//		Size--;
+//		return true;
+//	}
+//}
 
 template <typename T>
 bool PriorityQueue< T > ::peek(T& frntEntry)  const
@@ -75,6 +106,60 @@ bool PriorityQueue< T > ::peek(T& frntEntry)  const
 
 	frntEntry = Front->getdata();
 	return true;
+}
+
+template <typename T>
+int PriorityQueue<T> ::getSize()
+{
+	return Size;
+}
+
+template <typename T>
+void PriorityQueue<T> ::Display() const
+{
+	cout << getSize();
+	cout << " Waiting Cargos:";
+	Node<Cargo>* p = Front;
+	Cargo* pCargo;
+	pCargo = p;
+	TYP CargoType= pCargo->getCargo_Type();
+	switch (CargoType)
+	{
+	case(NORMAL):
+		while (p)
+		{
+			cout << "[ " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " ]";
+		break;
+	case(VIP):
+		while (p)
+		{
+			cout << "{ " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " }";
+		break;
+	case(SPECIAL):
+		while (p)
+		{
+			cout << "( " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " )";
+		break;
+	default:
+		break;
+	}
+	
+	cout << "\n---------------------------------------------------------------------------------------------------\n";
 }
 
 template <typename T>

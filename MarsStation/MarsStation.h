@@ -2,7 +2,7 @@
 #ifndef MARS_STATION_H
 #define MARS_STATION_H
 
-#include"..\Defs.H"
+//#include"..\Defs.H"
 #include "..\UI\UI.h"
 #include "..\Cargo\Cargo.h"
 #include "..\DataStructures\Queue.h"
@@ -38,7 +38,8 @@ class MarsStation
 	Queue<Cargo*> VIP_Cargo;      //need to be a priority queue
 	Queue<Cargo*> Special_Cargo;
 	LinkedList Normal_Cargo;
-	
+	PriorityQueue<Cargo*> Delivered_Cargo;
+
 	//Event Queue;
 	Queue<Event*> EVENT;
 	
@@ -86,15 +87,10 @@ class MarsStation
 		  CargoCost,
 		  CargoExtraMoney;
 
-	int EventLineNum = 1;
-
-		string* inputFileLines = new string[no_events];
-		string** events;
-		int LineNum = 0;                   
-
+	ifstream dataFile;	// File stream object
+	ofstream OutPutFile;
 
 public:
-
 
 //================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================
 	
@@ -140,7 +136,8 @@ public:
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
-	bool Excute_Output_File();
+	bool Create_Output_File();
+	void Excute_Output_File(Cargo*);
 	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted struct
 
 	// events handler	---------------------------
@@ -158,9 +155,9 @@ public:
 	//Cancel Cargo
 	void CancelCargo(int cargo_id);
 
-	void addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost);
+	void addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, float Cost);
 
-	void addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money);
+	void addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, float Extra_Money);
 
 	void addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id);
 
@@ -182,5 +179,11 @@ public:
 
 	// Run the program
 	void Run();
+	
+	Queue<Cargo*> getVIP_Cargo();
+	Queue<Cargo*> getSpecial_Cargo();
+	LinkedList getNormal_Cargo();
+	PriorityQueue<Cargo*> getDelivered_Cargo();
+
 };
 #endif

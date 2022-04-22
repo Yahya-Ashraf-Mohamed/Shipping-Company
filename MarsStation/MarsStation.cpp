@@ -151,9 +151,7 @@ bool MarsStation::check_file_is_empty(ifstream& file) {
 
 void MarsStation::ReadFile(string FileName)
 {
-	ifstream dataFile;	// File stream object
-
-
+	
 	if (openFileIn(dataFile, FileName) == false)
 	{
 		pUI->Show_Error(error_Open_inputFile);
@@ -208,23 +206,23 @@ void MarsStation::ReadFile(string FileName)
 	dataFile.close();		//close input file
 }
 
-bool MarsStation::Excute_Output_File()		//to be completed after events
+bool MarsStation::Create_Output_File()		//to be completed after events
 {
-	ofstream OutPutFile;
+
 	OutPutFile.open("Report.txt");	// Create and Open output file
 
 	OutPutFile << "CDT\t ID\t PT\t WT\t TID\t" << endl;
 	//for loop on cargoDlivered list
 	//OutPutFile << "Day:Time" << "\t " << "ID" << "\t " << "Prepartiontime" << "\t " << "WaitTime" << "\t " << "TruckID"<< endl;
 
-	OutPutFile << "..........................................................................." << endl;
-	OutPutFile << "..........................................................................." << endl;
-	OutPutFile << "Cargos: " << /*<<total cargo count <<*/ "[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<< endl*/;
-	OutPutFile << "Cargo Avg Wait = " << /*get Averg wait time<<*/  endl;
-	OutPutFile << "Auto-promoted Cargos: " << /*get % promoted cargo<<*/ "%" << endl;
-	OutPutFile << "Trucks: " << /*get munber of trucks<<*/"[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<<*/ << endl;
-	OutPutFile << "Avg Active time = 91%" << endl;
-	OutPutFile << "Avg utilization = 87%" << endl;
+	//OutPutFile << "..........................................................................." << endl;
+	//OutPutFile << "..........................................................................." << endl;
+	//OutPutFile << "Cargos: " << /*<<total cargo count <<*/ "[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<< endl*/;
+	//OutPutFile << "Cargo Avg Wait = " << /*get Averg wait time<<*/  endl;
+	//OutPutFile << "Auto-promoted Cargos: " << /*get % promoted cargo<<*/ "%" << endl;
+	//OutPutFile << "Trucks: " << /*get munber of trucks<<*/"[N: " << /*get delevered normal count<<*/ ", S: " << /*get delevered Special count<<*/ ", V: "/*get delevered Vip count<<*/ << endl;
+	//OutPutFile << "Avg Active time = 91%" << endl;
+	//OutPutFile << "Avg utilization = 87%" << endl;
 
 	OutPutFile.close();
 
@@ -310,13 +308,13 @@ void MarsStation::CancelCargo(int cargo_id)
 	}
 }
 
-void MarsStation::addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost)
+void MarsStation::addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, float Cost)
 {
 	ReadyEvent* Revent = new ReadyEvent(this, Eventtime_day, Eventtime_hour, type, distance, LoadTime, id, Cost);
 	EVENT.enqueue(Revent);
 }
 
-void MarsStation::addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money)
+void MarsStation::addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, float Extra_Money)
 {
 	PromotionEvent* Pevent = new PromotionEvent(this, Eventtime_day, Eventtime_hour, id, Extra_Money);
 	EVENT.enqueue(Pevent);
@@ -332,65 +330,65 @@ void MarsStation::Run()
 {	
 	switch (pUI->GetAppMode())
 	{
-	//case interactive:
-	//	pUI->Start_interactive_Mode();
-	//	break;
-	//case step_by_step:
-	//	pUI->Start_step_by_step_Mode();
-	//	break;
+	case interactive:
+		pUI->Start_interactive_Mode(EventTime[0], EventTime[1]);
+		break;
+	case step_by_step:
+		pUI->Start_step_by_step_Mode(EventTime[0], EventTime[1]);
+		break;
 	case silent:
 		pUI->Start_silent_Mode();
 		break;
 	}
 
-	while (/*EVENT.isEmpty()==false*/true)
+	while (EVENT.isEmpty()==false)
 	{
 		// Off Hours
-		while (MAINTANANCE_VIP_Truck.isEmpty() == false)		//check on manintenance of VIP truck list
-		{
-			Truck* VIP_Truck;
-			while (MAINTANANCE_VIP_Truck.peek(VIP_Truck))
-			{
+		//while (MAINTANANCE_VIP_Truck.isEmpty() == false)		//check on manintenance of VIP truck list
+		//{
+		//	Truck* VIP_Truck;
+		//	while (MAINTANANCE_VIP_Truck.peek(VIP_Truck))
+		//	{
 
-				//if(VIP_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && VIP_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
-				//{
-					//MAINTANANCE_VIP_Truck.dequeue(VIP_Truck);
-					//Waiting_VIP_Truck.enqueue(VIP_Truck);
-				//}
-				//else
-					//break;
-			}
-		}
-		while (MAINTANANCE_Normal_Truck.isEmpty() == false)		//check on manintenance of Normal truck list
-		{
-			Truck* Normal_Truck;
-			while (MAINTANANCE_Normal_Truck.peek(Normal_Truck))
-			{
+		//		//if(VIP_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && VIP_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
+		//		//{
+		//			//MAINTANANCE_VIP_Truck.dequeue(VIP_Truck);
+		//			//Waiting_VIP_Truck.enqueue(VIP_Truck);
+		//		//}
+		//		//else
+		//			//break;
+		//	}
+		//}
+		//while (MAINTANANCE_Normal_Truck.isEmpty() == false)		//check on manintenance of Normal truck list
+		//{
+		//	Truck* Normal_Truck;
+		//	while (MAINTANANCE_Normal_Truck.peek(Normal_Truck))
+		//	{
 
-				//if(Normal_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && Normal_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
-				//{
-					//MAINTANANCE_VIP_Truck.dequeue(Normal_Truck);
-					//Waiting_VIP_Truck.enqueue(Normal_Truck);
-				//}
-				//else
-					//break;
-			}
-		}
-		while (MAINTANANCE_Special_Truck.isEmpty() == false)		//check on manintenance of Special truck list
-		{
-			Truck* Special_Truck;
-			while (MAINTANANCE_Special_Truck.peek(Special_Truck))
-			{
+		//		//if(Normal_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && Normal_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
+		//		//{
+		//			//MAINTANANCE_VIP_Truck.dequeue(Normal_Truck);
+		//			//Waiting_VIP_Truck.enqueue(Normal_Truck);
+		//		//}
+		//		//else
+		//			//break;
+		//	}
+		//}
+		//while (MAINTANANCE_Special_Truck.isEmpty() == false)		//check on manintenance of Special truck list
+		//{
+		//	Truck* Special_Truck;
+		//	while (MAINTANANCE_Special_Truck.peek(Special_Truck))
+		//	{
 
-				//if(Special_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && Special_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
-				//{
-					//MAINTANANCE_VIP_Truck.dequeue(Special_Truck);
-					//Waiting_VIP_Truck.enqueue(Special_Truck);
-				//}
-				//else
-					//break;
-			}
-		}
+		//		//if(Special_Truck->getMAINTANANCE_Start_Time_Hour + VIP_CheckUp_duration >= Clock[1] && Special_Truck->getMAINTANANCE_Start_Time_day + VIP_CheckUp_duration >= Clock[0])
+		//		//{
+		//			//MAINTANANCE_VIP_Truck.dequeue(Special_Truck);
+		//			//Waiting_VIP_Truck.enqueue(Special_Truck);
+		//		//}
+		//		//else
+		//			//break;
+		//	}
+		//}
 
 		//calculations like distance, time, truck utilization,.........
 		
@@ -417,25 +415,45 @@ void MarsStation::Run()
 
 		if (Clock[1] < 5 && Clock[1] > 23)		//working hours
 		{
-			//if (dequeue event from EventList is == R)
-			//{
-			//	
-			//}
-			//else if (dequeue event from EventList is == P)
-			//{
-			// 
-			//}
-			//else	if (dequeue event from EventList is == X)
-			//{
-			// 
-			//}
+			Event* nextEvent;
+			while (EVENT.peek(nextEvent))
+			{ //if (nextEvent->get_time != Clock)
+				//	break;
+				// else
+				// {
+				//	EVENT.dequeue(nextEvent);
+				//	nextEvent.Excute;
+				//}
+			}
+			if (Clock[1] % 5 == 0)
+			{
+				Cargo* deliveredCargo;
+
+				VIP_Cargo.dequeue(deliveredCargo);
+				deliveredCargo->set_Delivery_time(Clock);
+				Delivered_Cargo.enqueue(deliveredCargo);
+				
+
+				Special_Cargo.dequeue(deliveredCargo);
+				deliveredCargo->set_Delivery_time(Clock);
+				Delivered_Cargo.enqueue(deliveredCargo);
+
+				Normal_Cargo.dequeue(deliveredCargo);
+				deliveredCargo->set_Delivery_time(Clock);
+				Delivered_Cargo.enqueue(deliveredCargo);
+			}
+
+			Cargo* deliveredCargo;
+			Delivered_Cargo.enqueue(deliveredCargo);
+
+			pUI->Show_State();
+			Clock[1] = Clock[1] + 1;
 		}
 
 		///////run application
 
 
 
-		Clock[1] = Clock[1] + 1;
 		/*if (EVENTS_List.getCount() == 0)
 		{
 			if (Excute_Output_File() == false)
@@ -444,23 +462,22 @@ void MarsStation::Run()
 		}*/
 
 
-		switch (pUI->GetAppMode())
-		{
-			//case interactive:
-			//	pUI->Start_interactive_Mode();
-			//	break;
-			//case step_by_step:
-			//	pUI->Start_step_by_step_Mode();
-			//	break;
-		case silent:
-			pUI->End_silent_Mode();
-			break;
-		}
-
 
 		/*if (EVENTS_List.isEmpty())
 			break;*/
 	}
 
 	// check that all queues are empty except delivered cargoes and waiting trucks
+	Cargo* nextCargo;
+	while (Delivered_Cargo.peek(nextCargo))
+	{
+		Delivered_Cargo.dequeue(nextCargo);
+		Excute_Output_File(nextCargo);
+	}
+	pUI->End_Simulation();
 }
+
+Queue<Cargo*> MarsStation::getVIP_Cargo() { return VIP_Cargo; }
+Queue<Cargo*> MarsStation::getSpecial_Cargo() { return Special_Cargo; }
+LinkedList MarsStation::getNormal_Cargo() { return Normal_Cargo; }
+PriorityQueue<Cargo*> MarsStation::getDelivered_Cargo() { return Delivered_Cargo; }

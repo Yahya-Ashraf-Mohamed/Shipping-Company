@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
     MarsStation Station;
-	/*Station.Run();*/
+	Station.Run();
 	std::cout << "Bye World!\n";
 
 }

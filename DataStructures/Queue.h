@@ -1,20 +1,31 @@
 #pragma once
 #include "Node.h"
+using namespace std;
 
 template <typename T>
-class Queue 
+class Queue
 {
 private:
 	Node<T>* front;
 	Node<T>* rear;
+	int Size = 0;
 public:
 	Queue();
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
+	int getSize();
+	void Display() const;
+	T* getRearPtr();
 	~Queue();
 };
+
+template <typename T>   
+T* Queue<T> :: getRearPtr()
+{
+	return rear;
+}
 
 template <typename T>   //Constructor
 Queue<T>::Queue()
@@ -23,7 +34,11 @@ Queue<T>::Queue()
 	rear = nullptr;
 }
 
-
+template <typename T>
+int Queue<T>::getSize()
+{
+	return Size;
+}
 
 //Function: isEmpty Sees whether this queue is empty.
 //Output: True if the queue is empty; otherwise false.
@@ -50,6 +65,7 @@ bool Queue<T>::enqueue(const T& newEntry)
 		rear->setNext(newNodePtr); // The queue was not empty
 
 	rear = newNodePtr; // New node is the last node now
+	Size++;
 	return true;
 }
 
@@ -73,7 +89,7 @@ bool Queue<T>::dequeue(T& frntEntry)
 
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	Size--;
 	return true;
 }
 
@@ -89,6 +105,53 @@ bool Queue<T>::peek(T& frntEntry) const
 	frntEntry = front->getdata();
 	return true;
 
+}
+
+template <typename T>
+void Queue <T> :: Display() const
+{
+	cout << getSize();
+	cout << " Delivered Cargos:";
+	Node<Cargo>* p = front;
+	Cargo* pCargo;
+	pCargo = p;
+	TYP CargoType = pCargo->getCargo_Type();
+	switch (CargoType)
+	{
+	case(NORMAL):
+		while (p)
+		{
+			cout << "[ " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " ]";
+		break;
+	case(VIP):
+		while (p)
+		{
+			cout << "{ " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " }";
+		break;
+	case(SPECIAL):
+		while (p)
+		{
+			cout << "( " << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ",";
+		}
+		cout << " )";
+		break;
+	default:
+		break;
+	}
+	cout << "\n-------------------------------------------------------------------------------------------------\n";
 }
 
 template <typename T>   //Destructor

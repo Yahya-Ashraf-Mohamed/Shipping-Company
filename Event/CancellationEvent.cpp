@@ -12,6 +12,15 @@ CancellationEvent::CancellationEvent(MarsStation* pApp, int Eventtime_day, int E
 CancellationEvent:: ~CancellationEvent()
 {}
 
+//int CancellationEvent::getEvent_Time()
+//{
+//
+//}
+//void CancellationEvent::setEvent_Time(string EventTime)
+//{
+//
+//}
+
 void CancellationEvent::Execute()
 {
 	pStation->CancelCargo(cargo_id);

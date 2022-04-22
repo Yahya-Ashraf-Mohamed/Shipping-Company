@@ -26,3 +26,13 @@ enum Error
 	error_Open_inputFile,
 	error_Print_OutputFile
 };
+
+//enum OutputType
+//{
+//	Waiting_Cargos,
+//	Loading_Trucks,
+//	Empty_Trucks,
+//	Moving_Cargos,
+//	In_CheckUp_Trucks,
+//	Delivered_Cargos
+//};
