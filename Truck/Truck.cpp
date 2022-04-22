@@ -75,14 +75,14 @@ int Truck::Order = 0;
 //	{
 //		for (int i = 0 ; i < PriorityQueueCargos.getSize(); i++)
 //		{
-//			CargoStack.push(/*PriorityQueueCargos.dequeue()*/ );
+//			CargoStack->push(/*PriorityQueueCargos.dequeue()*/ );
 //		}
 //	}
 //	else if (TypeCargo == VIP)
 //	{
 //		for (int i = 0; i < PriorityQueueCargos.getSize(); i++)
 //		{
-//			CargoStack.push(PriorityQueueCargos.dequeue());
+//			CargoStack->push(PriorityQueueCargos.dequeue());
 //			TotalCargosDelivered++;
 //		}
 //	}
@@ -90,7 +90,7 @@ int Truck::Order = 0;
 //	{
 //		for (int i = 0; i < PriorityQueueCargos.getSize(); i++)
 //		{
-//			CargoStack.push(PriorityQueueCargos.dequeue());
+//			CargoStack->push(PriorityQueueCargos.dequeue());
 //			TotalCargosDelivered++;
 //		}
 //	}
