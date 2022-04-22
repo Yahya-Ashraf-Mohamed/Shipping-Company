@@ -26,7 +26,7 @@ public:
 	void excute()
 	{
 
-		ReadyEvent* p1 = new ReadyEvent(M, 1, 5, VIP, 10, 6, 300, 1000);
+		ReadyEvent* p1 = new ReadyEvent(M, 1, 5, 'V', 10, 6, 300, 1000);
 		PromotionEvent* p2 = new PromotionEvent(M, 2, 2, 300, 5);
 		CancellationEvent* p3 = new CancellationEvent(M, 3, 3, 300);
 		bool x=EVENT.enqueue(p1);

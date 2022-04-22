@@ -13,6 +13,17 @@ PromotionEvent::PromotionEvent(MarsStation* pApp, int Eventtime_day, int Eventti
 PromotionEvent::~PromotionEvent(void)
 {}
 
+
+void PromotionEvent::setAutoP(bool x)
+{
+	AutoP = x;
+}
+
+bool PromotionEvent::isAutoP()
+{
+	return AutoP;
+}
+
 void PromotionEvent::Execute()
 {
 	pCargo=pStation->PromoteCargo(cargo_id);
@@ -21,6 +32,8 @@ void PromotionEvent::Execute()
 		pCargo->Set_cargo_type(VIP);
 		int newCost = pCargo->get_cost() + extra_money;
 		pCargo->Set_cost(newCost);
+		if (AutoP && pCargo)
+			pStation->Autop_Count_increment();
 		/*pCargo->Set_PromotionEvent_time(event_time);*/
 	}
 

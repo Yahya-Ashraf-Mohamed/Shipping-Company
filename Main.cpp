@@ -10,7 +10,7 @@ using namespace std;
 //main
 int main()
 {
-	/*cout << "Hello World"<<endl;*/
+	cout << "Hello World"<<endl;
 
 	test* Test = new test();
 	Test->excute();

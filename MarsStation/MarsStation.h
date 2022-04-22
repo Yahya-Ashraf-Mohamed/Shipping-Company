@@ -8,6 +8,7 @@
 #include "..\DataStructures\Queue.h"
 #include "..\DataStructures\LinkedList.h"
 #include "..\Event\Event.h"
+#include "..\Event\PromotionEvent.h"
 
 #include "..\Truck\Truck.h"
 #include  <fstream>
@@ -36,7 +37,7 @@ class MarsStation
 	int Special_Cargo_count=0;
 	int Normal_Cargo_count=0;
 
-	int promoted_Cargo_count = 0;
+	int AutoP_Count = 0;
 
 
 	//Truck Queue
@@ -85,9 +86,11 @@ public:
 	//Cancel Cargo
 	void CancelCargo(int cargo_id);
 
-	void addReadyEvent(int Eventtime_day, int Eventtime_hour, TYP type, double distance, int LoadTime, int id, int Cost);
+	void addReadyEvent(int Eventtime_day, int Eventtime_hour, char type, double distance, int LoadTime, int id, int Cost);
 
-	void addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money = 0);
+	PromotionEvent* addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money = 0);
+
+	void Autop_Count_increment();
 
 	void addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id);
 

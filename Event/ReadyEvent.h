@@ -12,18 +12,19 @@ private:
 	int cost;                 //cost of delievering the cargo
 	static int AutoP;        //represents number of days after which a normal cargo is Auto promoted to VIP cargo
 public:
-	ReadyEvent( MarsStation* pApp, int Eventtime_day , int Eventtime_hour , TYP type , double distance , int LoadTime , int id  , int Cost );
+	ReadyEvent( MarsStation* pApp, int Eventtime_day , int Eventtime_hour , char type , double distance , int LoadTime , int id  , int Cost );
 	virtual ~ReadyEvent(void);
 
 	void setAutoP(int x);
 	int  getAutoP();
 
+
+	//gets cargo type from UI and returns it with as enum value "TYP"
+	TYP get_cargo_type(char CargoType);
+
 	//Execute Event 
 	virtual void Execute();
 
-	//================================= ignore =========================
-	////gets cargo type from UI and returns it with as enum value "TYP"
-	//TYP get_cargo_type();
-	//===================================================================
+
 
 };

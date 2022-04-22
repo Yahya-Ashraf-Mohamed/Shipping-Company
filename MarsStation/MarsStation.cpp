@@ -3,7 +3,7 @@
 //#include "..\Event\Event.h"
 #include "..\Event\ReadyEvent.h"
 #include "..\Event\CancellationEvent.h"
-#include "..\Event\PromotionEvent.h"
+//#include "..\Event\PromotionEvent.h"
 
 #include  <fstream>
 
@@ -57,7 +57,6 @@
 			Normal_Cargo_count--;
 			VIP_Cargo.enqueue(pCargo);
 			VIP_Cargo_count++;
-			promoted_Cargo_count++;
 		}
 		return pCargo;
 	}
@@ -71,6 +70,30 @@
 			Normal_Cargo_count--;
 			delete pCargo;
 		}
+	}
+
+	void MarsStation::addReadyEvent(int Eventtime_day, int Eventtime_hour, char type, double distance, int LoadTime, int id, int Cost)
+	{
+		ReadyEvent* p = new ReadyEvent(this, Eventtime_day, Eventtime_hour, type, distance, LoadTime, id, Cost);
+		EVENT.enqueue(p);
+	}
+
+	PromotionEvent* MarsStation::addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money)
+	{
+		PromotionEvent* p = new PromotionEvent(this , Eventtime_day, Eventtime_hour, id, Extra_Money);
+		EVENT.enqueue(p);
+		return p;
+	}
+
+	void MarsStation::Autop_Count_increment()
+	{
+		AutoP_Count ++;
+	}
+
+	void MarsStation::addCancellationEvent( int Eventtime_day, int Eventtime_hour, int id)
+	{
+		CancellationEvent* p = new CancellationEvent(this, Eventtime_day, Eventtime_hour, id);
+		EVENT.enqueue(p);
 	}
 
 //=================================================== Input Functions =================================================
