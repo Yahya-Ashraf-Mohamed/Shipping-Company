@@ -1,22 +1,24 @@
-﻿  MarsStation.cpp
+﻿  CancellationEvent.cpp
+  Main.cpp
+  MarsStation.cpp
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.cpp(188,94): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.cpp(195,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\DataStructures\PriorityQueue.h(39,1): error C2660: 'Node<Cargo *>::getPriority': function does not take 0 arguments
-D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\DataStructures\Node.h(17,9): message : see declaration of 'Node<Cargo *>::getPriority'
-D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\DataStructures\PriorityQueue.h(37): message : while compiling class template member function 'bool PriorityQueue<Cargo *>::enqueue(const T &)'
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\DataStructures\PriorityQueue.h(58,1): error C2955: 'Node': use of class template requires template argument list
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\DataStructures\Node.h(4): message : see declaration of 'Node'
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\DataStructures\PriorityQueue.h(57): message : while compiling class template member function 'bool PriorityQueue<Cargo *>::dequeue(T &)'
           with
           [
               T=Cargo *
           ]
-D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.cpp(446): message : see reference to function template instantiation 'bool PriorityQueue<Cargo *>::enqueue(const T &)' being compiled
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.cpp(482): message : see reference to function template instantiation 'bool PriorityQueue<Cargo *>::dequeue(T &)' being compiled
           with
           [
               T=Cargo *
           ]
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(41): message : see reference to class template instantiation 'PriorityQueue<Cargo *>' being compiled
-D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\DataStructures\PriorityQueue.h(46,1): error C2660: 'Node<Cargo *>::getPriority': function does not take 0 arguments
-D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\DataStructures\Node.h(17,9): message : see declaration of 'Node<Cargo *>::getPriority'
   PromotionEvent.cpp
+  ReadyEvent.cpp
+  Truck.cpp
   UI.cpp
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(26,4): error C2143: syntax error: missing ';' before '*'
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.h(26,4): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
