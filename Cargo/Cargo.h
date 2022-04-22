@@ -11,6 +11,7 @@ private:
 	int cargo_extra_money;    //extra money of promotion from normal to vip cargo
 	//Event time [day,hour]
 	int ReadyEvent_time[2];
+	int Delivery_time[2];
 	/*int PromotionEvent_time[2];*/
 public:
 	Cargo(TYP type, double dist, int LT, int ID, int COST);
@@ -38,6 +39,9 @@ public:
 	int getCargo_Load_Time();
 	void Set_ReadyEvent_time(int* Eventtime);
 	int* get_ReadyEvent_time();
+
+	void set_Delivery_time(int* Eventtime);
+	int* get_Delivery_time();
 
 	//void Set_PromotionEvent_time(int* Eventtime);
 	//int* get_PromotionEvent_time();

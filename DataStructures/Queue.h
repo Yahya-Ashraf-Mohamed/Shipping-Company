@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+using namespace std;
 
 template <typename T>
 class Queue
