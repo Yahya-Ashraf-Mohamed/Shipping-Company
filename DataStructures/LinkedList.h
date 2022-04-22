@@ -13,7 +13,7 @@ class LinkedList
 private:
 	Node<Cargo*>* Head;
 	Node<Cargo*>* Tail;
-
+	int Size = 0;
 public:
 
 
@@ -30,18 +30,26 @@ public:
 		DeleteAll();
 	}	
 
+	int getSize() const
+	{
+		return Size;
+	}
+
 	//need to be further editted
 	void PrintList()	const 
 	{
-		cout << "\nprinting list contents:\n\n";
+//		cout << "\nprinting list contents:\n\n";
 		Node<Cargo*>* p = Head;
 		Cargo* pCargo;
 		while (p)
 		{
 			pCargo = p->getdata();
-			cout << "[ " << pCargo->getCargoID() << " ]";
-			cout << "--->";
+			cout << pCargo->getCargoID();
+//			cout << "[ " << pCargo->getCargoID() << " ]";
+//			cout << "--->";
 			p = p->getNext();
+			if (p != nullptr)
+				cout << ", ";
 		}
 		cout << "*\n";
 	}
@@ -63,6 +71,7 @@ public:
 			x = temp->getdata();
 
 		}
+		Size--;
 	}
 
 	void enqueue ( Cargo* data)
@@ -83,6 +92,7 @@ public:
 			Head = newNode;
 			Tail = Head;
 		}
+		Size++;
 	}
 
 
@@ -112,7 +122,7 @@ public:
 				prev->setNext(current->getNext());
 				return current->getdata();
 			}
-
+			Size--;
 		}
 		//item is not found
 		else

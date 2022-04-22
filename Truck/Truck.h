@@ -11,7 +11,7 @@ private:
 	Status Truck_Status = WAITING;
 	double Speed;				    // will be read form the input file
 	double DelivaryInterval;        // will be calculated depending on cargos input
-	double MaintenanceCheckupTime;   // will be read form the input file after maxNumber of Journeys
+	double MaintenanceCheckupDuration;   // will be read form the input file after maxNumber of Journeys
 	int maxJourneys;              // will be read form the input file
 	int TruckCapacity;            // will be read form the input file
 	int TruckID;                   // will be read form the input file
@@ -26,7 +26,7 @@ private:
 	int* TruckMovingTime = new int[2];
 
 public:
-	Truck(TYP TypeTruck, int TruckID, double Speed, int maxJourneys, int TruckCapacity);
+	Truck(TYP TypeTruck, int TruckID, double Speed, int maxJourneys, int TruckCapacity, int MaintenanceCheckupDuration);
 	void setDelivaryInterval(double DistanceFurthest, double sumUnloadTimes, double timeBack);
 	double getDelivaryInterval();
 	int getmaxJourneys();

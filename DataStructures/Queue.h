@@ -115,48 +115,57 @@ bool Queue <T> :: Display()
 		return false;
 	else
 	{
-		cout << getSize();
-		cout << " Delivered Cargos:";
+		//cout << getSize();
+		//cout << " Delivered Cargos:";
 		Node<Cargo*>* p = front;
 		Cargo* pCargo;
-		pCargo = p->getdata();
-		TYP CargoType = pCargo->getCargo_Type();
-		switch (CargoType)
+		//pCargo = p->getdata();
+
+		while (p)
 		{
-		case(NORMAL):
-			while (p)
-			{
-				cout << "[ " << pCargo->getCargoID();
-				p = p->getNext();
-				if (p != nullptr)
-					cout << ",";
-			}
-			cout << " ]";
-			break;
-		case(VIP):
-			while (p)
-			{
-				cout << "{ " << pCargo->getCargoID();
-				p = p->getNext();
-				if (p != nullptr)
-					cout << ",";
-			}
-			cout << " }";
-			break;
-		case(SPECIAL):
-			while (p)
-			{
-				cout << "( " << pCargo->getCargoID();
-				p = p->getNext();
-				if (p != nullptr)
-					cout << ",";
-			}
-			cout << " )";
-			break;
-		default:
-			break;
+			pCargo = p->getdata();
+			cout << pCargo->getCargoID();
+			p = p->getNext();
+			if (p != nullptr)
+				cout << ", ";
 		}
-		cout << "\n-------------------------------------------------------------------------------------------------\n";
+		//TYP CargoType = pCargo->getCargo_Type();
+		//switch (CargoType)
+		//{
+		//case(NORMAL):
+		//	while (p)
+		//	{
+		//		cout << "[ " << pCargo->getCargoID();
+		//		p = p->getNext();
+		//		if (p != nullptr)
+		//			cout << ",";
+		//	}
+		//	cout << " ]";
+		//	break;
+		//case(VIP):
+		//	while (p)
+		//	{
+		//		cout << "{ " << pCargo->getCargoID();
+		//		p = p->getNext();
+		//		if (p != nullptr)
+		//			cout << ",";
+		//	}
+		//	cout << " }";
+		//	break;
+		//case(SPECIAL):
+		//	while (p)
+		//	{
+		//		cout << "( " << pCargo->getCargoID();
+		//		p = p->getNext();
+		//		if (p != nullptr)
+		//			cout << ",";
+		//	}
+		//	cout << " )";
+		//	break;
+		//default:
+		//	break;
+		//}
+		//cout << "\n-------------------------------------------------------------------------------------------------\n";
 	
 		return true;
 	}

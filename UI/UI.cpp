@@ -19,6 +19,9 @@ void UI::startAPP()
 		cout << "Enter Input file name: ";
 		cin >> this->inputFileName;
 	
+		cout << "Enter Output file name: ";
+		cin >> this->outputFileName;
+
 		if (this->inputFileName != " ")
 			break;
 		else
@@ -70,14 +73,19 @@ string UI::getInput_File_Name()
 	return inputFileName;
 }
 
+string UI::getOutput_File_Name()
+{
+	return outputFileName;
+}
+
 void UI::Start_silent_Mode()
 {
 	cout << "Simulation Starts...";
 }
 
-void UI::End_Simulation()
+void UI::End_Simulation(string outputFileName)
 {
-	cout << "Simulation ends, Output file created with name \"Output.txt\". ";
+	cout << "Simulation ends, Output file created with name \""<< outputFileName<< "\". ";
 }
 
 void UI::Start_step_by_step_Mode(int Days, int Hours)//to be continued ) //input: time h, time day

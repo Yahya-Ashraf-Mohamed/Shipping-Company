@@ -1,6 +1,6 @@
 #include"Truck.h"
 
-Truck::Truck(TYP TypeTruck, int TruckID, double Speed, int maxJourneys, int TruckCapacity)
+Truck::Truck(TYP TypeTruck, int TruckID, double Speed, int maxJourneys, int TruckCapacity, int MaintenanceCheckupDuration)
 {
 	switch (TypeTruck)
 	{
@@ -19,6 +19,7 @@ Truck::Truck(TYP TypeTruck, int TruckID, double Speed, int maxJourneys, int Truc
 	this->maxJourneys = maxJourneys;
 	this->TruckCapacity = TruckCapacity;
 	this->Priority = Speed + TruckCapacity + (Speed / TruckCapacity) + Order;
+	
 }
 
 void Truck::setDelivaryInterval(double DistanceFurthest, double sumUnloadTimes, double timeBack)

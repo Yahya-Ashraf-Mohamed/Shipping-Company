@@ -1,4 +1,4 @@
 ﻿  MarsStation.cpp
 D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.cpp(182,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.cpp(346,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\MarsStation\MarsStation.cpp(376,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Shipping Company.vcxproj -> D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe

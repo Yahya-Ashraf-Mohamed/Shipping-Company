@@ -190,13 +190,45 @@ void MarsStation::ReadFile(string FileName)
 		}
 
 	}
+
+	Create_Normal_Truck();
+	Create_VIP_Truck();
+	Create_Special_Truck();
+
 	dataFile.close();		//close input file
 }
 
-bool MarsStation::Create_Output_File()		//to be completed after events
+void MarsStation::Create_Normal_Truck()
+{
+	for (int i = 1; i < no_Normal + 1; i++)
+	{
+		Truck* t = new Truck(NORMAL, i, Normal_speed, CheckUp_Journeys, Normal_capacity, Normal_CheckUp_duration);
+		Waiting_NORMAL_Truck.enqueue(t);
+	}
+}
+
+void MarsStation::Create_Special_Truck()
+{
+	for (int i = 1; i < no_Special + 1; i++)
+	{
+		Truck* t = new Truck(SPECIAL, i, Normal_speed, CheckUp_Journeys, Normal_capacity, Normal_CheckUp_duration);
+		Waiting_SPECIAL_Truck.enqueue(t);
+	}
+}
+
+void MarsStation::Create_VIP_Truck()
+{
+	for (int i = 1; i < no_VIP + 1; i++)
+	{
+		Truck* t = new Truck(VIP, i, Normal_speed, CheckUp_Journeys, Normal_capacity, Normal_CheckUp_duration);
+		Waiting_VIP_Truck.enqueue(t);
+	}
+}
+
+bool MarsStation::Create_Output_File(string outputFileName)		//to be completed after events
 {
 
-	OutPutFile.open("Report.txt");	// Create and Open output file
+	OutPutFile.open(outputFileName);	// Create and Open output file
 
 	OutPutFile << "CDT\t ID\t PT\t WT\t TID\t" << endl;
 	//for loop on cargoDlivered list
@@ -217,12 +249,10 @@ bool MarsStation::Create_Output_File()		//to be completed after events
 }
 
 //need implementation
-void MarsStation::Excute_Output_File()
+void MarsStation::Excute_Output_File(string outputFileName)
 {
-	OutPutFile.open("Report.txt");	// Create and Open output file
+	OutPutFile.open(outputFileName);	// Create and Open output file
 
-	OutPutFile << "CDT\t ID\t PT\t WT\t TID\t" << endl;
-	
 	Cargo* nextCargo;
 	while (Delivered_Cargo.peek(nextCargo))
 	{
@@ -238,9 +268,9 @@ void MarsStation::Excute_Output_File()
 	
 }
 
-void MarsStation::Analysis_Output_File()
+void MarsStation::Analysis_Output_File(string outputFileName)
 {
-	OutPutFile.open("Report.txt");	// Create and Open output file
+	OutPutFile.open(outputFileName);	// Create and Open output file
 
 	OutPutFile << "..........................................................................." << endl;
 	OutPutFile << "..........................................................................." << endl;
@@ -367,13 +397,24 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 		Show_Moving_Cargos();
 		Show_In_CheckUp_Trucks();
 		Show_Delivered_Cargos();
+		cout << endl;
 	}
 
 	void MarsStation::Show_Waiting_Cargos()
 	{
-		VIP_Cargo.Display();
-		Special_Cargo.Display();
+		cout << (VIP_Cargo.getSize() + Special_Cargo.getSize() + Normal_Cargo.getSize()) << " Waiting Cargos: [";
+		
 		Normal_Cargo.PrintList();
+			 
+		cout << "] (";
+		
+		Special_Cargo.Display();
+
+		cout << ") {";
+
+		VIP_Cargo.Display();
+		
+		cout << "}" << endl;
 	}
 
 	void MarsStation::Show_Loading_Trucks()
@@ -393,8 +434,9 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 	}
 
 	void MarsStation::Show_Delivered_Cargos()
-	{
-		Delivered_Cargo.Display();
+	{	
+		cout << Delivered_Cargo.getSize() << " Delivered Cargos: ";
+	
 	}
 
 
@@ -415,6 +457,9 @@ void MarsStation::Run()
 		pUI->Start_silent_Mode();
 		break;
 	}
+
+	Create_Output_File(pUI->getOutput_File_Name());
+
 
 	while (EVENT.isEmpty()==false)
 	{
@@ -522,8 +567,19 @@ void MarsStation::Run()
 			}
 			
 		}
-		
-		Show_State();
+
+		switch (pUI->GetAppMode())
+		{
+		case interactive:
+			Show_State();
+			system("pause");		// press any key to continue
+			break;
+		case step_by_step:
+			Show_State();
+			Sleep(1000);
+			break;
+		}
+
 		Clock[1] = Clock[1] + 1;
 
 
@@ -551,6 +607,8 @@ void MarsStation::Run()
 			Clock[1] = 1;
 		}
 
+		Excute_Output_File(pUI->getOutput_File_Name());
+	
 	}
 
 	// check that all queues are empty except delivered cargoes and waiting trucks
@@ -560,9 +618,8 @@ void MarsStation::Run()
 	//	Delivered_Cargo.dequeue(nextCargo);
 	//	Excute_Output_File();
 	//}
-	Excute_Output_File();
-	Analysis_Output_File();
-	pUI->End_Simulation();
+	Analysis_Output_File(pUI->getOutput_File_Name());
+	pUI->End_Simulation(pUI->getOutput_File_Name());
 }
 
 //Queue<Cargo*> MarsStation::getVIP_Cargo() { return VIP_Cargo; }

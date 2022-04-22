@@ -13,7 +13,7 @@ private:
 
 	//MarsStation* pStation;
 	MODE AppMode;	// Application Mode interactive or step_by_step or silent
-	string inputFileName;
+	string inputFileName, outputFileName;
 
 public:
 
@@ -23,6 +23,7 @@ public:
 	// Getters Functions  ---------------------------
 	MODE GetAppMode()const;     //returns App Mode state
 	string getInput_File_Name();
+	string getOutput_File_Name();
 
 	// Run UI Functions	--------------------------------------
 	void Start_silent_Mode();
@@ -39,7 +40,7 @@ public:
 	//void Show_In_CheckUp_Trucks();
 	//void Show_Delivered_Cargos();
 
-	void End_Simulation();
+	void End_Simulation(string outputFileName);
 
 	void startAPP();
 

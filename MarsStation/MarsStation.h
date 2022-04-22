@@ -16,6 +16,7 @@
 #include <sstream>
 //#include <iostream>  in UI
 #include <vector>
+#include <Windows.h>
 
 //#include "stdio.h"    to convert string to char
 
@@ -137,10 +138,13 @@ public:
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
-	bool Create_Output_File();
-	void Excute_Output_File();     //need implementation
-	void Analysis_Output_File();
+	bool Create_Output_File(string outputFileName);
+	void Excute_Output_File(string outputFileName);     //need implementation
+	void Analysis_Output_File(string outputFileName);
 
+	void Create_Normal_Truck();
+	void Create_Special_Truck();
+	void Create_VIP_Truck();
 	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted struct
 
 	// events handler	---------------------------
@@ -192,10 +196,10 @@ public:
 	// Run the program
 	void Run();
 	
-	Queue<Cargo*> getVIP_Cargo();
-	Queue<Cargo*> getSpecial_Cargo();
-	LinkedList getNormal_Cargo();
-	PriorityQueue<Cargo*> getDelivered_Cargo();
+	//Queue<Cargo*> getVIP_Cargo();
+	//Queue<Cargo*> getSpecial_Cargo();
+	//LinkedList getNormal_Cargo();
+	//PriorityQueue<Cargo*> getDelivered_Cargo();
 
 };
 #endif
