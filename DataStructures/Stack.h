@@ -6,14 +6,14 @@ class Stack     // Inheirt from the Abstract class
 private:
 	Node <T>* TopHead;
 	int size = 0;
-	
+
 
 public:
 
 	Stack();
 	bool isEmpty() const;
 	//bool isFull();
-	bool push(const T& newEntry);
+	bool push(T& newEntry);
 	bool pop(T& TopEntry);
 	//bool peek(T& TopEntry) const;
 	int StackSize();
@@ -45,10 +45,10 @@ bool Stack <T> ::isEmpty() const
 
 
 template<typename T>
-bool Stack <T> ::push(const T& newEntry)
+bool Stack <T> ::push(T& newEntry)
 {
-	Node<T>* newNode = new Node(newEntry);
-	newNode->next = TopHead;
+	Node<T>* newNode = new Node<T>(newEntry);
+	newNode = TopHead->getNext();
 	TopHead = newNode;
 	size++;
 	return true;
