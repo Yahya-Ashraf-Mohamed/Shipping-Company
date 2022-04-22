@@ -138,7 +138,9 @@ public:
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
 	bool Create_Output_File();
-	void Excute_Output_File(Cargo*);
+	void Excute_Output_File(Cargo*);     //need implementation
+
+
 	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted struct
 
 	// events handler	---------------------------

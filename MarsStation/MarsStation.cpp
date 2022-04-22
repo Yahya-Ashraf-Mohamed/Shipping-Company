@@ -216,6 +216,10 @@ bool MarsStation::Create_Output_File()		//to be completed after events
 	return true;
 }
 
+//need implementation
+void MarsStation::Excute_Output_File(Cargo*)
+{}
+
 //void MarsStation::Enqueue_Events(char EventType, int EventDay, int EventHour) deleted struct
 //{
 //	Events newEvent; //create event with the input values
@@ -248,7 +252,7 @@ bool MarsStation::Create_Output_File()		//to be completed after events
 //	}
 //}
 
-//Add Cargo to Cargo Queue depending on it's type
+
 //Add Cargo to Cargo Queue depending on it's type
 void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 {
@@ -270,7 +274,6 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 }
 
 //Promote normal cargo to VIP cargoes and returns pointer to the promoted Cargo
-	//Auto promote still not Handelled
 	Cargo* MarsStation::PromoteCargo(int cargo_id)
 	{
 		Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);

@@ -2,8 +2,10 @@
 #include <iostream>
 #include "..//Defs.H"
 #include <string>
-#include "..//MarsStation/MarsStation.h"
+//#include "..//MarsStation/MarsStation.h"
 using namespace std;
+
+class MarsStation;  //forward declaration
 
 class UI
 {
