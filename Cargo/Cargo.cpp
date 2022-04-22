@@ -81,6 +81,15 @@ int* Cargo::get_ReadyEvent_time()
 	return ReadyEvent_time;
 }
 
+void Cargo::set_Delivery_time(int* Eventtime)
+{
+	Delivery_time[0] = Eventtime[0];
+	Delivery_time[1] = Eventtime[1];
+}
+int* Cargo::get_Delivery_time()
+{
+	return Delivery_time;
+}
 //void Cargo::Set_PromotionEvent_time(int* Eventtime)
 //{
 //	PromotionEvent_time[0] = Eventtime[0];

@@ -75,31 +75,63 @@ void UI::Start_silent_Mode()
 	cout << "Simulation Starts...";
 }
 
-void UI::End_silent_Mode()
+void UI::End_Simulation()
 {
 	cout << "Simulation ends, Output file created with name \"Output.txt\". ";
 }
 
 void UI::Start_step_by_step_Mode(int Days, int Hours)//to be continued ) //input: time h, time day
 {
+	cout << "Simulation Starts..." << endl;
 	cout << "Current Time (Day:Hour):- " << Days << ":" << Hours << endl;
-
-	//enum OutputType  I was thinking about it
-	//{
-	//	Waiting_Cargos,
-	//	Loading_Trucks,
-	//	Empty_Trucks,
-	//	Moving_Cargos,
-	//	In_CheckUp_Trucks,
-	//	Delivered_Cargos
-	//};
-
 }
 
 void UI::Start_interactive_Mode(int Days, int Hours)//to be continued ) //input: time h, time day
 {
+	cout << "Simulation Starts..." << endl;
 	cout << "Current Time (Day:Hour):- " << Days << ":" << Hours << endl;
 }
+
+void UI::Show_State()
+{
+	Show_Waiting_Cargos();
+	Show_Loading_Trucks();
+	Show_Empty_Trucks();
+	Show_Moving_Cargos();
+	Show_In_CheckUp_Trucks();
+	Show_Delivered_Cargos();
+}
+
+void UI::Show_Waiting_Cargos()
+{	
+	cout << /*pStation->getVIP_Cargo().getCount() << */" Waiting Cargos: [" << /*pStation->getNormal_Cargo().PrintInfo() << */"] ("
+		<< /*pStation->getSpecial_Cargo().PrintInfo() << */ ") {" << /*pStation->getVIP_Cargo().PrintInfo() << */ "}";
+}
+
+void UI::Show_Loading_Trucks()
+{
+}
+
+void UI::Show_Empty_Trucks()
+{
+}
+
+void UI::Show_Moving_Cargos()
+{
+}
+
+void UI::Show_In_CheckUp_Trucks()
+{
+}
+
+void UI::Show_Delivered_Cargos()
+{
+
+	cout << /*pStation->getVIP_Cargo().getCount() << */" Waiting Cargos: [" << /*pStation->getNormal_Cargo().PrintInfo() << */"] ("
+		<< /*pStation->getSpecial_Cargo().PrintInfo() << */ ") {" << /*pStation->getVIP_Cargo().PrintInfo() << */ "}";
+
+}
+
 
 void UI::Show_Error(Error ErrorType)
 {

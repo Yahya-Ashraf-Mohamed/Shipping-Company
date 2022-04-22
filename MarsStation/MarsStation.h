@@ -38,7 +38,8 @@ class MarsStation
 	Queue<Cargo*> VIP_Cargo;      //need to be a priority queue
 	Queue<Cargo*> Special_Cargo;
 	LinkedList Normal_Cargo;
-	
+	Queue<Cargo*> Delivered_Cargo;
+
 	//Event Queue;
 	Queue<Event*> EVENT;
 	
@@ -86,15 +87,10 @@ class MarsStation
 		  CargoCost,
 		  CargoExtraMoney;
 
-	int EventLineNum = 1;
-
-		string* inputFileLines = new string[no_events];
-		string** events;
-		int LineNum = 0;                   
-
+	ifstream dataFile;	// File stream object
+	ofstream OutPutFile;
 
 public:
-
 
 //================================= CONSTRUCTOR / DESTRUCTOR / UI POINTER =================================
 	
@@ -140,7 +136,8 @@ public:
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
-	bool Excute_Output_File();
+	bool Create_Output_File();
+	void Excute_Output_File(Cargo*);
 	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted struct
 
 	// events handler	---------------------------
@@ -182,5 +179,11 @@ public:
 
 	// Run the program
 	void Run();
+	
+	Queue<Cargo*> getVIP_Cargo();
+	Queue<Cargo*> getSpecial_Cargo();
+	LinkedList getNormal_Cargo();
+	Queue<Cargo*> getDelivered_Cargo();
+
 };
 #endif
