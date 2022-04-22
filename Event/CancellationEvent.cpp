@@ -12,10 +12,10 @@ CancellationEvent::CancellationEvent(MarsStation* pApp, int Eventtime_day, int E
 CancellationEvent:: ~CancellationEvent()
 {}
 
-//int CancellationEvent::getEvent_Time()
-//{
-//
-//}
+int CancellationEvent::getEvent_Time()
+{
+	return event_time[0] * 24 + event_time[1];
+}
 //void CancellationEvent::setEvent_Time(string EventTime)
 //{
 //

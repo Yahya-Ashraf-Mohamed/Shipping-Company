@@ -38,3 +38,8 @@ void PromotionEvent::Execute()
 	}
 
 }
+
+int PromotionEvent::getEvent_Time()
+{
+	return event_time[0] * 24 + event_time[1];
+}
