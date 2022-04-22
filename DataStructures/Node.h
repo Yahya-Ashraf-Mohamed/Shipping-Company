@@ -16,14 +16,8 @@ public:
 	Node<T>* getNext() const;
 	double getPriority() const;
 	void setPriority(double Priority_);  // Can't be constant
-	void operator= (const T& DATA);
-}; // end Node
+};
 
-template <typename T>
-void Node<T> :: operator= (const T& DATA)
-{
-	data = DATA;
-}
 
 template < typename T>
 Node<T>::Node()
@@ -34,8 +28,7 @@ Node<T>::Node()
 template < typename T>
 Node<T>::Node(const T& DATA)
 {
-	/*data = DATA;*/
-	operator= (DATA);
+	data = DATA;
 	next = nullptr;
 }
 
