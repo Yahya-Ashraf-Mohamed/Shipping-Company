@@ -1,2 +1,13 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(1092,5): error MSB6006: "link.exe" exited with code 1168.
-LINK : fatal error LNK1168: cannot open D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\Shipping-Company\x64\Debug\Shipping Company.exe for writing
+﻿  CancellationEvent.cpp
+  PromotionEvent.cpp
+  ReadyEvent.cpp
+  Main.cpp
+C:\Users\dell\Desktop\Shipping-Company\Event\test.h(21,99): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MarsStation.cpp
+C:\Users\dell\Desktop\Shipping-Company\MarsStation\MarsStation.cpp(185,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\dell\Desktop\Shipping-Company\MarsStation\MarsStation.cpp(385,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Truck.cpp
+  Generating Code...
+C:\Users\dell\Desktop\Shipping-Company\Truck\Truck.cpp(99): warning C4715: 'Truck::LoadCargo': not all control paths return a value
+C:\Users\dell\Desktop\Shipping-Company\DataStructures\LinkedList.h(75): warning C4715: 'LinkedList::dequeue': not all control paths return a value
+  Shipping Company.vcxproj -> C:\Users\dell\Desktop\Shipping-Company\x64\Debug\Shipping Company.exe

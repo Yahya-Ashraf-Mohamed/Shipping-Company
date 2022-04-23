@@ -95,6 +95,10 @@ public:
 		Size++;
 	}
 
+	bool isEmpty() const
+	{
+		return (Head == nullptr);
+	}
 
 	// Take Cargo id, Remove Cargo, return pointer to that Cargo
 	Cargo* RemoveNode(int id)
@@ -223,6 +227,7 @@ private:
 			// value not present
 			return nullptr;
 		}
+
 
 //============================================= ignore ==============================================
 	//

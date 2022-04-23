@@ -46,9 +46,14 @@ class MarsStation
 	Queue<Event*> EVENT;
 	
 	//Counts
-	int VIP_Cargo_count=0;
+	int VIP_Cargo_count=0;			// in report (get total number of cargos)
 	int Special_Cargo_count=0;
 	int Normal_Cargo_count=0;
+	int Delivered_Cargo_Count = 0;
+
+	int VIP_Cargo_Size = 0;			// for UI (get dinamic size of cargos)
+	int Special_Cargo_Size = 0;
+	int Normal_Cargo_Size = 0;
 
 	int AutoP_Count = 0;
 

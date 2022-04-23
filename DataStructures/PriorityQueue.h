@@ -127,37 +127,38 @@ bool PriorityQueue<T> ::Display()
 		Cargo* pCargo;
 		pCargo = p->getdata();
 		TYP CargoType = pCargo->getCargo_Type();
+		
 		switch (CargoType)
 		{
 		case(NORMAL):
 			while (p)
 			{
-				cout << "[ " << pCargo->getCargoID();
+				cout << "[" << pCargo->getCargoID();
 				p = p->getNext();
 				if (p != nullptr)
 					cout << ",";
 			}
-			cout << " ]";
+			cout << "]";
 			break;
 		case(VIP):
 			while (p)
 			{
-				cout << "{ " << pCargo->getCargoID();
+				cout << "{" << pCargo->getCargoID();
 				p = p->getNext();
 				if (p != nullptr)
 					cout << ",";
 			}
-			cout << " }";
+			cout << "}";
 			break;
 		case(SPECIAL):
 			while (p)
 			{
-				cout << "( " << pCargo->getCargoID();
+				cout << "(" << pCargo->getCargoID();
 				p = p->getNext();
 				if (p != nullptr)
 					cout << ",";
 			}
-			cout << " )";
+			cout << ")";
 			break;
 		default:
 			break;

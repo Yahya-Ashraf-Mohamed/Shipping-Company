@@ -55,6 +55,7 @@ void MarsStation::setInt_Variables(ifstream& DataFile)
 		>> AutoPromotion
 		>> MaxW
 		>> no_events;
+		
 }
 
 void MarsStation::setEvent_Time(string Time)
@@ -151,7 +152,9 @@ bool MarsStation::check_file_is_empty(ifstream& file) {
 
 void MarsStation::ReadFile(string FileName)
 {
-	
+	/*ReadyEvent Revent(this);
+	Revent.setAutoP(AutoPromotion);*/
+
 	if (openFileIn(dataFile, FileName) == false)
 	{
 		pUI->Show_Error(error_Open_inputFile);
@@ -243,7 +246,7 @@ bool MarsStation::Create_Output_File(string outputFileName)		//to be completed a
 	//OutPutFile << "Avg Active time = 91%" << endl;
 	//OutPutFile << "Avg utilization = 87%" << endl;
 
-	OutPutFile.close();
+//	OutPutFile.close();
 
 	return true;
 }
@@ -251,26 +254,26 @@ bool MarsStation::Create_Output_File(string outputFileName)		//to be completed a
 //need implementation
 void MarsStation::Excute_Output_File(string outputFileName)
 {
-	OutPutFile.open(outputFileName);	// Create and Open output file
+	//OutPutFile.open(outputFileName);	// Create and Open output file
 
 	Cargo* nextCargo;
 	while (Delivered_Cargo.peek(nextCargo))
 	{
 		Delivered_Cargo.dequeue(nextCargo);
-		cout << nextCargo->get_Delivery_time()[0] << ":" << nextCargo->get_Delivery_time()[1] << "\t"
-			<< nextCargo->getCargoID() << "\t"
-			<< nextCargo->get_ReadyEvent_time()[0] << ":" << nextCargo->get_ReadyEvent_time()[1]
-			<< /*to be edited in phase 2*/ nextCargo->get_Delivery_time()[0] - nextCargo->get_ReadyEvent_time()[0] << ":" << nextCargo->get_Delivery_time()[1] - nextCargo->get_ReadyEvent_time()[1]
-			<< endl;		
+		OutPutFile << nextCargo->get_Delivery_time()[0] << ":" << nextCargo->get_Delivery_time()[1] << "\t"
+				   << nextCargo->getCargoID() << "\t"
+				   << nextCargo->get_ReadyEvent_time()[0] << ":" << nextCargo->get_ReadyEvent_time()[1]
+				   << /*to be edited in phase 2*/ nextCargo->get_Delivery_time()[0] - nextCargo->get_ReadyEvent_time()[0] << ":" << nextCargo->get_Delivery_time()[1] - nextCargo->get_ReadyEvent_time()[1]
+				   << endl;		
 	}
 
-	OutPutFile.close();
+//	OutPutFile.close();
 	
 }
 
 void MarsStation::Analysis_Output_File(string outputFileName)
 {
-	OutPutFile.open(outputFileName);	// Create and Open output file
+//	OutPutFile.open(outputFileName);	// Create and Open output file
 
 	OutPutFile << "..........................................................................." << endl;
 	OutPutFile << "..........................................................................." << endl;
@@ -329,14 +332,17 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 	case VIP:
 		VIP_Cargo.enqueue(pCargo);
 		VIP_Cargo_count++;
+		VIP_Cargo_Size++;
 		break;
 	case SPECIAL:
 		Special_Cargo.enqueue(pCargo);
 		Special_Cargo_count++;
+		Special_Cargo_Size++;
 		break;
 	case NORMAL:
 		Normal_Cargo.enqueue(pCargo);
 		Normal_Cargo_count++;
+		Normal_Cargo_Size++;
 		break;
 	}
 }
@@ -348,8 +354,10 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 		if (pCargo)
 		{
 			Normal_Cargo_count--;
+			Normal_Cargo_Size--;
 			VIP_Cargo.enqueue(pCargo);
 			VIP_Cargo_count++;
+			VIP_Cargo_Size++;
 		}
 		return pCargo;
 	}
@@ -361,6 +369,7 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 		if (pCargo)
 		{
 			Normal_Cargo_count--;
+			Normal_Cargo_Size--;
 			delete pCargo;
 		}
 	}
@@ -403,8 +412,8 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 
 	void MarsStation::Show_Waiting_Cargos()
 	{
-		cout << (VIP_Cargo.getSize() + Special_Cargo.getSize() + Normal_Cargo.getSize()) << " Waiting Cargos: [";
-		
+		cout << (VIP_Cargo_Size + Special_Cargo_Size + Normal_Cargo_Size) << " Waiting Cargos: [";
+		//VIP_Cargo.getSize() + Special_Cargo.getSize() + Normal_Cargo.getSize()
 		Normal_Cargo.PrintList();
 			 
 		cout << "] (";
@@ -436,19 +445,10 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 
 	void MarsStation::Show_Delivered_Cargos()
 	{	
-		cout << Delivered_Cargo.getSize() << " Delivered Cargos: ";
+		cout << Delivered_Cargo_Count << " Delivered Cargos: ";
 		
 		Delivered_Cargo.Display();
 
-		//cout << "] (";
-
-		//Special_Cargo.Display();
-
-		//cout << ") {";
-
-		//VIP_Cargo.Display();
-
-		//cout << "}" << endl;
 	}
 
 
@@ -462,9 +462,9 @@ void MarsStation::Run()
 
 	pUI->Start_Simulation();
 
-	while (EVENT.isEmpty()==false)
+	while (EVENT.isEmpty() == false || (VIP_Cargo.isEmpty() == false || Normal_Cargo.isEmpty() == false || Special_Cargo.isEmpty() == false) )
 	{
-
+		
 		// Off Hours
 		//while (MAINTANANCE_VIP_Truck.isEmpty() == false)		//check on manintenance of VIP truck list
 		//{
@@ -549,7 +549,7 @@ void MarsStation::Run()
 					break;
 
 			}
-			if (Clock[1] % 5 == 0 && Clock[0] != 0) // && Clock[0] != 0
+			if (Clock[1] % 5 == 0 && (Clock[1] > 6 || Clock[0] > 0)) // && Clock[0] != 0
 			{
 
 				Cargo* deliveredCargo;
@@ -558,18 +558,24 @@ void MarsStation::Run()
 				{
 					deliveredCargo->set_Delivery_time(Clock);
 					Delivered_Cargo.enqueue(deliveredCargo);
+					VIP_Cargo_Size = VIP_Cargo_Size-1;
+					Delivered_Cargo_Count = Delivered_Cargo_Count+1;
 				}
 
 				if (Special_Cargo.dequeue(deliveredCargo) != false)
 				{
 					deliveredCargo->set_Delivery_time(Clock);
 					Delivered_Cargo.enqueue(deliveredCargo);
+					Special_Cargo_Size = Special_Cargo_Size-1;
+					Delivered_Cargo_Count = Delivered_Cargo_Count+1;
 				}
 
 				if (Normal_Cargo.dequeue(deliveredCargo) != false)
 				{
 					deliveredCargo->set_Delivery_time(Clock);
 					Delivered_Cargo.enqueue(deliveredCargo);
+					Normal_Cargo_Size = Normal_Cargo_Size-1;
+					Delivered_Cargo_Count = Delivered_Cargo_Count+1;
 				}
 			}
 			

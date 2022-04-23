@@ -6,6 +6,8 @@
 //initializing static Variable
 int ReadyEvent::AutoP = 0;
 
+ReadyEvent::ReadyEvent(MarsStation* pApp) :Event(pApp) {}
+
 ReadyEvent::ReadyEvent(MarsStation* pApp, int Eventtime_day, int Eventtime_hour, char type, double distance, int LoadTime, int id, float Cost) :Event(pApp)
 {
 	event_time[0] = Eventtime_day;
@@ -63,12 +65,12 @@ void ReadyEvent::Execute()
 	if (cargo_type == NORMAL)
 	{
 		////Event time [day,hour]
-		//int AutoP_day= event_time[0] + AutoP;
+		//int AutoP_day= event_time[1] + AutoP;
 		//int AutoP_hour= event_time[0];
 
 		//PromotionEvent* p= pStation->addPromotionEvent(AutoP_day, AutoP_hour, cargo_id);
 		//p->setAutoP(true);
-		
+		//
 	}
 
 }
