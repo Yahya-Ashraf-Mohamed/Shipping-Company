@@ -121,48 +121,69 @@ bool PriorityQueue<T> ::Display()
 		return false;
 	else
 	{
-		cout << getSize();
-		cout << " Waiting Cargos:";
 		Node<Cargo*>* p = Front;
-		Cargo* pCargo;
-		pCargo = p->getdata();
-		TYP CargoType = pCargo->getCargo_Type();
-		
-		switch (CargoType)
+		Cargo* pCargo;		
+		while (p)
 		{
-		case(NORMAL):
-			while (p)
+			pCargo = p->getdata();
+			TYP CargoType = pCargo->getCargo_Type();
+			if (CargoType == NORMAL)
 			{
-				cout << "[" << pCargo->getCargoID();
-				p = p->getNext();
-				if (p != nullptr)
-					cout << ",";
+				cout << "[";
+				cout << pCargo->getCargoID();
+				cout << "] ";
 			}
-			cout << "]";
-			break;
-		case(VIP):
-			while (p)
+
+			if (CargoType == SPECIAL)
 			{
-				cout << "{" << pCargo->getCargoID();
-				p = p->getNext();
-				if (p != nullptr)
-					cout << ",";
+				cout << "(";
+				cout << pCargo->getCargoID();
+				cout << ") ";
 			}
-			cout << "}";
-			break;
-		case(SPECIAL):
-			while (p)
+
+			if (CargoType == VIP)
 			{
-				cout << "(" << pCargo->getCargoID();
-				p = p->getNext();
-				if (p != nullptr)
-					cout << ",";
+				cout << "{";
+				cout << pCargo->getCargoID();
+				cout << "} ";
 			}
-			cout << ")";
-			break;
-		default:
-			break;
+			p = p->getNext();
 		}
+		//switch (CargoType)
+		//{
+		//case(NORMAL):
+		//	while (p)
+		//	{
+		//		cout << "[" << pCargo->getCargoID();
+		//		p = p->getNext();
+		//		if (p != nullptr)
+		//			cout << ",";
+		//	}
+		//	cout << "]";
+		//	break;
+		//case(VIP):
+		//	while (p)
+		//	{
+		//		cout << "{" << pCargo->getCargoID();
+		//		p = p->getNext();
+		//		if (p != nullptr)
+		//			cout << ",";
+		//	}
+		//	cout << "}";
+		//	break;
+		//case(SPECIAL):
+		//	while (p)
+		//	{
+		//		cout << "(" << pCargo->getCargoID();
+		//		p = p->getNext();
+		//		if (p != nullptr)
+		//			cout << ",";
+		//	}
+		//	cout << ")";
+		//	break;
+		//default:
+		//	break;
+		//}
 
 		cout << "\n---------------------------------------------------------------------------------------------------\n";
 		
