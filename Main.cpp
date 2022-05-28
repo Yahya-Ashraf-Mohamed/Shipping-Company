@@ -11,8 +11,13 @@ using namespace std;
 //main
 int main()
 {
-    MarsStation Station;
+	MarsStation Station;
 	Station.Run();
 	std::cout << "Bye World!\n";
+	///////////////////////////////
 
+	//test mytest;
+	//mytest.excute();
+
+	//std::cout << "Bye World!\n";
 }

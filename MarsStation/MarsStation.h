@@ -54,6 +54,9 @@ class MarsStation
 	int VIP_Cargo_Size = 0;			// for UI (get dinamic size of cargos)
 	int Special_Cargo_Size = 0;
 	int Normal_Cargo_Size = 0;
+	//int VIP_Cargo_Size = VIP_Cargo.getSize();
+	//int Special_Cargo_Size = Special_Cargo.getSize();
+	//int Normal_Cargo_Size = Normal_Cargo.getSize();
 
 	int AutoP_Count = 0;
 
@@ -110,15 +113,16 @@ public:
 	//Gets a pointer to UI Object
 	UI* GetUI();
 
+//========================================= SETTERS / GETTERS ==================================================
 
-	// setters Functions		---------------------------
+	// setters Functions		
 	void setClock_Hours(int Hours);				//set the clock hours
 	void setClock_Days(int Days);			//set the clock minutes
 	void setClock(int Hours, int Days);		//set the clock hours and minutes
 	void setInt_Variables(ifstream& DataFile);	//set the values of the integar variables
 	void setEvent_Time(string EventTime);
 
-	// getters Functions		---------------------------
+	// getters Functions		
 	int getClock_Hours();						//get clock hour
 	int getClock_Days();						//get clock days
 	int getCargo_ID();
@@ -139,7 +143,9 @@ public:
 	char getTruck_Type();
 	char getEvent_Type();
 
-	// input file handler	---------------------------
+	//================================================= FILE HANDLER ===============================================
+	
+	// input file handler	
 	bool openFileIn(ifstream& file, string name);	// Open input file and return True if succeeded
 	bool check_file_is_empty(ifstream& file);
 	void ReadFile(string Filename);
@@ -150,14 +156,15 @@ public:
 	void Create_Normal_Truck();
 	void Create_Special_Truck();
 	void Create_VIP_Truck();
-	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted struct
 
-	// events handler	---------------------------
-	//Select Event to be excuted
-	//void ExecuteEvent(char Event, Cargo* pCargo=nullptr);  deleted
-	
+	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted 
+
+	//=================================================== LOAD ==================================================
+
+
+
 	//=================================================== EVENTS =================================================//
-
+	
 	//Add Cargo to Cargo Queue depending on it's type
 	void AddCargo(Cargo* pCargo, TYP type) ;
 	
@@ -167,13 +174,22 @@ public:
 	//Cancel Cargo
 	void CancelCargo(int cargo_id);
 
+	//create Ready event then adds it to the Event queue 
 	void addReadyEvent(int Eventtime_day, int Eventtime_hour, char type, double distance, int LoadTime, int id, float Cost);
 
+	//create Promotion event then adds it to the Event queue and returns the pointer 
 	PromotionEvent* addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money = 0);
 
+	//set Autop by its value in ready event
+	void initiate_Autop(int value);
+
+	//increments autop count
 	void Autop_Count_increment();
 
+	//create Cancellation event then adds it to the Event queue 
 	void addCancellationEvent(int Eventtime_day, int Eventtime_hour, int id);
+
+
 //============================================== UI Functions ==================================================//
 	void Show_State(int Days, int Hours);
 	void Show_Waiting_Cargos();

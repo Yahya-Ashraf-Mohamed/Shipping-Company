@@ -32,7 +32,7 @@ void PromotionEvent::Execute()
 		pCargo->Set_cargo_type(VIP);
 		float newCost = pCargo->getCargoCost() + extra_money;
 		pCargo->setCargoCost(newCost);
-		if (AutoP && pCargo)
+		if (AutoP)
 			pStation->Autop_Count_increment();
 		/*pCargo->Set_PromotionEvent_time(event_time);*/
 	}

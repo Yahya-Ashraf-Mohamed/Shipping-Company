@@ -64,13 +64,13 @@ void ReadyEvent::Execute()
 	//creates Autop Event and adds it to the event queue
 	if (cargo_type == NORMAL)
 	{
-		////Event time [day,hour]
-		//int AutoP_day= event_time[1] + AutoP;
-		//int AutoP_hour= event_time[0];
+		//Event time [day,hour]
+		int AutoP_day= event_time[1] + AutoP - 1;
+		int AutoP_hour= event_time[0];
 
-		//PromotionEvent* p= pStation->addPromotionEvent(AutoP_day, AutoP_hour, cargo_id);
-		//p->setAutoP(true);
-		//
+		PromotionEvent* p= pStation->addPromotionEvent(AutoP_day, AutoP_hour, cargo_id);
+		p->setAutoP(true);
+		
 	}
 
 }

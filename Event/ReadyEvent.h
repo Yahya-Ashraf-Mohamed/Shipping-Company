@@ -18,7 +18,7 @@ public:
 	virtual ~ReadyEvent(void);
 
 	//TYP	get_cargo_type(char CargoType);
-	void setAutoP(int x);
+	static void setAutoP(int x);
 	int  getAutoP();
 
 

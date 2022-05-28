@@ -300,37 +300,20 @@ void MarsStation::Analysis_Output_File(string outputFileName)
 //	EVENTS_List.enqueue(newEvent);	// then enque this event	
 //}
 
+
+//=================================================== LOAD ==================================================
+
+
+
 //=================================================== EVENTS =================================================
-//selecting the Event to be excecuted
 
-//void MarsStation::ExecuteEvent(char eventt, Cargo* pCargo)   deleted
-//{
-//	int Eventtime_day = EventTime[0];
-//	int Eventtime_hour = EventTime[1];
-//
-//	Event* pEvent = nullptr;
-//	switch (eventt)
-//	{
-//	case 'R':
-//		pEvent = new ReadyEvent(this, Eventtime_day, Eventtime_hour);
-//		break;
-//	}
-//	if (pEvent)
-//	{
-//		pEvent->Execute();
-//		delete pEvent;
-//		pEvent = nullptr;
-//	}
-//}
-
-
-//Add Cargo to Cargo Queue depending on it's type
-void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
+	//Add Cargo to Cargo Queue depending on it's type
+	void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 {
 	switch (CargoType)
 	{
 	case VIP:
-		VIP_Cargo.enqueue(pCargo);
+		VIP_Cargo.enqueue(pCargo); 
 		VIP_Cargo_count++;
 		VIP_Cargo_Size++;
 		break;
@@ -347,7 +330,7 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 	}
 }
 
-//Promote normal cargo to VIP cargoes and returns pointer to the promoted Cargo
+	//Promote normal cargo to VIP cargoes and returns pointer to the promoted Cargo
 	Cargo* MarsStation::PromoteCargo(int cargo_id)
 	{
 		Cargo* pCargo = Normal_Cargo.RemoveNode(cargo_id);
@@ -374,12 +357,14 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 		}
 	}
 
+	//create Ready event then adds it to the Event queue 
 	void MarsStation::addReadyEvent(int Eventtime_day, int Eventtime_hour, char type, double distance, int LoadTime, int id, float Cost)
 	{
 		ReadyEvent* p = new ReadyEvent(this, Eventtime_day, Eventtime_hour, type, distance, LoadTime, id, Cost);
 		EVENT.enqueue(p);
 	}
 
+	//create Promotion event then adds it to the Event queue and returns the pointer 
 	PromotionEvent* MarsStation::addPromotionEvent(int Eventtime_day, int Eventtime_hour, int id, int Extra_Money)
 	{
 		PromotionEvent* p = new PromotionEvent(this , Eventtime_day, Eventtime_hour, id, Extra_Money);
@@ -387,16 +372,25 @@ void MarsStation::AddCargo(Cargo* pCargo, TYP CargoType)
 		return p;
 	}
 
+	//set Autop to its value in ready event
+	void MarsStation::initiate_Autop(int value)
+	{
+		ReadyEvent::setAutoP(value);
+	}
+
+	//increments autop count
 	void MarsStation::Autop_Count_increment()
 	{
 		AutoP_Count ++;
 	}
 
+	//create Cancellation event then adds it to the Event queue 
 	void MarsStation::addCancellationEvent( int Eventtime_day, int Eventtime_hour, int id)
 	{
 		CancellationEvent* p = new CancellationEvent(this, Eventtime_day, Eventtime_hour, id);
 		EVENT.enqueue(p);
 	}
+
 //======================================================== UI Function ============================================//
 	void MarsStation::Show_State(int Days, int Hours)
 	{
