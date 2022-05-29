@@ -4,7 +4,7 @@ class Cargo
 {
 private:
 	TYP cargo_type;			  //TYP is enum that contains ( NORMAL , SPECIAL , VIP )
-	double cargo_distance;    //The distance that the cargo will travel in kilometeres
+	int cargo_distance;    //The distance that the cargo will travel in kilometeres
 	int load_time;            //Time (in hours) to load or unload cargo
 	int cargo_id;             // unique sequence number that identifies each cargo
 	float cost;                 //cost of delievering the cargo
@@ -36,7 +36,7 @@ public:
 
 
 	int getCargoID();
-	double getCargoDistance();
+	int getCargoDistance();
 	float getCargoCost();
 	float getCargo_Extra_Money();
 
@@ -49,8 +49,6 @@ public:
 	bool Set_ReadyEvent_time(int* Eventtime);
 	int* get_ReadyEvent_time();
 
-	bool set_Delivery_time(int* Eventtime);
-	int* get_Delivery_time();
 
 	//void Set_PromotionEvent_time(int* Eventtime);
 	//int* get_PromotionEvent_time();
@@ -61,6 +59,9 @@ public:
 
 	void set_Waiting_Time(int* currentTime);
 	int* get_Waiting_Time();
+
+	void set_Delivery_time(int* Eventtime);
+	int* get_Delivery_time();
 
 	//========================================================
 

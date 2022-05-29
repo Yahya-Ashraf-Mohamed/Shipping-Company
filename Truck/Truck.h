@@ -9,7 +9,7 @@ class Truck
 private:
 	TYP TypeTruck;   // Decides the type of the truck used in making list
 	Status Truck_Status = WAITING;
-	double Speed;				    // will be read form the input file
+	int Speed;				    // will be read form the input file
 	double DelivaryInterval;        // will be calculated depending on cargos input
 	int MaintenanceCheckupDuration;   // will be read form the input file after maxNumber of Journeys
 	int maxJourneys;              // will be read form the input file
@@ -35,6 +35,7 @@ private:
 
 	int Total_Delivery_Journeys = 0;
 
+	int* Return_back_time = new int[2];
 	//========================================================
 
 public:
@@ -45,15 +46,15 @@ public:
 	int getTruckCapacity();
 	int getTruckID();
 	TYP getTruckType();
-	double getTruckSpeed();
+	int getTruckSpeed();
 	double getPriority();
 	static int getOrderNum();
 
 	int getCountTotalCargosDelivered();
-	double getTruckUtilization();
-	void setTruckUtilization(int TotalSimulationTime[2]);
+	double get_Truck_Utilization();
+	void set_Truck_Utilization(int* TotalSimulationTime);
 
-	void setMovingTime(int time[2]);
+	void setMovingTime(int* Curranttime);
 	int* getMovingTime();
 
 	//Stack<Cargo*>* LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos);
@@ -81,6 +82,9 @@ public:
 	void Add_Total_Num_Of_Journeys();
 
 	void LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos);
+
+	void set_Return_back_time(int* curant_time);
+	int* get_Return_back_time();
 	//========================================================
 
 	~Truck();

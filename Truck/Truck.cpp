@@ -50,7 +50,7 @@ int Truck::getTruckCapacity()
 	return this->TruckCapacity;
 }
 
-double Truck::getTruckSpeed()
+int Truck::getTruckSpeed()
 {
 	return this->Speed;
 }
@@ -132,23 +132,23 @@ int* Truck::get_End_Maintanance_Time()
 	return End_Maintanance_Time;
 }
 
-void Truck::setTruckUtilization(int TotalSimulationTime[2])  // Time in days will be converted to hours to be able to do the operation
+void Truck::set_Truck_Utilization(int* TotalSimulationTime)  // Time in days will be converted to hours to be able to do the operation
 {
-	if (TotalDeliveryJourneys == 0)
+	if (Total_Delivery_Journeys == 0)
 		TruckUtilization = 0;
 	else
-		TruckUtilization = TotalCargosDelivered / (TruckCapacity * TotalDeliveryJourneys) * (TotalTruckActiveTime[0] * 24 + TotalTruckActiveTime[1]) / (TotalSimulationTime[0] * 24 + TotalSimulationTime[1]);
+		TruckUtilization = TotalCargosDelivered / (TruckCapacity * Total_Delivery_Journeys) * (TotalTruckActiveTime[0] * 24 + TotalTruckActiveTime[1]) / (TotalSimulationTime[0] * 24 + TotalSimulationTime[1]);
 }
 
-double Truck::getTruckUtilization()
+double Truck::get_Truck_Utilization()
 {
 	return TruckUtilization;
 }
 
-void Truck::setMovingTime(int time[2])
+void Truck::setMovingTime(int* Curranttime)
 {
-	TruckMovingTime[0] = time[0];
-	TruckMovingTime[1] = time[1];
+	TruckMovingTime[0] = Curranttime[0];
+	TruckMovingTime[1] = Curranttime[1];
 }
 int* Truck::getMovingTime()
 {
@@ -228,6 +228,30 @@ int Truck::get_Total_Num_Of_Journeys()
 void Truck::Add_Total_Num_Of_Journeys()
 {
 	Total_Delivery_Journeys = Total_Delivery_Journeys + 1;
+}
+
+int* Truck::get_Return_back_time()
+{
+	return Return_back_time;
+}
+
+void Truck::set_Return_back_time(int* curant_time)
+{
+	Cargo* Farthest_Cargo;
+	Carried_Cargoes.pop(Farthest_Cargo);
+	int CargoDistance = Farthest_Cargo->getCargoDistance();
+	int CargoUnloadTime = Farthest_Cargo->getCargo_Load_Time();
+
+	Return_back_time[1] = curant_time[1] + (CargoDistance / Speed)*2 + CargoUnloadTime;
+
+	while (Return_back_time[1] > 24)
+	{
+		Return_back_time[0] = Return_back_time[0] + 1;
+		Return_back_time[1] = Return_back_time[1] - 24;
+	}
+
+	Carried_Cargoes.push(Farthest_Cargo);
+
 }
 
 

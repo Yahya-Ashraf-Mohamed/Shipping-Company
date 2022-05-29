@@ -699,6 +699,10 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 						// set Wait time for cargos
 						Loading_trucks[i]->set_Waiting_Time_For_Cargoes(Clock);
 
+						Loading_trucks[i]->setMovingTime(Clock);
+
+						Loading_trucks[i]->set_Return_back_time(Clock);
+
 						Loading_trucks[i]->Add_Total_Num_Of_Journeys();
 						Loading_trucks[i]->set_Num_Of_Journeys(1);
 

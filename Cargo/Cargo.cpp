@@ -40,7 +40,7 @@ int Cargo::getCargoID()
 {
 	return cargo_id;
 }
-double Cargo::getCargoDistance()
+int Cargo::getCargoDistance()
 {
 	return cargo_distance;
 }
@@ -88,21 +88,7 @@ int* Cargo::get_ReadyEvent_time()
 	return ReadyEvent_time;
 }
 
-bool Cargo::set_Delivery_time(int* Eventtime)
-{
-	if (Eventtime == nullptr)
-		return false;
-	else
-	{
-		Delivery_time[0] = Eventtime[0];
-		Delivery_time[1] = Eventtime[1];
-		return true;
-	}
-}
-int* Cargo::get_Delivery_time()
-{
-	return Delivery_time;
-}
+
 //void Cargo::Set_PromotionEvent_time(int* Eventtime)
 //{
 //	PromotionEvent_time[0] = Eventtime[0];
@@ -127,4 +113,22 @@ void Cargo::set_Waiting_Time(int* currentTime)
 int* Cargo::get_Waiting_Time()
 {
 	return Waiting_Time;
+}
+
+void Cargo::set_Delivery_time(int* Eventtime)
+{
+	// to be implemented
+
+	/*if (Eventtime == nullptr)
+		return false;
+	else
+	{
+		Delivery_time[0] = Eventtime[0];
+		Delivery_time[1] = Eventtime[1];
+		return true;
+	}*/
+}
+int* Cargo::get_Delivery_time()
+{
+	return Delivery_time;
 }

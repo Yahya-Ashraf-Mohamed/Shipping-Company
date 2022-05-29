@@ -40,12 +40,18 @@ class MarsStation
 	Queue<Cargo*> VIP_Cargo;      //need to be a priority queue @yasmeen
 	Queue<Cargo*> Special_Cargo;
 	LinkedList Normal_Cargo;
+
 	PriorityQueue<Cargo*> Delivered_Cargo;
 
 	//change to priority queue loading cargos ordered ****{DESCENDINGLY} acoording to delivary time or distance @yasmeen (farthest distance will be first one)
 	PriorityQueue<Cargo*> Loading_VIP_Cargo;
 	PriorityQueue<Cargo*> Loading_Special_Cargo;
 	PriorityQueue<Cargo*> Loading_Normal_Cargo;
+
+	Queue<Cargo*> Moving_VIP_Cargo;
+	Queue<Cargo*> Moving_Special_Cargo;
+	Queue<Cargo*> Moving_Normal_Cargo;
+
 
 	//Event Queue;
 	Queue<Event*> EVENT;
