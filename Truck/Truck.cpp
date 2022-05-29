@@ -103,16 +103,17 @@ int Truck::getCountTotalCargosDelivered()
 	return TotalCargosDelivered;
 }
 
-void Truck::setTruckActiveTime(int time[2])
+void Truck::set_Truck_Total_Active_Time(int time[2])
 {
-	TotalTruckActiveTime[0] = time[0];
-	TotalTruckActiveTime[1] = time[1];
+	TotalTruckActiveTime[0] = TotalTruckActiveTime[0] + time[0];
+	TotalTruckActiveTime[1] = TotalTruckActiveTime[1] + time[1];
 }
 
-int* Truck::getTruckActiveTime()
+int* Truck::get_Truck_Total_Active_Time()
 {
 	return TotalTruckActiveTime;
 }
+
 
 void Truck::setMaintananceTime(int time[2])
 {
@@ -147,3 +148,55 @@ int* Truck::getMovingTime()
 
 Truck :: ~Truck()
 {}
+
+
+
+//Added by Yahya new
+//========================================================
+int Truck::get_Num_Of_Journeys()
+{
+	return NumberOFJourneys;
+}
+
+void Truck::set_Num_Of_Journeys(int NJ)
+{
+	NumberOFJourneys = NumberOFJourneys - NJ;
+}
+
+void Truck::set_Available_Time(int time[2])
+{
+	AvailableTime[0] = time[0];
+	AvailableTime[1] = time[1];
+}
+
+int* Truck::get_Available_Time()
+{
+	return AvailableTime;
+}
+
+void Truck::Add_Truck_ActiveTime()
+{
+	if (Truck_ActiveTime[1] < 24)
+	{
+		Truck_ActiveTime[1] = Truck_ActiveTime[1] + 1;
+	}
+	else
+	{
+		Truck_ActiveTime[0] = Truck_ActiveTime[0] + 1;
+		Truck_ActiveTime[1] = Truck_ActiveTime[1] - 24;
+	}
+}
+
+int* Truck::get_Truck_ActiveTime()
+{
+	return Truck_ActiveTime;
+}
+
+void Truck::Reset_Truck_ActiveTime()
+{
+	Truck_ActiveTime[0] = 0;
+	Truck_ActiveTime[1] = 0;
+}
+
+
+//========================================================

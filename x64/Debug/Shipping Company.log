@@ -1,2 +1,18 @@
-﻿  Main.cpp
-  Shipping Company.vcxproj -> C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Shipping-Company\Shipping-Company\x64\Debug\Shipping Company.exe
+﻿  Cargo.cpp
+  CancellationEvent.cpp
+  test.cpp
+  Main.cpp
+  MarsStation.cpp
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\final phase\My version\Shipping-Company\MarsStation\MarsStation.cpp(185,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\final phase\My version\Shipping-Company\MarsStation\MarsStation.cpp(370,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\final phase\My version\Shipping-Company\MarsStation\MarsStation.cpp(679,13): warning C4101: 'Cargo': unreferenced local variable
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\final phase\My version\Shipping-Company\MarsStation\MarsStation.cpp(709,13): warning C4101: 'Cargo': unreferenced local variable
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\final phase\My version\Shipping-Company\MarsStation\MarsStation.cpp(722,13): warning C4101: 'Cargo': unreferenced local variable
+  PromotionEvent.cpp
+  ReadyEvent.cpp
+  Truck.cpp
+  UI.cpp
+  Generating Code...
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\final phase\My version\Shipping-Company\Truck\Truck.cpp(99): warning C4715: 'Truck::LoadCargo': not all control paths return a value
+D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\final phase\My version\Shipping-Company\DataStructures\LinkedList.h(75): warning C4715: 'LinkedList::dequeue': not all control paths return a value
+  Shipping Company.vcxproj -> D:\Zewail collage material\Year 2\Second Semester\Data Structures\Project\final phase\My version\Shipping-Company\x64\Debug\Shipping Company.exe
