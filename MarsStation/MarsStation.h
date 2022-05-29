@@ -204,6 +204,11 @@ public:
 	void Show_Moving_Cargos();
 	void Show_In_CheckUp_Trucks();
 	void Show_Delivered_Cargos();
+//===================================== Functions of Run Function ===============================================
+
+	void Calculate_Truck_Time_Wait_to_Maintanance(Truck*);				// time handler for moving Trucks from waiting to MAINTANANCE
+
+
 //=============================================================================================================
 	
 	// Input Functions		--------------------------- (uncomment later)

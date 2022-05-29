@@ -496,7 +496,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 						break;
 					else
 					{
-						VIP_Truck->set_Num_Of_Journeys(this->CheckUp_Journeys);
+						VIP_Truck->set_Num_Of_Journeys(this->CheckUp_Journeys);		//reset the number of journeys done
 
 						// for bonus if we load cargo imediatly so we have to check if it was empty
 						// else deload first and save deload time then move it to MAINTANANCE
@@ -504,24 +504,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 						Waiting_VIP_Truck.dequeue(VIP_Truck);
 						MAINTANANCE_VIP_Truck.enqueue(VIP_Truck);
 
-						int* AV_time = new int[2];
-						if (Clock[1] + this->VIP_CheckUp_duration < 24)
-						{
-							AV_time[0] = Clock[0];
-							AV_time[1] = Clock[1] + this->VIP_CheckUp_duration;
-						}
-						else
-						{
-							AV_time[0] = Clock[0] + 1;
-							AV_time[1] = (Clock[1] + this->VIP_CheckUp_duration) - 24;
-						}
-
-						VIP_Truck->set_Available_Time(AV_time);
-
-						int* time = new int[2];
-						time = VIP_Truck->get_Truck_ActiveTime();
-						VIP_Truck->set_Truck_Total_Active_Time(time);
-						VIP_Truck->Reset_Truck_ActiveTime();
+						this->Calculate_Truck_Time_Wait_to_Maintanance(VIP_Truck);
 					}
 				}
 			}
@@ -544,24 +527,8 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 						Waiting_NORMAL_Truck.dequeue(Normal_Truck);
 						MAINTANANCE_Normal_Truck.enqueue(Normal_Truck);
 
-						int* AV_time = new int[2];
-						if (Clock[1] + this->VIP_CheckUp_duration < 24)
-						{
-							AV_time[0] = Clock[0];
-							AV_time[1] = Clock[1] + this->VIP_CheckUp_duration;
-						}
-						else
-						{
-							AV_time[0] = Clock[0] + 1;
-							AV_time[1] = (Clock[1] + this->VIP_CheckUp_duration) - 24;
-						}
+						this->Calculate_Truck_Time_Wait_to_Maintanance(Normal_Truck);
 
-						Normal_Truck->set_Available_Time(AV_time);
-
-						int* time = new int[2];
-						time = Normal_Truck->get_Truck_ActiveTime();
-						Normal_Truck->set_Truck_Total_Active_Time(time);
-						Normal_Truck->Reset_Truck_ActiveTime();
 					}
 				}
 			}
@@ -584,25 +551,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 						Waiting_SPECIAL_Truck.dequeue(Special_Truck);
 						MAINTANANCE_Special_Truck.enqueue(Special_Truck);
 
-						int* AV_time = new int[2];
-						if (Clock[1] + this->VIP_CheckUp_duration < 24)
-						{
-							AV_time[0] = Clock[0];
-							AV_time[1] = Clock[1] + this->VIP_CheckUp_duration;
-						}
-						else
-						{
-							AV_time[0] = Clock[0] + 1;
-							AV_time[1] = (Clock[1] + this->VIP_CheckUp_duration) - 24;
-						}
-
-						Special_Truck->set_Available_Time(AV_time);
-
-						int* time = new int[2];
-						time = Special_Truck->get_Truck_ActiveTime();
-						Special_Truck->set_Truck_Total_Active_Time(time);
-						Special_Truck->Reset_Truck_ActiveTime();
-
+						this->Calculate_Truck_Time_Wait_to_Maintanance(Special_Truck);
 
 					}
 				}
@@ -614,12 +563,13 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 				Truck* VIP_Truck;
 				while (MAINTANANCE_VIP_Truck.peek(VIP_Truck))
 				{
-					if (VIP_Truck->get_Available_Time()[0] != Clock[0] || VIP_Truck->get_Available_Time()[1] != Clock[1])
+					if (VIP_Truck->get_End_Maintanance_Time()[0] != Clock[0] || VIP_Truck->get_End_Maintanance_Time()[1] != Clock[1])
 						break;
 					else
 					{
 						MAINTANANCE_VIP_Truck.dequeue(VIP_Truck);
 						Waiting_VIP_Truck.enqueue(VIP_Truck);
+						VIP_Truck->set_Truck_ActiveTime(Clock);
 					}
 				}
 			}
@@ -630,12 +580,13 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 				Truck* Special_Truck;
 				while (MAINTANANCE_Special_Truck.peek(Special_Truck))
 				{
-					if (Special_Truck->get_Available_Time()[0] != Clock[0] || Special_Truck->get_Available_Time()[1] != Clock[1])
+					if (Special_Truck->get_End_Maintanance_Time()[0] != Clock[0] || Special_Truck->get_End_Maintanance_Time()[1] != Clock[1])
 						break;
 					else
 					{
 						MAINTANANCE_Special_Truck.dequeue(Special_Truck);
 						Waiting_SPECIAL_Truck.enqueue(Special_Truck);
+						Special_Truck->set_Truck_ActiveTime(Clock);
 					}
 				}
 			}
@@ -647,12 +598,13 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 				Truck* Normal_Truck;
 				while (MAINTANANCE_Normal_Truck.peek(Normal_Truck))
 				{
-					if (Normal_Truck->get_Available_Time()[0] != Clock[0] || Normal_Truck->get_Available_Time()[1] != Clock[1])
+					if (Normal_Truck->get_End_Maintanance_Time()[0] != Clock[0] || Normal_Truck->get_End_Maintanance_Time()[1] != Clock[1])
 						break;
 					else
 					{
 						MAINTANANCE_Normal_Truck.dequeue(Normal_Truck);
 						Waiting_NORMAL_Truck.enqueue(Normal_Truck);
+						Normal_Truck->set_Truck_ActiveTime(Clock);
 					}
 				}
 			}
@@ -694,7 +646,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 				// for bonus we have to load instantinously after creating the cargo so the header of the following if condition will be removed
 				// --> if (Loading_VIP_Cargo.getSize() > this->VIP_capacity - 1)
 
-				if (Loading_VIP_Cargo.getSize() > this->VIP_capacity - 1)		// After loading complete the cargos moves into the truck (stack) to be delivered
+				if (Loading_VIP_Cargo.getSize() > 0)		// After loading complete the cargos moves into the truck (stack) to be delivered
 				{
 					Cargo* Cargo;
 					Truck* Truck;
@@ -724,7 +676,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 				}
 
 
-				if (Loading_Special_Cargo.getSize() > this->Special_capacity - 1)		// After loading complete the cargos moves into the truck (stack) to be delivered
+				if (Loading_Special_Cargo.getSize() > 0)		// After loading complete the cargos moves into the truck (stack) to be delivered
 				{
 					Cargo* Cargo;
 					Truck* Truck;
@@ -737,7 +689,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 					}
 				}
 
-				if (Loading_Normal_Cargo.getSize() > this->Normal_capacity - 1)		// After loading complete the cargos moves into the truck (stack) to be delivered
+				if (Loading_Normal_Cargo.getSize() > 0)		// After loading complete the cargos moves into the truck (stack) to be delivered
 				{
 					Cargo* Cargo;
 					Truck* Truck;
@@ -823,6 +775,8 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 
 
 
+			//===========================================================================DELETED=============================================
+			
 
 			//calculations like distance, time, truck utilization,.........
 
@@ -942,3 +896,41 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 	//Queue<Cargo*> MarsStation::getSpecial_Cargo() { return Special_Cargo; }
 	//LinkedList MarsStation::getNormal_Cargo() { return Normal_Cargo; }
 	//PriorityQueue<Cargo*> MarsStation::getDelivered_Cargo() { return Delivered_Cargo; }
+	//=======================================================================================================================================================================
+
+
+
+
+	//===================================== Functions of Run Function ===============================================
+	void MarsStation::Calculate_Truck_Time_Wait_to_Maintanance(Truck* truck)
+	{
+		truck->set_End_Maintanance_Time(Clock);
+
+
+		int* Stop_Active_Time = new int[2];
+		Stop_Active_Time = truck->get_Truck_ActiveTime();
+
+		int* diffActiveTime = new int[2];
+
+		if (Stop_Active_Time[1] > Clock[1])
+		{
+			diffActiveTime[1] = 24 - Stop_Active_Time[1] + Clock[1];
+			if (diffActiveTime[1] > 24)
+			{
+				diffActiveTime[1] = diffActiveTime[1] - 24;
+				diffActiveTime[0] = Clock[0] - (Stop_Active_Time[0] + 1);
+				diffActiveTime[0] = diffActiveTime[0] + 1;
+			}
+			else
+				diffActiveTime[0] = Clock[0] - (Stop_Active_Time[0] + 1);
+		}
+		else
+		{
+			diffActiveTime[0] = Clock[0] - Stop_Active_Time[0];
+			diffActiveTime[1] = Clock[1] - Stop_Active_Time[1];
+		}
+
+
+		truck->set_Truck_Total_Active_Time(diffActiveTime);
+
+	}

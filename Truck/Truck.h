@@ -11,11 +11,10 @@ private:
 	Status Truck_Status = WAITING;
 	double Speed;				    // will be read form the input file
 	double DelivaryInterval;        // will be calculated depending on cargos input
-	double MaintenanceCheckupDuration;   // will be read form the input file after maxNumber of Journeys
+	int MaintenanceCheckupDuration;   // will be read form the input file after maxNumber of Journeys
 	int maxJourneys;              // will be read form the input file
 	int TruckCapacity;            // will be read form the input file
 	int TruckID;                   // will be read form the input file
-	int* StartMaintananceTime = new int[2];  // [day , hour ]
 	static int Order;
 	double Priority;
 	Stack <Cargo*>* CargoStack = new Stack <Cargo*>;   // Name of the stack that include the cargos
@@ -29,8 +28,9 @@ private:
 	//========================================================
 	//Added by Yahya new
 	int NumberOFJourneys = 0;
-	int* AvailableTime = new int[2];
 	int* Truck_ActiveTime = new int[2] { 0, 0 };
+
+	int* End_Maintanance_Time = new int[2];
 
 	//========================================================
 
@@ -45,10 +45,7 @@ public:
 	double getTruckSpeed();
 	double getPriority();
 	static int getOrderNum();
-	void setMaintananceTime(int time[2]);
-	int* getMaintananceTime();
-	void set_Truck_Total_Active_Time(int time[2]);
-	int* get_Truck_Total_Active_Time();
+
 	int getCountTotalCargosDelivered();
 	double getTruckUtilization();
 	void setTruckUtilization(int TotalSimulationTime[2]);
@@ -65,13 +62,15 @@ public:
 	int get_Num_Of_Journeys();
 	void set_Num_Of_Journeys(int NJ);
 
-	void set_Available_Time(int time[2]);
-	int* get_Available_Time();
+	void set_Truck_Total_Active_Time(int* currentTime);
+	int* get_Truck_Total_Active_Time();
 
-	void Add_Truck_ActiveTime();
+	void set_Truck_ActiveTime(int* currentTime);
 	int* get_Truck_ActiveTime();
-	void Reset_Truck_ActiveTime();
 
+
+	void set_End_Maintanance_Time(int* currentTime);
+	int* get_End_Maintanance_Time();
 	//========================================================
 
 	~Truck();

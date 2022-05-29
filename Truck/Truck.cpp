@@ -103,10 +103,16 @@ int Truck::getCountTotalCargosDelivered()
 	return TotalCargosDelivered;
 }
 
-void Truck::set_Truck_Total_Active_Time(int time[2])
+void Truck::set_Truck_Total_Active_Time(int* currentTime)
 {
-	TotalTruckActiveTime[0] = TotalTruckActiveTime[0] + time[0];
-	TotalTruckActiveTime[1] = TotalTruckActiveTime[1] + time[1];
+	TotalTruckActiveTime[0] = TotalTruckActiveTime[0] + currentTime[0];
+	TotalTruckActiveTime[1] = TotalTruckActiveTime[1] + currentTime[1];
+
+	if (TotalTruckActiveTime[1] > 24)
+	{
+		TotalTruckActiveTime[0] = TotalTruckActiveTime[0] + 1;
+		TotalTruckActiveTime[1] = TotalTruckActiveTime[1] - 24;
+	}
 }
 
 int* Truck::get_Truck_Total_Active_Time()
@@ -115,15 +121,15 @@ int* Truck::get_Truck_Total_Active_Time()
 }
 
 
-void Truck::setMaintananceTime(int time[2])
+void Truck::set_End_Maintanance_Time(int* currentTime)
 {
-	StartMaintananceTime[0] = time[0];
-	StartMaintananceTime[1] = time[1];
+	End_Maintanance_Time[0] = currentTime[0];
+	End_Maintanance_Time[1] = currentTime[1] + MaintenanceCheckupDuration;
 }
 
-int* Truck::getMaintananceTime()
+int* Truck::get_End_Maintanance_Time()
 {
-	return StartMaintananceTime;
+	return End_Maintanance_Time;
 }
 
 void Truck::setTruckUtilization(int TotalSimulationTime[2])  // Time in days will be converted to hours to be able to do the operation
@@ -163,39 +169,15 @@ void Truck::set_Num_Of_Journeys(int NJ)
 	NumberOFJourneys = NumberOFJourneys - NJ;
 }
 
-void Truck::set_Available_Time(int time[2])
+void Truck::set_Truck_ActiveTime(int* currentTime)
 {
-	AvailableTime[0] = time[0];
-	AvailableTime[1] = time[1];
-}
-
-int* Truck::get_Available_Time()
-{
-	return AvailableTime;
-}
-
-void Truck::Add_Truck_ActiveTime()
-{
-	if (Truck_ActiveTime[1] < 24)
-	{
-		Truck_ActiveTime[1] = Truck_ActiveTime[1] + 1;
-	}
-	else
-	{
-		Truck_ActiveTime[0] = Truck_ActiveTime[0] + 1;
-		Truck_ActiveTime[1] = Truck_ActiveTime[1] - 24;
-	}
+	Truck_ActiveTime[0] = currentTime[0];
+	Truck_ActiveTime[1] = currentTime[1];
 }
 
 int* Truck::get_Truck_ActiveTime()
 {
 	return Truck_ActiveTime;
-}
-
-void Truck::Reset_Truck_ActiveTime()
-{
-	Truck_ActiveTime[0] = 0;
-	Truck_ActiveTime[1] = 0;
 }
 
 
