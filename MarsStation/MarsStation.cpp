@@ -55,7 +55,7 @@ void MarsStation::setInt_Variables(ifstream& DataFile)
 		>> AutoPromotion
 		>> MaxW
 		>> no_events;
-		
+	initiate_Autop(AutoPromotion);
 }
 
 void MarsStation::setEvent_Time(string Time)
@@ -303,7 +303,27 @@ void MarsStation::Analysis_Output_File(string outputFileName)
 
 //=================================================== LOAD ==================================================
 
+bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
+{
+	int TruckCapacity = ptruck->getTruckCapacity();
 
+	switch (CargoType)
+	{
+	case VIP:
+		if (VIP_Cargo.getSize() >= TruckCapacity)
+			return true;
+		break;
+	case SPECIAL:
+		if (Special_Cargo.getSize() >= TruckCapacity)
+			return true;
+		break;
+	case NORMAL:
+		if (Normal_Cargo.getSize() >= TruckCapacity)
+			return true;
+		break;
+	}
+	return false;
+}
 
 //=================================================== EVENTS =================================================
 
