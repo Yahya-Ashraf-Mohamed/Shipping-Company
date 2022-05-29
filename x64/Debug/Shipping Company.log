@@ -1,2 +1,5 @@
-﻿  Main.cpp
+﻿  MarsStation.cpp
+C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Shipping-Company\Shipping-Company\MarsStation\MarsStation.cpp(185,60): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Shipping-Company\Shipping-Company\MarsStation\MarsStation.cpp(370,84): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Shipping-Company\Shipping-Company\DataStructures\LinkedList.h(75): warning C4715: 'LinkedList::dequeue': not all control paths return a value
   Shipping Company.vcxproj -> C:\Users\pc\Documents\Mary\college\spring 2022-year 2\Data structure\Project\shared\Shipping-Company\Shipping-Company\x64\Debug\Shipping Company.exe
