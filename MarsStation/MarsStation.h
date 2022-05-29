@@ -29,18 +29,23 @@ class MarsStation
 	//ReadyEvent* pReadyEvent;
 	//PromotionEvent* pPromotionEvent;
 	//CancellationEvent* pCancellationEvent;
-	
+
 
 
 	//event queue need to be implemented
 	//loaded cargo list need to be implemented (add member variable truck pointer in cargo)
 	//delivered cargo list need to be implemented
-	
+
 	//Cargo listes
-	Queue<Cargo*> VIP_Cargo;      //need to be a priority queue
+	Queue<Cargo*> VIP_Cargo;      //need to be a priority queue @yasmeen
 	Queue<Cargo*> Special_Cargo;
 	LinkedList Normal_Cargo;
 	PriorityQueue<Cargo*> Delivered_Cargo;
+
+	//change to priority queue loading cargos ordered ****{DESCENDINGLY} acoording to delivary time or distance @yasmeen (farthest distance will be first one)
+	PriorityQueue<Cargo*> Loading_VIP_Cargo;
+	PriorityQueue<Cargo*> Loading_Special_Cargo;
+	PriorityQueue<Cargo*> Loading_Normal_Cargo;
 
 	//Event Queue;
 	Queue<Event*> EVENT;
@@ -61,6 +66,7 @@ class MarsStation
 	int AutoP_Count = 0;
 
 
+
 	//Truck Queue
 	Queue<Truck*> Waiting_VIP_Truck;
 	Queue<Truck*> Waiting_SPECIAL_Truck;
@@ -68,10 +74,10 @@ class MarsStation
 	Queue<Truck*> MAINTANANCE_VIP_Truck;
 	Queue<Truck*> MAINTANANCE_Normal_Truck;
 	Queue<Truck*> MAINTANANCE_Special_Truck;
-	Queue<Truck*> MOVING_Truck;
+	PriorityQueue<Truck*> MOVING_Truck;					// need to be priority queue  @yasmeen
+	Truck* Loading_trucks[3];			//{0: VIP, 1: Normal, 2: Special}
 
-
-	int Clock[2] = { 0,5 };
+	int Clock[2] = { 1,1 };
 
 
 
