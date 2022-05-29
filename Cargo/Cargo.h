@@ -13,6 +13,15 @@ private:
 	int ReadyEvent_time[2];
 	int Delivery_time[2];
 	/*int PromotionEvent_time[2];*/
+
+	//========================================================
+	//Added by Yahya new
+
+	int* Waiting_Time = new int[2];
+
+	//========================================================
+
+
 public:
 	Cargo(TYP type, double dist, int LT, int ID, float COST);
 	~Cargo();
@@ -45,4 +54,14 @@ public:
 
 	//void Set_PromotionEvent_time(int* Eventtime);
 	//int* get_PromotionEvent_time();
+
+
+	//Added by Yahya new
+	//========================================================
+
+	void set_Waiting_Time(int* currentTime);
+	int* get_Waiting_Time();
+
+	//========================================================
+
 };

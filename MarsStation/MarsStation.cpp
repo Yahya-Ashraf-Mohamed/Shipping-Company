@@ -496,7 +496,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 						break;
 					else
 					{
-						VIP_Truck->set_Num_Of_Journeys(this->CheckUp_Journeys);		//reset the number of journeys done
+						VIP_Truck->set_Num_Of_Journeys(- this->CheckUp_Journeys);		//reset the number of journeys done
 
 						// for bonus if we load cargo imediatly so we have to check if it was empty
 						// else deload first and save deload time then move it to MAINTANANCE
@@ -519,7 +519,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 						break;
 					else
 					{
-						Normal_Truck->set_Num_Of_Journeys(this->CheckUp_Journeys);
+						Normal_Truck->set_Num_Of_Journeys(- this->CheckUp_Journeys);			//reset the number of journeys done
 
 						// for bonus if we load cargo imediatly so we have to check if it was empty
 						// else deload first and save deload time then move it to MAINTANANCE
@@ -543,7 +543,7 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 						break;
 					else
 					{
-						Special_Truck->set_Num_Of_Journeys(this->CheckUp_Journeys);
+						Special_Truck->set_Num_Of_Journeys(- this->CheckUp_Journeys);				//reset the number of journeys done
 
 						// for bonus if we load cargo imediatly so we have to check if it was empty
 						// else deload first and save deload time then move it to MAINTANANCE
@@ -648,66 +648,47 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 
 				if (Loading_VIP_Cargo.getSize() > 0)		// After loading complete the cargos moves into the truck (stack) to be delivered
 				{
-					Cargo* Cargo;
-					Truck* Truck;
-
+					
 					if (Waiting_VIP_Truck.isEmpty() == false)
 					{
-						Waiting_VIP_Truck.dequeue(Truck);
-						Truck->LoadCargo(Loading_VIP_Cargo);
-						Loading_trucks[0] = Truck;							//@yahya not the best idea but it is good for now.
+						Load_VIP_truck(Loading_VIP_Cargo);
 					}
 
-					// @Mariam Check for max waiting rule to make the following code
+					// @yasmeen Check for max waiting rule to make the following code
 					else if (Waiting_NORMAL_Truck.isEmpty() == false)
 					{
-						Waiting_NORMAL_Truck.dequeue(Truck);
-						Truck->LoadCargo(Loading_VIP_Cargo);		//@yasmeen please make sure that normal truck carry VIP cargo 
-						Loading_trucks[1] = Truck;
+						Load_Normal_truck(Loading_VIP_Cargo);
 					}
 
-					// @Mariam Check for max waiting rule to make the following code
+					// @yasmeen Check for max waiting rule to make the following code
 					else if (Waiting_SPECIAL_Truck.isEmpty() == false)
 					{
-						Waiting_SPECIAL_Truck.dequeue(Truck);
-						Truck->LoadCargo(Loading_VIP_Cargo);		//@yasmeen please make sure that Special truck carry VIP cargo
-						Loading_trucks[2] = Truck;
+						Load_Special_truck(Loading_VIP_Cargo);
 					}
 				}
 
 
 				if (Loading_Special_Cargo.getSize() > 0)		// After loading complete the cargos moves into the truck (stack) to be delivered
 				{
-					Cargo* Cargo;
-					Truck* Truck;
 
 					if (Waiting_SPECIAL_Truck.isEmpty() == false)
 					{
-						Waiting_SPECIAL_Truck.dequeue(Truck);
-						Truck->LoadCargo(Loading_Special_Cargo);
-						Loading_trucks[2] = Truck;
+						Load_Special_truck(Loading_Special_Cargo);
 					}
 				}
 
 				if (Loading_Normal_Cargo.getSize() > 0)		// After loading complete the cargos moves into the truck (stack) to be delivered
 				{
-					Cargo* Cargo;
-					Truck* Truck;
-
 					if (Waiting_NORMAL_Truck.isEmpty() == false)
 					{
-						Waiting_NORMAL_Truck.dequeue(Truck);
-						Truck->LoadCargo(Loading_Normal_Cargo);
-						Loading_trucks[1] = Truck;
+						Load_Normal_truck(Loading_Normal_Cargo);
 					}
 
-					// @Mariam Check for max waiting rule to make the following code
+					// @yasmeen Check for max waiting rule to make the following code
 
 					else if (Waiting_VIP_Truck.isEmpty() == false)
 					{
-						Waiting_VIP_Truck.dequeue(Truck);
-						Truck->LoadCargo(Loading_Normal_Cargo);
-						Loading_trucks[0] = Truck;
+						Load_VIP_truck(Loading_Normal_Cargo);
 					}
 				}
 
@@ -715,7 +696,17 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 				{
 					if (Loading_trucks[i] != nullptr)
 					{
+						// set Wait time for cargos
+						Loading_trucks[i]->set_Waiting_Time_For_Cargoes(Clock);
+
+						Loading_trucks[i]->Add_Total_Num_Of_Journeys();
+						Loading_trucks[i]->set_Num_Of_Journeys(1);
+
+
 						MOVING_Truck.enqueue(Loading_trucks[i]);
+
+						Loading_trucks[i] = nullptr;
+
 
 					}
 				}
@@ -933,4 +924,32 @@ bool MarsStation::LoadingRule(Truck* ptruck, TYP CargoType)
 
 		truck->set_Truck_Total_Active_Time(diffActiveTime);
 
+	}
+
+
+	void MarsStation::Load_VIP_truck(PriorityQueue<Cargo*> loaded_Cargo)
+	{
+		Truck* Truck;
+
+		Waiting_VIP_Truck.dequeue(Truck);
+		Truck->LoadCargo(loaded_Cargo);
+		Loading_trucks[0] = Truck;							//@yahya not the best idea but it is good for now.
+	}
+
+	void MarsStation::Load_Special_truck(PriorityQueue<Cargo*> loaded_Cargo)
+	{
+		Truck* Truck;
+
+		Waiting_SPECIAL_Truck.dequeue(Truck);
+		Truck->LoadCargo(loaded_Cargo);		//@yasmeen please make sure that Special truck carry VIP cargo
+		Loading_trucks[2] = Truck;
+	}
+
+	void MarsStation::Load_Normal_truck(PriorityQueue<Cargo*> loaded_Cargo)
+	{
+		Truck* Truck;
+
+		Waiting_VIP_Truck.dequeue(Truck);
+		Truck->LoadCargo(loaded_Cargo);
+		Loading_trucks[1] = Truck;							//@yahya not the best idea but it is good for now.
 	}

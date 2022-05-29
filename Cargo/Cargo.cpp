@@ -112,3 +112,19 @@ int* Cargo::get_Delivery_time()
 //{
 //	return PromotionEvent_time;
 //}
+
+
+
+//Added by Yahya new
+//========================================================
+
+void Cargo::set_Waiting_Time(int* currentTime)
+{
+	Waiting_Time[0] = currentTime[0] - ReadyEvent_time[0];
+	Waiting_Time[1] = currentTime[1] - ReadyEvent_time[1];
+}
+
+int* Cargo::get_Waiting_Time()
+{
+	return Waiting_Time;
+}

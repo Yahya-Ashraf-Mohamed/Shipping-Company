@@ -17,10 +17,9 @@ private:
 	int TruckID;                   // will be read form the input file
 	static int Order;
 	double Priority;
-	Stack <Cargo*>* CargoStack = new Stack <Cargo*>;   // Name of the stack that include the cargos
+	//Stack <Cargo*>* CargoStack = new Stack <Cargo*>;   // Name of the stack that include the cargos
 	int* TotalTruckActiveTime = new int[2];
 	int TotalCargosDelivered = 0;
-	int TotalDeliveryJourneys;
 	double TruckUtilization;
 	int* TruckMovingTime = new int[2];
 
@@ -31,6 +30,10 @@ private:
 	int* Truck_ActiveTime = new int[2] { 0, 0 };
 
 	int* End_Maintanance_Time = new int[2];
+
+	Stack <Cargo*> Carried_Cargoes;   // stack to carry the cargos carried on the truck
+
+	int Total_Delivery_Journeys = 0;
 
 	//========================================================
 
@@ -53,7 +56,7 @@ public:
 	void setMovingTime(int time[2]);
 	int* getMovingTime();
 
-	Stack<Cargo*>* LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos);
+	//Stack<Cargo*>* LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos);
 
 
 
@@ -71,6 +74,13 @@ public:
 
 	void set_End_Maintanance_Time(int* currentTime);
 	int* get_End_Maintanance_Time();
+
+	void set_Waiting_Time_For_Cargoes(int* currentTime);
+
+	int get_Total_Num_Of_Journeys();
+	void Add_Total_Num_Of_Journeys();
+
+	void LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos);
 	//========================================================
 
 	~Truck();

@@ -208,6 +208,9 @@ public:
 
 	void Calculate_Truck_Time_Wait_to_Maintanance(Truck*);				// time handler for moving Trucks from waiting to MAINTANANCE
 
+	void Load_VIP_truck(PriorityQueue<Cargo*>);
+	void Load_Special_truck(PriorityQueue<Cargo*>);
+	void Load_Normal_truck(PriorityQueue<Cargo*>);
 
 //=============================================================================================================
 	

@@ -69,34 +69,34 @@ int Truck::Order = 0;
 
 // >> How to pass a Priority Queue to the function
 
-Stack<Cargo*>* Truck::LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos)
-{
-	while (!PriorityQueueCargos.isEmpty())
-	{
-		Cargo* pCargo = nullptr;
-		PriorityQueueCargos.peek(pCargo);
-		TYP CargoType = pCargo->getCargo_Type();
-		if (CargoType == TypeTruck)
-		{
-
-			PriorityQueueCargos.dequeue(pCargo);
-			CargoStack->push(pCargo);
-		}
-		else if (CargoType == TypeTruck)
-		{
-			PriorityQueueCargos.dequeue(pCargo);
-			CargoStack->push(pCargo);
-			TotalCargosDelivered++;
-		}
-		else if (CargoType == TypeTruck)
-		{
-			PriorityQueueCargos.dequeue(pCargo);
-			CargoStack->push(pCargo);
-			TotalCargosDelivered++;
-		}
-		return CargoStack;
-	}
-}
+//Stack<Cargo*>* Truck::LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos)
+//{
+//	while (!PriorityQueueCargos.isEmpty())
+//	{
+//		Cargo* pCargo = nullptr;
+//		PriorityQueueCargos.peek(pCargo);
+//		TYP CargoType = pCargo->getCargo_Type();
+//		if (CargoType == TypeTruck)
+//		{
+//
+//			PriorityQueueCargos.dequeue(pCargo);
+//			CargoStack->push(pCargo);
+//		}
+//		else if (CargoType == TypeTruck)
+//		{
+//			PriorityQueueCargos.dequeue(pCargo);
+//			CargoStack->push(pCargo);
+//			TotalCargosDelivered++;
+//		}
+//		else if (CargoType == TypeTruck)
+//		{
+//			PriorityQueueCargos.dequeue(pCargo);
+//			CargoStack->push(pCargo);
+//			TotalCargosDelivered++;
+//		}
+//	}
+//	return CargoStack;
+//}
 
 int Truck::getCountTotalCargosDelivered()
 {
@@ -134,7 +134,10 @@ int* Truck::get_End_Maintanance_Time()
 
 void Truck::setTruckUtilization(int TotalSimulationTime[2])  // Time in days will be converted to hours to be able to do the operation
 {
-	TruckUtilization = TotalCargosDelivered / (TruckCapacity * TotalDeliveryJourneys) * (TotalTruckActiveTime[0] * 24 + TotalTruckActiveTime[1]) / (TotalSimulationTime[0] * 24 + TotalSimulationTime[1]);
+	if (TotalDeliveryJourneys == 0)
+		TruckUtilization = 0;
+	else
+		TruckUtilization = TotalCargosDelivered / (TruckCapacity * TotalDeliveryJourneys) * (TotalTruckActiveTime[0] * 24 + TotalTruckActiveTime[1]) / (TotalSimulationTime[0] * 24 + TotalSimulationTime[1]);
 }
 
 double Truck::getTruckUtilization()
@@ -166,7 +169,7 @@ int Truck::get_Num_Of_Journeys()
 
 void Truck::set_Num_Of_Journeys(int NJ)
 {
-	NumberOFJourneys = NumberOFJourneys - NJ;
+	NumberOFJourneys = NumberOFJourneys + NJ;
 }
 
 void Truck::set_Truck_ActiveTime(int* currentTime)
@@ -178,6 +181,53 @@ void Truck::set_Truck_ActiveTime(int* currentTime)
 int* Truck::get_Truck_ActiveTime()
 {
 	return Truck_ActiveTime;
+}
+
+void Truck::set_Waiting_Time_For_Cargoes(int* currentTime)
+{
+	Cargo* pCargo = nullptr;
+
+	Stack <Cargo*> Temp;
+
+	while (Carried_Cargoes.isEmpty() == false)
+	{
+		Carried_Cargoes.pop(pCargo);
+		Temp.push(pCargo);
+	}
+
+	while (Temp.isEmpty() == false)
+	{
+		Temp.pop(pCargo);
+
+		pCargo->set_Waiting_Time(currentTime);
+
+		Carried_Cargoes.push(pCargo);
+	}
+}
+
+
+
+void Truck::LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos)
+{
+	Cargo* pCargo = nullptr;
+
+	while (PriorityQueueCargos.isEmpty() == false)
+	{
+		PriorityQueueCargos.dequeue(pCargo);
+		Carried_Cargoes.push(pCargo);
+	}
+		
+}
+
+
+int Truck::get_Total_Num_Of_Journeys()
+{
+	return Total_Delivery_Journeys;
+}
+
+void Truck::Add_Total_Num_Of_Journeys()
+{
+	Total_Delivery_Journeys = Total_Delivery_Journeys + 1;
 }
 
 
