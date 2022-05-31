@@ -18,11 +18,13 @@ private:
 	//Added by Yahya new
 
 	int* Waiting_Time = new int[2];
+	int Delivary_Truck_ID;
 
 	//========================================================
 
 
 public:
+	Cargo();
 	Cargo(TYP type, double dist, int LT, int ID, float COST);
 	~Cargo();
 
@@ -60,9 +62,11 @@ public:
 	void set_Waiting_Time(int* currentTime);
 	int* get_Waiting_Time();
 
-	void set_Delivery_time(int* Eventtime);
+	void set_Delivery_time(int* Eventtime, int speed);
 	int* get_Delivery_time();
 
+	int get_Delivary_Truck_ID();
+	void set_Delivary_Truck_ID(int TID);
 	//========================================================
 
 };

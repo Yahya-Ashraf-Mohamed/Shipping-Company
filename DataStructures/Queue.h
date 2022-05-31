@@ -111,24 +111,24 @@ bool Queue<T>::peek(T& frntEntry) const
 template <typename T>
 bool Queue <T> :: Display() 
 {
-	if (isEmpty() == true)
-		return false;
-	else
-	{
-		//cout << getSize();
-		//cout << " Delivered Cargos:";
-		Node<Cargo*>* p = front;
-		Cargo* pCargo;
-		//pCargo = p->getdata();
+	//if (isEmpty() == true)
+	//	return false;
+	//else
+	//{
+	//	//cout << getSize();
+	//	//cout << " Delivered Cargos:";
+	//	Node<Truck*>* p = front;
+	//	Truck* pCargo;
+	//	//pCargo = p->getdata();
 
-		while (p)
-		{
-			pCargo = p->getdata();
-			cout << pCargo->getCargoID();
-			p = p->getNext();
-			if (p != nullptr)
-				cout << ", ";
-		}
+	//	while (p)
+	//	{
+	//		pCargo = p->getdata();
+	//		cout << pCargo->getCargoID();
+	//		p = p->getNext();
+	//		if (p != nullptr)
+	//			cout << ", ";
+	//	}
 		//TYP CargoType = pCargo->getCargo_Type();
 		//switch (CargoType)
 		//{
@@ -168,7 +168,7 @@ bool Queue <T> :: Display()
 		//cout << "\n-------------------------------------------------------------------------------------------------\n";
 	
 		return true;
-	}
+	//}
 }
 
 template <typename T>   //Destructor

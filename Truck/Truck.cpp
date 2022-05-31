@@ -140,7 +140,7 @@ void Truck::set_Truck_Utilization(int* TotalSimulationTime)  // Time in days wil
 		TruckUtilization = TotalCargosDelivered / (TruckCapacity * Total_Delivery_Journeys) * (TotalTruckActiveTime[0] * 24 + TotalTruckActiveTime[1]) / (TotalSimulationTime[0] * 24 + TotalSimulationTime[1]);
 }
 
-double Truck::get_Truck_Utilization()
+int Truck::get_Truck_Utilization()
 {
 	return TruckUtilization;
 }
@@ -187,7 +187,7 @@ void Truck::set_Waiting_Time_For_Cargoes(int* currentTime)
 {
 	Cargo* pCargo = nullptr;
 
-	Stack <Cargo*> Temp;
+	Stack <Cargo*> Temp; /////////////////////(TruckCapacity)
 
 	while (Carried_Cargoes.isEmpty() == false)
 	{
@@ -207,13 +207,17 @@ void Truck::set_Waiting_Time_For_Cargoes(int* currentTime)
 
 
 
-void Truck::LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos)
+void Truck::LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos, int* currantTime)
 {
 	Cargo* pCargo = nullptr;
 
 	while (PriorityQueueCargos.isEmpty() == false)
 	{
 		PriorityQueueCargos.dequeue(pCargo);
+
+		pCargo->set_Delivery_time(currantTime, Speed);
+		pCargo->set_Delivary_Truck_ID(TruckID);
+
 		Carried_Cargoes.push(pCargo);
 	}
 		
@@ -255,4 +259,42 @@ void Truck::set_Return_back_time(int* curant_time)
 }
 
 
+Queue <Cargo*> Truck::Deliver_Cargo(int* currantTime)
+{
+	Queue <Cargo*> Truck_Delivered_Cargo;
+	Cargo* cargo;
+	Stack <Cargo*> Temp;
+
+	while (Carried_Cargoes.isEmpty() == false)
+	{
+		Carried_Cargoes.pop(cargo);
+
+		if (cargo->get_Delivery_time() < currantTime)
+		{
+			Temp.push(cargo);
+		}
+		else
+		{
+			Truck_Delivered_Cargo.enqueue(cargo);
+		}
+	}
+
+	while (Temp.isEmpty() == false)
+	{
+		Temp.pop(cargo);
+		Carried_Cargoes.push(cargo);
+	}
+
+	return Truck_Delivered_Cargo;
+}
+
+Stack <Cargo*> Truck::get_Carried_Cargoes()
+{
+	return Carried_Cargoes;
+}
+
+void Truck::Add_To_total_Cargos_Delivered(int size)
+{
+	TotalCargosDelivered = TotalCargosDelivered + size;
+}
 //========================================================

@@ -3,6 +3,7 @@
 #include"../Defs.H"
 #include"../Cargo/Cargo.h"
 #include"../DataStructures/PriorityQueue.h"
+#include "..//DataStructures/Queue.h"
 
 class Truck
 {
@@ -13,7 +14,7 @@ private:
 	double DelivaryInterval;        // will be calculated depending on cargos input
 	int MaintenanceCheckupDuration;   // will be read form the input file after maxNumber of Journeys
 	int maxJourneys;              // will be read form the input file
-	int TruckCapacity;            // will be read form the input file
+	int TruckCapacity = 1;            // will be read form the input file
 	int TruckID;                   // will be read form the input file
 	static int Order;
 	double Priority;
@@ -51,14 +52,11 @@ public:
 	static int getOrderNum();
 
 	int getCountTotalCargosDelivered();
-	double get_Truck_Utilization();
+	int get_Truck_Utilization();
 	void set_Truck_Utilization(int* TotalSimulationTime);
 
 	void setMovingTime(int* Curranttime);
 	int* getMovingTime();
-
-	//Stack<Cargo*>* LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos);
-
 
 
 	//Added by Yahya new
@@ -81,10 +79,16 @@ public:
 	int get_Total_Num_Of_Journeys();
 	void Add_Total_Num_Of_Journeys();
 
-	void LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos);
-
 	void set_Return_back_time(int* curant_time);
 	int* get_Return_back_time();
+
+	void LoadCargo(PriorityQueue<Cargo*> PriorityQueueCargos, int* currantTime);
+	
+	Queue<Cargo*> Deliver_Cargo(int* currantTime);
+	
+	Stack <Cargo*> get_Carried_Cargoes();
+
+	void Add_To_total_Cargos_Delivered(int size);
 	//========================================================
 
 	~Truck();

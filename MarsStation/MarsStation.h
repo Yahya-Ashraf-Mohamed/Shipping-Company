@@ -48,9 +48,6 @@ class MarsStation
 	PriorityQueue<Cargo*> Loading_Special_Cargo;
 	PriorityQueue<Cargo*> Loading_Normal_Cargo;
 
-	Queue<Cargo*> Moving_VIP_Cargo;
-	Queue<Cargo*> Moving_Special_Cargo;
-	Queue<Cargo*> Moving_Normal_Cargo;
 
 
 	//Event Queue;
@@ -71,6 +68,9 @@ class MarsStation
 
 	int AutoP_Count = 0;
 
+	int* Cargos_Average_Waiting_Time = new int[2] {0,0};
+	int Truck_Average_Active_Time;
+	int Truck_Average_Utilization;
 
 
 	//Truck Queue
@@ -171,6 +171,11 @@ public:
 
 	//void Enqueue_Events(char EventType, int EventDay, int EventHour);		deleted 
 
+	void Calculate_Cargo_Average_Waiting_Time();
+	int Calculate_Truck_Average_Active_Time();
+	int Calculate_Truck_Average_Utilization();
+	
+
 	//=================================================== LOAD ==================================================
 
 	bool LoadingRule(Truck* ptruck, TYP CargoType);
@@ -218,6 +223,27 @@ public:
 	void Load_Special_truck(PriorityQueue<Cargo*>);
 	void Load_Normal_truck(PriorityQueue<Cargo*>);
 
+	void Check_VIP_truck_to_MAINTANANCE();
+	void Check_Normal_truck_to_MAINTANANCE();
+	void Check_Special_truck_to_MAINTANANCE();
+
+	void Check_VIP_truck_Finished_MAINTANANCE();
+	void Check_Special_truck_Finished_MAINTANANCE();
+	void Check_Normal_truck_Finished_MAINTANANCE();
+
+	void Excute_Next_Event();
+
+	void Load_VIP_To_Truck();
+	void Load_Special_To_Truck();
+	void Load_Normal_To_Truck();
+
+	void Start_Moving_Loaded_Truck();
+	
+	void Deliver_Cargos(Truck* truck);
+	
+	void Truck_from_Moving_to_Waiting(Truck* truck);
+	void Truck_from_Moving_to_Maintanance(Truck* truck);
+	
 //=============================================================================================================
 	
 	// Input Functions		--------------------------- (uncomment later)

@@ -1,5 +1,7 @@
 #include "Cargo.h"
 
+Cargo::Cargo(){}
+
 Cargo::Cargo(TYP type, double dist, int LT, int ID, float COST)
 {
 	cargo_type = type;
@@ -115,20 +117,27 @@ int* Cargo::get_Waiting_Time()
 	return Waiting_Time;
 }
 
-void Cargo::set_Delivery_time(int* Eventtime)
+void Cargo::set_Delivery_time(int* currantTime, int Truck_Speed)
 {
-	// to be implemented
 
-	/*if (Eventtime == nullptr)
-		return false;
+	Delivery_time[0] = currantTime[0] + cargo_distance / Truck_Speed + load_time;
+	
+	if (Delivery_time[0] > 24)
+		Delivery_time[1] = currantTime[1] + 1;
 	else
-	{
-		Delivery_time[0] = Eventtime[0];
-		Delivery_time[1] = Eventtime[1];
-		return true;
-	}*/
+		Delivery_time[1] = currantTime[1];
 }
 int* Cargo::get_Delivery_time()
 {
 	return Delivery_time;
+}
+
+int Cargo::get_Delivary_Truck_ID()
+{
+	return Delivary_Truck_ID;
+}
+
+void Cargo::set_Delivary_Truck_ID(int TID)
+{
+	Delivary_Truck_ID = TID;
 }
